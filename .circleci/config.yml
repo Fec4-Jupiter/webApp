@@ -23,3 +23,5 @@ jobs:
           command: npm test
       - store_artifacts:
           path: ~/repo/test_artifacts
+      - store_test_results:
+          path: test-results
