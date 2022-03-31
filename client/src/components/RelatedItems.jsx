@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 
-const RelatedItems = ({currentProduct}) => (
-  <div>RelatedItems</div>
-)
+function RelatedItems({ currentProduct }) {
+  return <div>RelatedItems</div>;
+}
 
 export default RelatedItems;

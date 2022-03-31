@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 
-const Overview = ({currentProduct}) => (
-  <div>Overview</div>
-)
+function Overview({ currentProduct }) {
+  return <div>Overview</div>;
+}
 
 export default Overview;
