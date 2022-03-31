@@ -2,21 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 
-
-
 let app = express();
-
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const api_url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfc2202'
 
-
 app.all('/*', (req, res, next) => {
-
+  console.log('Req recieved: ', req.method, req.url)
   let targetUrl = api_url + req.url;
-
   axios({
     method: req.method,
     url: targetUrl,
@@ -31,7 +26,6 @@ app.all('/*', (req, res, next) => {
     .catch((err) => {
       res.status(err.response.status).send(err.response.data);
     });
-
 });
 
 

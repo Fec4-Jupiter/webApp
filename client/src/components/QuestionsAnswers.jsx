@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-const QuestionsAnswers = () => (
+const QuestionsAnswers = ({currentProduct}) => (
   <div>QuestionsAnswers</div>
 )
 
