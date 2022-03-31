@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-const RatingsReviews = () => (
+const RatingsReviews = ({currentProduct}) => (
   <div>RatingsReviews</div>
 )
 

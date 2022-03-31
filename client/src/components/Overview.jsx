@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-const Overview = () => (
+const Overview = ({currentProduct}) => (
   <div>Overview</div>
 )
 
