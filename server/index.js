@@ -14,7 +14,7 @@ app.use(session({
   cookie: { secure: false },
 }));
 
-const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfc2202';
+const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
 
 app.all('/*', (req, res) => {
   const targetUrl = apiUrl + req.url;
