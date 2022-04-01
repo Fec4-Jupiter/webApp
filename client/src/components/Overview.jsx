@@ -15,17 +15,6 @@ class Overview extends React.Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    let {styles, reviews, product} = props;
-    let currentStyle = styles.filter(style => style['default?']);
-    this.setState({
-      currentStyle,
-      styles,
-      reviews,
-      product,
-    });
-  }
-
   render() {
     const {styles, reviews, product, currentStyle} = this.state;
     return (

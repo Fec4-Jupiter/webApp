@@ -11,20 +11,21 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      product: {},
+      product: null,
       reviews: [],
       styles: [],
       related: [],
       questions: [],
     };
+
+    this.updateProduct = this.updateProduct.bind(this);
   }
 
-  componentDidMount() {
+  updateProduct(id) {
     let newState = {};
-    axios.get('/products')
+    axios.get(`/products/${id}`)
       .then((results) => {
-        newState.product=results.data[0];
-        const id = newState.product.id;
+        newState.product=results.data;
         const reviews = axios.get(`/reviews?product_id=${id}&count=500`);
         const styles = axios.get(`/products/${id}/styles`);
         const related = axios.get(`/products/${id}/related`);
@@ -42,18 +43,27 @@ class App extends React.Component {
           });
       })
       .catch((err) => { throw err;})
+
+  }
+
+  componentDidMount() {
+    this.updateProduct(66642);
   }
 
   render() {
     const { product, reviews, styles, related, questions } = this.state;
-    return (
-      <div>
-        <Overview product={product} reviews={reviews} styles={styles} />
-        <RelatedItems props={this.state} />
-        <QuestionsAnswers props={this.state} />
-        <RatingsReviews id="RatingsReviews" props={this.state} />
-      </div>
-    );
+    if (!product) {
+      return <div>Loading...</div>
+    } else {
+      return (
+        <div>
+          <Overview product={product} styles={styles} reviews={reviews} />
+          <RelatedItems product={product} related={related} />
+          <QuestionsAnswers product={product} questions={questions} />
+          <RatingsReviews id="RatingsReviews" product={product} reviews={reviews} />
+        </div>
+      );
+    }
   }
 }
 
