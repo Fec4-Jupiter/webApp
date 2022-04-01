@@ -6,8 +6,8 @@ import RatingsReviews from './components/RatingsReviews.jsx';
 import RelatedItems from './components/RelatedItems.jsx';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentProduct: {
         id: 1,

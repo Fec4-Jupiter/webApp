@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 // import ReactDOM from 'react-dom/client';
 
-class QuestionAnswers extends React.Component {
+class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,8 +21,8 @@ class QuestionAnswers extends React.Component {
   }
 }
 
-QuestionAnswers.propTypes = {
-  currentProduct: PropTypes.instanceOf(Object).isRequired
+QuestionsAnswers.propTypes = {
+  id: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default QuestionsAnswers;
