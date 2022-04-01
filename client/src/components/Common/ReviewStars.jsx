@@ -9,9 +9,9 @@ const PropTypes = require('prop-types');
 function ReviewStars({ reviews }) {
   const reviewAvg = function reviewAvg(reviews) {
     let reviewTotal = 0;
-    const numberOfReviews = reviews.results.length;
+    const numberOfReviews = reviews.length;
 
-    reviews.results.forEach((review) => {
+    reviews.forEach((review) => {
       reviewTotal += review.rating;
     });
     return reviewTotal / numberOfReviews;
@@ -19,13 +19,11 @@ function ReviewStars({ reviews }) {
 
   return (
     <div>
-      Average review:
+      Rating:
       {' '}
       {reviewAvg(reviews)}
-      # of reviews:
-      {' '}
-      {reviews.results.length}
-
+      {' stars. '}
+      <a href="#RatingsReviews">Read all {reviews.length} reviews</a>
     </div>
   );
 }
