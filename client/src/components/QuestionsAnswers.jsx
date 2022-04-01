@@ -12,9 +12,14 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <div>
-        <h1> Questions and Answers </h1>
+        <h3> Questions and Answers </h3>
         <div>
-          {this.props.currentProduct.id}
+          <p>
+            {this.props.currentProduct.name}
+          </p>
+          <p>
+            {this.props.currentProduct.id}
+          </p>
         </div>
       </div>
     );
@@ -22,7 +27,9 @@ class QuestionsAnswers extends React.Component {
 }
 
 QuestionsAnswers.propTypes = {
+  currentProduct: PropTypes.instanceOf(Object).isRequired,
   id: PropTypes.instanceOf(Object).isRequired,
+  name: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default QuestionsAnswers;
