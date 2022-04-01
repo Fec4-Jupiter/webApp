@@ -1,16 +1,22 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const session = require('express-session');
 
 const app = express();
 app.use(express.static(`${__dirname}/../client/dist`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'asdfasfasdfasdfasdfasdf',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false },
+}));
 
-const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfc2202';
+const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
 
 app.all('/*', (req, res) => {
-  console.log('Req recieved: ', req.method, req.url);
   const targetUrl = apiUrl + req.url;
   axios({
     method: req.method,
