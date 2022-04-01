@@ -8,8 +8,8 @@ import RelatedItems from './components/RelatedItems.jsx';
 const axios = require('axios');
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       product: null,
       reviews: [],
