@@ -19,6 +19,7 @@
     "jQuery": "^1.7.4",
     "nodemon": "^2.0.15",
     "path": "^0.12.7",
+    "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "style-loader": "^3.3.1",

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Overview from './components/Overview';
-import QuestionsAnswers from './components/QuestionsAnswers';
-import RatingsReviews from './components/RatingsReviews';
-import RelatedItems from './components/RelatedItems';
+import Overview from './components/Overview.jsx';
+import QuestionsAnswers from './components/QuestionsAnswers.jsx';
+import RatingsReviews from './components/RatingsReviews.jsx';
+import RelatedItems from './components/RelatedItems.jsx';
 
 class App extends React.Component {
   constructor() {
