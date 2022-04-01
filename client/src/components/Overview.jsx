@@ -13,6 +13,19 @@ class Overview extends React.Component {
       reviews,
       product,
     };
+
+    this.updateStyle=this.updateStyle.bind(this);
+  }
+
+  updateStyle(currentStyle) {
+    const {styles, reviews, product} = this.state;
+    this.setState({
+      currentStyle,
+      styles,
+      reviews,
+      product,
+    });
+
   }
 
   render() {

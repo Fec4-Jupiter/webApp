@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StyleSelector() {
+function StyleSelector({ currentStyle, styles, changeStyle }) {
   return <div>StyleSelector</div>;
 }
 
