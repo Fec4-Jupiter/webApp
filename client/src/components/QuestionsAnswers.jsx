@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
@@ -12,9 +13,7 @@ const axios = require('axios');
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      answers: [],
-    };
+    this.state = {};
 
     this.fetchAnswers = this.fetchAnswers.bind(this);
   }
@@ -26,11 +25,16 @@ class QuestionsAnswers extends React.Component {
   fetchAnswers(questions) {
     // for each question_id, generate a get call
     // GET /qa/questions/:question_id/answers
-    const newState = {};
-    const answersList = questions.map((question) => axios.get(`/qa/questions/${question.question_id}/answers`));
-    Promise.all(answersList)
+    const answersInResponse = questions.map((question) => (
+      axios.get(`/qa/questions/${question.question_id}/answers`)));
+    Promise.all(answersInResponse)
       .then((values) => {
-        newState.answers = values;
+        const newState = {};
+        for (let i = 0; i < values.length; i++) {
+          const questionId = values[i].data.question;
+          const listOfAnswerObjs = values[i].data.results;
+          newState[questionId] = listOfAnswerObjs;
+        }
         this.setState(newState);
       })
       .catch((err) => {
@@ -47,55 +51,11 @@ class QuestionsAnswers extends React.Component {
             Product ID:
             {this.props.product.id}
           </h4>
-          <h4> ==== Questions in container</h4>
-          {this.props.questions.map((question) => (
-            <div key={question.question_id}>
-              <p>
-                {' '}
-                Question ID:
-                {question.question_id}
-              </p>
-              <p>
-                {' '}
-                Question:
-                {question.question_body}
-              </p>
-            </div>
-          ))}
-          <div>
-            <h4> ==== Answers in container:</h4>
-            {this.state.answers.map((question) => {
-              if (question.data.results.length !== 0) {
-                return (
-                  question.data.results.map((answer) => (
-                    <div key={answer.answer_id}>
-                      <p>
-                        Answerer:
-                        {answer.answerer_name}
-                      </p>
-                      <p>
-                        Answer:
-                        {answer.body}
-                      </p>
-                      <p>
-                        Date:
-                        {answer.date}
-                      </p>
-                      <p>
-                        Helpfulness:
-                        {answer.helpfulness}
-                      </p>
-                    </div>
-                  ))
-                );
-              }
-            })}
-          </div>
           <div>
             <QuestionsList
               product={this.props.product}
               questions={this.props.questions}
-              answers={this.state.answers}
+              answers={this.state}
             />
           </div>
         </div>
