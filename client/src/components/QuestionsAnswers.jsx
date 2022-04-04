@@ -42,16 +42,19 @@ class QuestionsAnswers extends React.Component {
       <div className="questionsandanswers">
         <h3> Questions and Answers Component</h3>
         <div>
-          <p> Product ID: {this.props.product.id}</p>
+          <h4> Product ID: {this.props.product.id}</h4>
+          <h4> ==== Questions</h4>
           {this.props.questions.map((question) => {
             return (
               <div key={question.question_id}>
-                <p>Question: {question.question_body} </p>
+                <p> Question ID:  {question.question_id}</p>
+                <p> Question: {question.question_body} </p>
               </div>
             )
+          })
           }
-          )}
-          <div> Answers:
+          <div>
+            <h4> ==== Answers:</h4>
             {this.state.answers.map((question) => {
               if (question.data.results.length !== 0) {
                 return (
