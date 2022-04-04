@@ -1,10 +1,10 @@
 /**
- * 
+ *
  * Based on Josh Comeau's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/.
- * 
+ *
  * Feel free to edit this file as needed.
- * 
- */ 
+ *
+ */
 
 *,
 *::before,
@@ -61,4 +61,8 @@ main {
 
 #app {
   color: blue;
+}
+
+.questionsandanswers {
+  background-color: rgb(208, 208, 208);
 }
