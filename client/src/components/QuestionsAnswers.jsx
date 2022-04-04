@@ -5,6 +5,7 @@
 import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
+import QuestionsList from './QuestionsAnswers/QuestionsList.jsx';
 
 const axios = require('axios');
 
@@ -43,12 +44,10 @@ class QuestionsAnswers extends React.Component {
         <h3> Questions and Answers Component</h3>
         <div>
           <h4>
-            {' '}
             Product ID:
-            {' '}
             {this.props.product.id}
           </h4>
-          <h4> ==== Questions</h4>
+          <h4> ==== Questions in container</h4>
           {this.props.questions.map((question) => (
             <div key={question.question_id}>
               <p>
@@ -64,7 +63,7 @@ class QuestionsAnswers extends React.Component {
             </div>
           ))}
           <div>
-            <h4> ==== Answers:</h4>
+            <h4> ==== Answers in container:</h4>
             {this.state.answers.map((question) => {
               if (question.data.results.length !== 0) {
                 return (
@@ -91,6 +90,13 @@ class QuestionsAnswers extends React.Component {
                 );
               }
             })}
+          </div>
+          <div>
+            <QuestionsList
+              product={this.props.product}
+              questions={this.props.questions}
+              answers={this.state.answers}
+            />
           </div>
         </div>
       </div>

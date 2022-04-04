@@ -66,3 +66,15 @@ main {
 .questionsandanswers {
   background-color: rgb(208, 208, 208);
 }
+
+.questionslist {
+  background-color: rgb(240, 241, 225);
+}
+
+.questionview {
+  background-color: rgb(162, 225, 252);
+}
+
+.addquestion {
+  background-color: rgb(247, 125, 206);
+}
