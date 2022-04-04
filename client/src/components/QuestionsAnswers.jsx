@@ -39,24 +39,32 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="questionsandanswers">
         <h3> Questions and Answers Component</h3>
         <div>
           <p> Product ID: {this.props.product.id}</p>
-          <div> Q&A
+          {this.props.questions.map((question) => {
+            return (
+              <div key={question.question_id}>
+                <p>Question: {question.question_body} </p>
+              </div>
+            )
+          }
+          )}
+          <div> Answers:
             {this.state.answers.map((question) => {
-              <div>Question:{question.question_id}</div>
               if (question.data.results.length !== 0) {
                 return (
                   question.data.results.map((answer) => {
-                    return(
+                    return (
                       <div key={answer.answer_id}>
-                      <p>Answerer: {answer.answerer_name} </p>
-                      <p>Answer: {answer.body} </p>
-                      <p>Date: {answer.date} </p>
-                      <p>Helpfulness: {answer.helpfulness} </p>
+                        <p>Answerer: {answer.answerer_name} </p>
+                        <p>Answer: {answer.body} </p>
+                        <p>Date: {answer.date} </p>
+                        <p>Helpfulness: {answer.helpfulness} </p>
                       </div>
-                    )}
+                    )
+                  }
                   )
                 )
               }
