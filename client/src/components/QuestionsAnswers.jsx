@@ -7,7 +7,9 @@ const axios = require('axios');
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      answers: []
+    };
 
     this.fetchAnswers = this.fetchAnswers.bind(this);
   }
@@ -18,16 +20,17 @@ class QuestionsAnswers extends React.Component {
     // GET /qa/questions/:question_id/answers
     let newState = {};
     const answersList = questions.map((question) => {
-      return  axios.get(`/qa/questions/${question.question_id}/answers`)
+      return axios.get(`/qa/questions/${question.question_id}/answers`)
     });
     Promise.all(answersList)
-    .then((values) => {
-      // setState has raw responses for now
-      this.setState(values);
-    })
-    .catch((err) => {
-      throw err;
-    })
+      .then((values) => {
+        newState.answers = values;
+        this.setState(newState);
+
+      })
+      .catch((err) => {
+        throw err;
+      })
   }
 
   componentDidMount() {
@@ -40,19 +43,34 @@ class QuestionsAnswers extends React.Component {
         <h3> Questions and Answers Component</h3>
         <div>
           <p> Product ID: {this.props.product.id}</p>
-          <h4>Questions:</h4>
-          <div>
-            {this.props.questions.map((question) => {
-              return (
-                <div key={question.question_id}> Question: {question.question_body}</div>
-              )
+          <div> Q&A
+            {this.state.answers.map((question) => {
+              <div>Question:{question.question_id}</div>
+              if (question.data.results.length !== 0) {
+                return (
+                  question.data.results.map((answer) => {
+                    return(
+                      <div key={answer.answer_id}>
+                      <p>Answerer: {answer.answerer_name} </p>
+                      <p>Answer: {answer.body} </p>
+                      <p>Date: {answer.date} </p>
+                      <p>Helpfulness: {answer.helpfulness} </p>
+                      </div>
+                    )}
+                  )
+                )
+              }
             })
-            }</div>
-
+            }
+          </div>
         </div>
       </div>
     )
   }
+
+
+
+
 }
 
 QuestionsAnswers.propTypes = {
