@@ -1,3 +1,7 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
