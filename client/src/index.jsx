@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client.js';
+import ReactDOM from 'react-dom/client';
 import Overview from './components/Overview.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers.jsx';
 import RatingsReviews from './components/RatingsReviews.jsx';
