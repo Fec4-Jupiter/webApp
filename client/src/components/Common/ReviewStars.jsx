@@ -2,19 +2,18 @@ import React from 'react';
 
 const PropTypes = require('prop-types');
 
-//This component requires a reviews object, usually
-//obtained via reviews.results on a get request to reviews/product_id
-
+// This component requires a reviews object, usually
+// obtained via reviews.results on a get request to reviews/product_id
 
 function ReviewStars({ reviews }) {
-  const reviewAvg = function reviewAvg(reviews) {
+  const reviewAvg = function reviewAvg(list) {
     let reviewTotal = 0;
     const numberOfReviews = reviews.length;
 
-    reviews.forEach((review) => {
+    list.forEach((review) => {
       reviewTotal += review.rating;
     });
-    return reviewTotal / numberOfReviews;
+    return (reviewTotal / numberOfReviews).toFixed(1);
   };
 
   return (
@@ -23,7 +22,13 @@ function ReviewStars({ reviews }) {
       {' '}
       {reviewAvg(reviews)}
       {' stars. '}
-      <a href="#RatingsReviews">Read all {reviews.length} reviews</a>
+      <a href="#RatingsReviews">
+        Read all
+        {' '}
+        {reviews.length}
+        {' '}
+        reviews
+      </a>
     </div>
   );
 }

@@ -5,7 +5,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     const { styles, reviews, product } = props;
-    const currentStyle = styles.filter((style) => style['default?']);
+    const currentStyle = styles.filter((style) => style['default?'])[0];
     this.state = {
       currentStyle,
       styles,
@@ -34,11 +34,11 @@ class Overview extends React.Component {
       <div>
         Image Gallery Component
         {reviews.length ? <ReviewStars reviews={reviews} /> : '' }
-        {product.category}
+        <span className="category">{product.category}</span>
         <br />
-        {product.name}
+        <span className="name">{product.name}</span>
         <br />
-        {currentStyle ? currentStyle.price : ''}
+        <span className="price">{currentStyle.original_price}</span>
         <br />
         Style selector component here
         <br />
@@ -48,9 +48,11 @@ class Overview extends React.Component {
         <button type="button">Twitter</button>
         <button type="button">Pinterest</button>
         <br />
-        <b>{product.slogan}</b>
+        <span className="slogan">
+          <b>{product.slogan}</b>
+        </span>
         <br />
-        {product.description}
+        <span className="description">{product.description}</span>
         <br />
       </div>
     );
