@@ -21,11 +21,13 @@ class QuestionsList extends React.Component {
       <div className="questionslist">
         <div> QuestionsList component</div>
         <div>
-          <QuestionView
-            product={this.props.product}
-            questions={this.props.questions}
-            answers={this.props.answers}
-          />
+          {this.props.questions.map((question) => (
+            <QuestionView
+              product={this.props.product.id}
+              question={question.question_id}
+              answers={this.props.answers}
+            />
+          ))}
         </div>
       </div>
     );

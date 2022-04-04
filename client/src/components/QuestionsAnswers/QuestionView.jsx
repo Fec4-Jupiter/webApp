@@ -11,14 +11,13 @@ function QuestionView(props) {
   return (
     <div>
       <p>QuestionView component: </p>
-      <div> prod id>>
+      <div>
+        <p>prod id </p>
         {props.product.id}
       </div>
-      <div> question id>>
-        {props.questions[0].question_id}
-      </div>
-      <div> answers data>>
-        {props.answers.data}
+      <div>
+        <p> question id</p>
+        {props.question}
       </div>
       <div>
         <AddQuestion
@@ -30,8 +29,8 @@ function QuestionView(props) {
 }
 
 QuestionView.propTypes = {
-  product: PropTypes.instanceOf(Object),
-  questions: PropTypes.instanceOf(Object),
+  product: PropTypes.instanceOf(Number),
+  question: PropTypes.instanceOf(Object),
   answers: PropTypes.instanceOf(Object),
 };
 

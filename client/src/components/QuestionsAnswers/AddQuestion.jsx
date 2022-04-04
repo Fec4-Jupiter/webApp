@@ -24,7 +24,7 @@ class AddQuestion extends React.Component {
     return (
       <div className="addquestion">
         <div> Add Question Component</div>
-        <div> product id in addQ>>
+        <div> product id in addQ
           {this.props.product.id}
         </div>
       </div>
