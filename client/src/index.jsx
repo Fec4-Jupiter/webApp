@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client.js';
 import Overview from './components/Overview.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers.jsx';
 import RatingsReviews from './components/RatingsReviews.jsx';
@@ -21,11 +21,15 @@ class App extends React.Component {
     this.updateProduct = this.updateProduct.bind(this);
   }
 
+  componentDidMount() {
+    this.updateProduct(66642);
+  }
+
   updateProduct(id) {
-    let newState = {};
+    const newState = {};
     axios.get(`/products/${id}`)
       .then((results) => {
-        newState.product=results.data;
+        newState.product = results.data;
         const reviews = axios.get(`/reviews?product_id=${id}&count=500`);
         const styles = axios.get(`/products/${id}/styles`);
         const related = axios.get(`/products/${id}/related`);
@@ -42,31 +46,27 @@ class App extends React.Component {
             throw err;
           });
       })
-      .catch((err) => { throw err;})
-
-  }
-
-  componentDidMount() {
-    this.updateProduct(66642);
+      .catch((err) => { throw err; });
   }
 
   render() {
-    const { product, reviews, styles, related, questions } = this.state;
+    const {
+      product, reviews, styles, related, questions,
+    } = this.state;
     if (!product) {
-      return <div>Loading...</div>
-    } else {
-      return (
-        <div>
-          <Overview product={product} styles={styles} reviews={reviews} />
-          <RelatedItems product={product} related={related} />
-          <QuestionsAnswers product={product} questions={questions} />
-          <RatingsReviews id="RatingsReviews" product={product} reviews={reviews} />
-        </div>
-      );
+      return <div>Loading...</div>;
     }
+    return (
+      <div>
+        <Overview product={product} styles={styles} reviews={reviews} />
+        <RelatedItems product={product} related={related} />
+        <QuestionsAnswers product={product} questions={questions} />
+        <RatingsReviews id="RatingsReviews" product={product} reviews={reviews} />
+      </div>
+    );
   }
 }
 
 export default App;
 
-ReactDOM.createRoot(document.getElementById('app')|| document.createElement('div')).render(<App />);
+ReactDOM.createRoot(document.getElementById('app') || document.createElement('div')).render(<App />);
