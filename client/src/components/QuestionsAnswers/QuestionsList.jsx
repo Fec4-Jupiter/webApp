@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
@@ -23,7 +24,8 @@ class QuestionsList extends React.Component {
         <p>{this.props.product.id}</p>
         <div>
           {this.props.questions?.map((question) => (
-            <div key={question.question_id}>
+            <div key={`qlist ${question.question_id}`}>
+
               <QuestionView
                 product={this.props.product}
                 question={question}
@@ -31,6 +33,8 @@ class QuestionsList extends React.Component {
             </div>
           ))}
         </div>
+        {/* // eslint-disable-next-line react/button-has-type */}
+        <button> See more answers</button>
       </div>
     );
   }
