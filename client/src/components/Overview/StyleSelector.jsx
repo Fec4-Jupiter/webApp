@@ -13,16 +13,18 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
       if (style.style_id === currentStyle.style_id) {
         items.push(
           <td key={style.style_id} onClick={() => changeStyle(style)}>
-            <div className="selectedImageContainer">
-              <img className="stylethumbnail selected" src={thumb} alt="" />
+            <span className="thumbnailcontainer selected">
+              <img className="stylethumbnail " src={thumb} alt="" />
               <span className="checkmark">&#10003;</span>
-            </div>
+            </span>
           </td>,
         );
       } else {
         items.push(
           <td key={style.style_id} onClick={() => changeStyle(style)}>
-            <img className="stylethumbnail" src={thumb} alt="" />
+            <span className="thumbnailcontainer">
+              <img className="stylethumbnail" src={thumb} alt="" />
+            </span>
           </td>,
         );
       }
