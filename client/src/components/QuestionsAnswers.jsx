@@ -16,7 +16,6 @@ function QuestionsAnswers(props) {
       <div className="questionsandanswers-row1">
         <h3> Questions and Answers Component</h3>
         <h4>
-          Product ID:
           {props.product.id}
         </h4>
         <div className="questionsandanswers-row2">SearchBar</div>
