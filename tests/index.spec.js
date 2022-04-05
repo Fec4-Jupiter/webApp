@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import * as React from 'react';
 import 'regenerator-runtime/runtime.js';
-import { render, screen, act } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import axios from 'axios';
 import App from '../client/src/index.jsx';
 import testData from './testdata.js';
@@ -10,15 +10,6 @@ import testData from './testdata.js';
 jest.mock('axios');
 
 describe('Index test suite', () => {
-  it('Should show a loading state initially', async () => {
-    axios.get.mockImplementation(() => Promise.resolve({ data: 'Test' }));
-    act(() => {
-      render(<App />);
-    });
-    expect(screen.queryByText('Loading...')).not.toBeNull();
-    expect(screen.queryByText('Facebook')).toBeNull();
-  });
-
   it('Should make appropriate API calls on load', async () => {
     const urls = [];
     axios.get.mockImplementation((url) => {
