@@ -33,7 +33,9 @@ class QuestionsAnswers extends React.Component {
         for (let i = 0; i < values.length; i++) {
           const questionId = values[i].data.question;
           const listOfAnswerObjs = values[i].data.results;
-          newState[questionId] = listOfAnswerObjs;
+          if (listOfAnswerObjs.length !== 0) {
+            newState[questionId] = listOfAnswerObjs;
+          }
         }
         this.setState(newState);
       })

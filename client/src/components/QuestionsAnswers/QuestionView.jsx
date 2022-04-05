@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
@@ -8,23 +9,22 @@ import PropTypes from 'prop-types';
 import AddQuestion from './AddQuestion.jsx';
 
 function QuestionView(props) {
+  const questionID = props.question.question_id;
+  const arrayOfAnswers = (props.answers[questionID]);
+  // i think this is async as well - sometimes it does not log
+  // data that is there > use a promise here?
+  // const answersItems = arrayOfAnswers.map((answer) => <p>{answer.body}</p>);
+
   return (
     <div>
-      <p>QuestionView component: </p>
       <div>
-        <p>prod id </p>
-        {props.product.id}
+        {/* {answersItems} */}
       </div>
       <div>
-        <p> question id</p>
-        {props.question}
-      </div>
-      <div>
-        <AddQuestion
-          product={props.product}
-        />
+        <AddQuestion product={props.product} />
       </div>
     </div>
+
   );
 }
 

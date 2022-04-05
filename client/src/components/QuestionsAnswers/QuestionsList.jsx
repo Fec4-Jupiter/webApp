@@ -19,12 +19,12 @@ class QuestionsList extends React.Component {
   render() {
     return (
       <div className="questionslist">
-        <div> QuestionsList component</div>
+        {/* <div> QuestionsList component</div> */}
         <div>
           {this.props.questions.map((question) => (
             <QuestionView
               product={this.props.product.id}
-              question={question.question_id}
+              question={question}
               answers={this.props.answers}
             />
           ))}
