@@ -19,14 +19,16 @@ class QuestionsList extends React.Component {
   render() {
     return (
       <div className="questionslist">
-        {/* <div> QuestionsList component</div> */}
+        <div> QuestionsList component</div>
+        <p>{this.props.product.id}</p>
         <div>
-          {this.props.questions.map((question) => (
-            <QuestionView
-              product={this.props.product.id}
-              question={question}
-              answers={this.props.answers}
-            />
+          {this.props.questions?.map((question) => (
+            <div key={question.question_id}>
+              <QuestionView
+                product={this.props.product}
+                question={question}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -37,7 +39,6 @@ class QuestionsList extends React.Component {
 QuestionsList.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
-  answers: PropTypes.instanceOf(Object),
 };
 
 export default QuestionsList;
