@@ -15,7 +15,7 @@ function QuestionView(props) {
   const answersArray = Object.entries(props.question.answers);
   // console.log('answer array', answersArray[0]); // ['idnum', {}]
   const listAnswers = answersArray?.map((answer) => (
-    <div className="answercol-2">
+    <div className="answercol-2" key={`answercol ${answer[0]}`}>
       <div className="answer" key={`answer ${answer[0]}`}>
         {answer[1].body}
       </div>

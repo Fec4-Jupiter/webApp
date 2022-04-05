@@ -26,10 +26,7 @@ function QuestionsAnswers(props) {
             questions={props.questions}
           />
         </div>
-        <div className="questionsandanswers-row4">
-          <button>More Answered Questions </button>
-          <button>Add A Question </button>
-        </div>
+
       </div>
     </div>
   );

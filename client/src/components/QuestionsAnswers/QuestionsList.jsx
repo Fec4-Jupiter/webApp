@@ -19,13 +19,10 @@ class QuestionsList extends React.Component {
 
   render() {
     return (
-      <div className="questionslist">
-        <div> QuestionsList component</div>
-        <p>{this.props.product.id}</p>
-        <div>
+      <div className="questionslistgrid">
+        <div className="questionviewcontainer">
           {this.props.questions?.map((question) => (
             <div key={`qlist ${question.question_id}`}>
-
               <QuestionView
                 product={this.props.product}
                 question={question}
@@ -33,8 +30,15 @@ class QuestionsList extends React.Component {
             </div>
           ))}
         </div>
-        {/* // eslint-disable-next-line react/button-has-type */}
-        <button> See more answers</button>
+        <div className="questionslistfooter">
+          <div className="questionslistfooter-row1">
+            <button> See more answers</button>
+          </div>
+          <div className="questionslistfooter-row2">
+            <button>More Answered Questions </button>
+            <button>Add A Question </button>
+          </div>
+        </div>
       </div>
     );
   }
