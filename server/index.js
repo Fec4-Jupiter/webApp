@@ -18,7 +18,7 @@ const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
 
 app.all('/*', (req, res) => {
   const targetUrl = apiUrl + req.url;
-  console.log('Req recieved: ', req.url);
+  console.log('Req received: ', req.url);
   axios({
     method: req.method,
     url: targetUrl,

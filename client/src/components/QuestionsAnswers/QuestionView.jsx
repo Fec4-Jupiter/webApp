@@ -10,28 +10,32 @@ import AddQuestion from './AddQuestion.jsx';
 
 function QuestionView(props) {
   const questionID = props.question.question_id;
-  const arrayOfAnswers = (props.answers[questionID]);
-  // i think this is async as well - sometimes it does not log
-  // data that is there > use a promise here?
-  // const answersItems = arrayOfAnswers.map((answer) => <p>{answer.body}</p>);
+  const answersArray = Object.entries(props.question.answers);
+  console.log('aarray', answersArray[0]); // ['idnum', {}]
+  const listAnswers = answersArray?.map((answer) => (
+
+    <div className="answer" key={answer[0]}>
+      {answer[1].body}
+    </div>
+  ));
 
   return (
     <div>
       <div>
-        {/* {answersItems} */}
+        {' '}
+        {questionID}
       </div>
+      <div>{listAnswers}</div>
       <div>
         <AddQuestion product={props.product} />
       </div>
     </div>
-
   );
 }
 
 QuestionView.propTypes = {
-  product: PropTypes.instanceOf(Number),
+  product: PropTypes.instanceOf(Object),
   question: PropTypes.instanceOf(Object),
-  answers: PropTypes.instanceOf(Object),
 };
 
 export default QuestionView;
