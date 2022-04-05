@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewStars from './Common/ReviewStars.jsx';
 import StyleSelector from './Overview/StyleSelector.jsx';
+import AddToCart from './Overview/AddToCart.jsx';
 
 const PropTypes = require('prop-types');
 
@@ -26,7 +27,7 @@ class Overview extends React.Component {
       styles,
       reviews,
       product,
-    });
+    }, this.render);
   }
 
   render() {
@@ -45,7 +46,7 @@ class Overview extends React.Component {
         <br />
         <StyleSelector currentStyle={currentStyle} styles={styles} changeStyle={this.updateStyle} />
         <br />
-        Add to Cart component here
+        <AddToCart currentStyle={currentStyle} key={currentStyle.style_id} />
         <br />
         <button type="button">Facebook</button>
         <button type="button">Twitter</button>
