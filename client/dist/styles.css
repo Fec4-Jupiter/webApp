@@ -92,3 +92,8 @@ main {
   left: 15%;
   font-weight: bold;
 }
+
+/* ----------- Questions and Answers Styling ----- */
+.questionsandanswers {
+  background-color: rgb(208, 208, 208);
+}
