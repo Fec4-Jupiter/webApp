@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
@@ -7,15 +8,26 @@ import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
 import QuestionView from './QuestionView.jsx';
+import AddQuestion from './AddQuestion.jsx';
 
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // showAll: false,
+      showAddQuestion: false,
     };
+    this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
+    this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
   }
+
+  showAddQuestionForm = () => {
+    this.setState({ showAddQuestion: true });
+  };
+
+  hideAddQuestionForm = () => {
+    this.setState({ showAddQuestion: false });
+  };
 
   render() {
     return (
@@ -36,7 +48,15 @@ class QuestionsList extends React.Component {
           </div>
           <div className="questionslistfooter-row2">
             <button>More Answered Questions </button>
-            <button>Add A Question </button>
+            <button type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
+          </div>
+          <div>
+            <AddQuestion
+              showAddQuestion={this.state.showAddQuestion}
+              handleClose={this.hideAddQuestionForm}
+              product={this.props.product}
+            />
+
           </div>
         </div>
       </div>
