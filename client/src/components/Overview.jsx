@@ -1,5 +1,8 @@
 import React from 'react';
 import ReviewStars from './Common/ReviewStars.jsx';
+import StyleSelector from './Overview/StyleSelector.jsx';
+
+const PropTypes = require('prop-types');
 
 class Overview extends React.Component {
   constructor(props) {
@@ -40,7 +43,7 @@ class Overview extends React.Component {
         <br />
         <span className="price">{currentStyle.original_price}</span>
         <br />
-        Style selector component here
+        <StyleSelector currentStyle={currentStyle} styles={styles} changeStyle={this.updateStyle} />
         <br />
         Add to Cart component here
         <br />
@@ -58,5 +61,11 @@ class Overview extends React.Component {
     );
   }
 }
+
+Overview.propTypes = {
+  reviews: PropTypes.instanceOf(Object).isRequired,
+  styles: PropTypes.instanceOf(Object).isRequired,
+  product: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default Overview;

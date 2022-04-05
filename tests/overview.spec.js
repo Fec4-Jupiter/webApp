@@ -2,14 +2,17 @@
 /* eslint-disable react/jsx-filename-extension */
 import * as React from 'react';
 import 'regenerator-runtime/runtime.js';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Overview from '../client/src/components/Overview.jsx';
 import testData from './testdata.js';
 
 describe('Overview test suite', () => {
   beforeEach(() => {
-    const { product, styles, reviews } = testData;
-    render(<Overview product={product} styles={styles.data.results} reviews={reviews.data.results} />);
+    const { product } = testData;
+    let { styles, reviews } = testData;
+    styles = styles.data.results;
+    reviews = reviews.data.results;
+    render(<Overview product={product} styles={styles} reviews={reviews} />);
   });
   it('Should display product title, category, price, and overview information', () => {
     expect(screen.getByText(testData.product.category)).not.toBeNull();

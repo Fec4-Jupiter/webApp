@@ -63,6 +63,37 @@ main {
   color: blue;
 }
 
+/* ----------- Thumbnail selection styling ----- */
+.thumbnailcontainer {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px
+}
+
+.thumbnailcontainer.selected {
+  position: relative;
+  border: 3px solid red;
+}
+
+.stylethumbnail {
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkmark {
+  position: absolute;
+  color: red;
+  z-index: 5;
+  top: 10%;
+  left: 15%;
+  font-weight: bold;
+}
+
+/* ----------- Questions and Answers Styling ----- */
 .questionsandanswers {
   background-color: rgb(208, 208, 208);
 }
