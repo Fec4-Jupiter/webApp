@@ -76,9 +76,6 @@ class AddToCart extends React.Component {
             onChange={this.changeSize}
             required
             onInvalid={(e) => {
-              const event = document.createEvent('MouseEvents');
-              event.initMouseEvent('mousedown', true, true, window);
-              e.target.dispatchEvent(event);
               e.target.setCustomValidity('Please select size');
             }}
           >
@@ -94,7 +91,7 @@ class AddToCart extends React.Component {
         <div>
           <label htmlFor="size">Select Size:</label>
           <select disabled name="size">
-            <option>OUT OF STOCK</option>
+            <option name="OUT OF STOCK">OUT OF STOCK</option>
           </select>
         </div>
       );
