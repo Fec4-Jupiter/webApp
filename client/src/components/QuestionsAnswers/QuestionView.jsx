@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
