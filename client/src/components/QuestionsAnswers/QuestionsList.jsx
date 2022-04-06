@@ -16,6 +16,7 @@ class QuestionsList extends React.Component {
 
     this.state = {
       showAddQuestion: false,
+      showMoreAnsweredQuestions: false,
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
@@ -43,13 +44,8 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          <div className="questionslistfooter-row1">
-            <button> See more answers</button>
-          </div>
-          <div className="questionslistfooter-row2">
-            <button>More Answered Questions </button>
-            <button type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
-          </div>
+          <button>MORE ANSWERED QUESTIONS </button>
+          <button type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
               showAddQuestion={this.state.showAddQuestion}

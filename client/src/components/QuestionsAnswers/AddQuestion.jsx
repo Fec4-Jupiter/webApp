@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable class-methods-use-this */
@@ -9,6 +10,7 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class AddQuestion extends React.Component {
       questionText: '',
       nickname: '',
       email: '',
+      product: this.props.product.id,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,16 +28,16 @@ class AddQuestion extends React.Component {
 
   handleInputChange(event) {
     const target = event.target;
+    // console.log(target.value);
     this.setState({
-      questionText: target.questionText,
-      nickname: target.nickname,
-      email: target.email,
+      [target.name]: target.value,
     });
   }
 
   handleSubmit = (event) => {
-    alert(`A question was submitted: ${this.state.questionText}`);
     event.preventDefault();
+    console.log(JSON.stringify(this.state));
+    axios.post('/qa/questions', JSON.stringify(this.state));
   };
 
   render() {
@@ -48,6 +51,10 @@ class AddQuestion extends React.Component {
             {' '}
             {this.props.product.name}
             {' '}
+            id
+            {' '}
+            {this.props.product.id}
+            {' '}
           </h3>
           <form className="addquestionform" onSubmit={this.handleSubmit}>
 
@@ -56,7 +63,7 @@ class AddQuestion extends React.Component {
               Your question:
 
             </label>
-            <textarea type="text" className="textareaQA" name="questionText" onChange={this.handleChange} placeholder="Enter your question here" />
+            <textarea type="text" className="textareaQA" name="questionText" onChange={this.handleInputChange} placeholder="Enter your question here" />
 
             <label className="formlabel">
               <span className="mandatory">* </span>
