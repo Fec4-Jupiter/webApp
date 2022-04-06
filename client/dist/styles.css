@@ -177,40 +177,45 @@ main {
   background-color: rgb(208, 208, 208);
 }
 
-.questionslist {
-  color:rgb(16, 16, 17);
-}
-
-.questionviewgrid {
+/* question view grids */
+.questionrow {
+  border: solid grey;
   display: grid;
   gap: 1.5rem;
-  grid-auto-columns: 1fr;
+  grid-template-areas: "questioncol-1 questioncol-2";
+  grid-template-columns: 3fr 1fr;
 }
 
 .questioncol-1 {
-  grid-column-start:1;
-  grid-row-start:1;
-  border: solid grey;
-}
-
-.answercol-1 {
-  grid-column-start:1;
-  grid-row-start:2;
-  border: solid grey;
+  grid-area: questioncol-1;
 }
 
 .questioncol-2 {
-  grid-column-start:2;
-  grid-row-start:1;
-  border: solid grey;
+  grid-area: questioncol-2;
 }
 
-.questioncol-3, .answercol-3 {
-  border: solid grey;
+.answerrow {
+  border: solid rgb(48, 11, 11);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-areas: "answercol-1 answercol-2";
+  grid-template-columns: 3fr 1fr;
 }
 
-.answer {
-  border:solid red;
+.answercol-1 {
+  grid-area: answercol-1;
+  display: grid;
+  grid-template-areas: "answer-A answerlist";
+  grid-template-columns: 1fr 71fr;
+
+}
+
+.answercol-2 {
+  grid-area: answercol-2;
+}
+
+.footer {
+  background-color: rgb(235, 240, 126);
 }
 
 /* addQuestion modal */
@@ -231,6 +236,8 @@ main {
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  color: black;
+  padding: 20px;
 }
 
 .display-block {
@@ -239,4 +246,44 @@ main {
 
 .display-none {
   display: none;
+}
+
+.addquestionform {
+  font-size: 2m;
+}
+
+.formlabelQA {
+  font-size: 1.5em;
+  color: grey;
+}
+
+.textareaQA {
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.inputQA {
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.formbutton {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.mandatory {
+  color: red;
 }
