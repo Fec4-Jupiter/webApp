@@ -36,7 +36,7 @@ describe('Overview test suite', () => {
   it('Should display product title, category, price and overview information', () => {
     expect(screen.getByText(testData.product.category.toUpperCase())).not.toBeNull();
     expect(screen.getByText(testData.product.name)).not.toBeNull();
-    expect(screen.getByText(testData.product.default_price)).not.toBeNull();
+    expect(screen.getByText(`$${testData.product.default_price}`)).not.toBeNull();
     expect(screen.getByText(testData.product.slogan)).not.toBeNull();
     expect(screen.getByText(testData.product.description)).not.toBeNull();
   });
