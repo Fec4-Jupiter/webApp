@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ImageGallery() {
+function ImageGallery( { currentStyle }) {
   return <div>ImageGallery</div>;
 }
 
