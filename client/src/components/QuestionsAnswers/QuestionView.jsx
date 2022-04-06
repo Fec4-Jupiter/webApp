@@ -6,35 +6,52 @@
 import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
-import AddQuestion from './AddQuestion.jsx';
+import Footer from './Footer.jsx';
+import SideBox from './SideBox.jsx';
 
 function QuestionView(props) {
-  const questionID = props.question.question_id;
+  const question = props.question.question_body;
   const answersArray = Object.entries(props.question.answers);
-  console.log('aarray', answersArray[0]); // ['idnum', {}]
+  // console.log('answer array', answersArray[0]); // ['idnum', {}]
   const listAnswers = answersArray?.map((answer) => (
-
-    <div className="answer" key={answer[0]}>
-      {answer[1].body}
+    <div className="answercol-2" key={`answercol ${answer[0]}`}>
+      <div className="answer" key={`answer ${answer[0]}`}>
+        {answer[1].body}
+      </div>
+      <div className="footer" key={`Footer ${answer[0]}`}>
+        <Footer
+          answer={answer}
+        />
+      </div>
+      {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
+        <SideBox />
+      </div> */}
     </div>
   ));
 
   return (
-    <div>
-      <div>
-        {' '}
-        {questionID}
+    <div className="questionviewgrid">
+      <div className="questionrow" key={`q in view ${question.question_id}`}>
+        <div className="questioncol-1"> Q: </div>
+        <div className="questioncol-2">
+          {' '}
+          {question}
+          {' '}
+        </div>
+        <div className="q</div>questioncol-3"> SideBox </div>
+
       </div>
-      <div>{listAnswers}</div>
-      <div>
-        <AddQuestion product={props.product} />
+      <div className="answerrow">
+        <div className="answercol-1"> A:</div>
+        <div>{listAnswers}</div>
+        <div className="answercol-3" />
       </div>
     </div>
   );
 }
 
 QuestionView.propTypes = {
-  product: PropTypes.instanceOf(Object),
+  // product: PropTypes.instanceOf(Object),
   question: PropTypes.instanceOf(Object),
 };
 

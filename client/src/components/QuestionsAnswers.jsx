@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
 /* eslint-disable react/require-default-props */
@@ -11,17 +12,20 @@ import QuestionsList from './QuestionsAnswers/QuestionsList.jsx';
 
 function QuestionsAnswers(props) {
   return (
-    <div className="questionsandanswers">
-      <h3> Questions and Answers Component</h3>
-      <h4>
-        Product ID:
-        {props.product.id}
-      </h4>
-      <div>
-        <QuestionsList
-          product={props.product}
-          questions={props.questions}
-        />
+    <div className="questionsandanswerscontainer">
+      <div className="questionsandanswers-row1">
+        <h3> Questions and Answers Component</h3>
+        <h4>
+          {props.product.id}
+        </h4>
+        <div className="questionsandanswers-row2">SearchBar</div>
+        <div className="questionsandanswers-row3">
+          <QuestionsList
+            product={props.product}
+            questions={props.questions}
+          />
+        </div>
+
       </div>
     </div>
   );

@@ -94,18 +94,70 @@ main {
 }
 
 /* ----------- Questions and Answers Styling ----- */
-.questionsandanswers {
+.questionsandanswerscontainer {
   background-color: rgb(208, 208, 208);
 }
 
 .questionslist {
-  background-color: rgb(240, 241, 225);
+  color:rgb(16, 16, 17);
 }
 
-.questionview {
-  background-color: rgb(162, 225, 252);
+.questionviewgrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-auto-columns: 1fr;
 }
 
-.addquestion {
-  background-color: rgb(247, 125, 206);
+.questioncol-1 {
+  grid-column-start:1;
+  grid-row-start:1;
+  border: solid grey;
+}
+
+.answercol-1 {
+  grid-column-start:1;
+  grid-row-start:2;
+  border: solid grey;
+}
+
+.questioncol-2 {
+  grid-column-start:2;
+  grid-row-start:1;
+  border: solid grey;
+}
+
+.questioncol-3, .answercol-3 {
+  border: solid grey;
+}
+
+.answer {
+  border:solid red;
+}
+
+/* addQuestion modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
 }
