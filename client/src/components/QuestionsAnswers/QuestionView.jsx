@@ -7,44 +7,42 @@ import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
 import Footer from './Footer.jsx';
-import SideBox from './SideBox.jsx';
+// import SideBox from './SideBox.jsx';
 
 function QuestionView(props) {
   const question = props.question.question_body;
   const answersArray = Object.entries(props.question.answers);
-  // console.log('answer array', answersArray[0]); // ['idnum', {}]
   const listAnswers = answersArray?.map((answer) => (
-    <div className="answercol-2" key={`answercol ${answer[0]}`}>
+    <div key={`oneanswer ${answer[0]}`}>
       <div className="answer" key={`answer ${answer[0]}`}>
-        {answer[1].body}
+        <span>{answer[1].body}</span>
       </div>
       <div className="footer" key={`Footer ${answer[0]}`}>
         <Footer
           answer={answer}
         />
       </div>
-      {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
-        <SideBox />
-      </div> */}
+
     </div>
   ));
 
   return (
     <div className="questionviewgrid">
       <div className="questionrow" key={`q in view ${question.question_id}`}>
-        <div className="questioncol-1"> Q: </div>
-        <div className="questioncol-2">
-          {' '}
-          {question}
-          {' '}
+        <div className="questioncol-1">
+          <span className="question-Q">Q:</span>
+          <span>{question}</span>
         </div>
-        <div className="q</div>questioncol-3"> SideBox </div>
-
+        <div className="questioncol-2"> SideBox Comp </div>
+        {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
+        <SideBox />
+      </div> */}
       </div>
-      <div className="answerrow">
-        <div className="answercol-1"> A:</div>
-        <div>{listAnswers}</div>
-        <div className="answercol-3" />
+      <div className="answerslist">
+        <div className="answercol-1">
+          <div className="answer-A">A:</div>
+          <div className="answerlist">{listAnswers}</div>
+        </div>
       </div>
     </div>
   );
