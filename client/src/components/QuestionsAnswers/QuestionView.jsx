@@ -12,7 +12,9 @@ import Footer from './Footer.jsx';
 function QuestionView(props) {
   const question = props.question.question_body;
   const answersArray = Object.entries(props.question.answers);
-  const listAnswers = answersArray?.map((answer) => (
+  const numOfAnswers = answersArray.length;
+
+  const listAnswers = answersArray.map((answer) => (
     <div key={`oneanswer ${answer[0]}`}>
       <div className="answer" key={`answer ${answer[0]}`}>
         <span>{answer[1].body}</span>
@@ -30,8 +32,12 @@ function QuestionView(props) {
     <div className="questionviewgrid">
       <div className="questionrow" key={`q in view ${question.question_id}`}>
         <div className="questioncol-1">
-          <span className="question-Q">Q:</span>
+          <span className="question-Q">
+            Q:
+            {' '}
+          </span>
           <span>{question}</span>
+          <span>{`number of answers:${numOfAnswers}`}</span>
         </div>
         <div className="questioncol-2"> SideBox Comp </div>
         {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
@@ -40,7 +46,10 @@ function QuestionView(props) {
       </div>
       <div className="answerslist">
         <div className="answercol-1">
-          <div className="answer-A">A:</div>
+          <span className="answer-A">
+            A:
+            {' '}
+          </span>
           <div className="answerlist">{listAnswers}</div>
         </div>
       </div>
