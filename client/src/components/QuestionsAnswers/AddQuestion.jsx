@@ -16,12 +16,13 @@ class AddQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionText: '',
-      nickname: '',
+      body: '',
+      name: '',
       email: '',
-      product: this.props.product.id,
+      product_id: this.props.product.id,
     };
 
+    this.baseState = this.state;
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,16 +35,23 @@ class AddQuestion extends React.Component {
     });
   }
 
+  resetForm = () => {
+    this.setState(this.baseState);
+    document.getElementById('addQuestionForm').reset();
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(JSON.stringify(this.state));
-    axios.post('/qa/questions', JSON.stringify(this.state))
+    axios.post('/qa/questions', this.state)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         throw err;
       });
+    this.resetForm();
+    this.props.handleClose();
   };
 
   render() {
@@ -62,14 +70,18 @@ class AddQuestion extends React.Component {
             {this.props.product.id}
             {' '}
           </h3>
-          <form className="addquestionform" onSubmit={this.handleSubmit}>
+          <form
+            id="addQuestionForm"
+            className="addquestionform"
+            onSubmit={this.handleSubmit}
+          >
 
             <label className="formlabel">
               <span className="mandatory">* </span>
               Your question:
 
             </label>
-            <textarea type="text" className="textareaQA" name="questionText" onChange={this.handleInputChange} placeholder="Enter your question here" />
+            <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your question here" />
 
             <label className="formlabel">
               <span className="mandatory">* </span>
@@ -77,7 +89,7 @@ class AddQuestion extends React.Component {
               What is your nickname:
               {' '}
             </label>
-            <input className="inputQA" type="text" name="nickname" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
+            <input className="inputQA" type="text" name="name" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
 
             <label className="formlabel">
               <span className="mandatory">* </span>
@@ -85,7 +97,7 @@ class AddQuestion extends React.Component {
             </label>
             <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jackson11@gmail.com" />
 
-            <button className="formbutton" type="button" onClick={this.props.handleClose}>
+            <button className="formbutton" type="button" onClick={this.handleSubmit}>
               Submit
             </button>
           </form>

@@ -197,7 +197,7 @@ main {
 }
 .formbutton {
   width: 50%;
-  background-color: #b7bab7;
+  background-color: #9ea69e;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
   margin: 8px 0;
@@ -209,6 +209,7 @@ main {
 
 .formbutton:hover {
   color: white;
+  background-color: #9ea69ebb;
 }
 
 .mandatory {
