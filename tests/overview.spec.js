@@ -11,6 +11,20 @@ import testData from './testdata.js';
 
 jest.mock('axios');
 
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 describe('Overview test suite', () => {
   beforeEach(() => {
     const { product } = testData;
@@ -20,7 +34,7 @@ describe('Overview test suite', () => {
     render(<Overview product={product} styles={styles} reviews={reviews} />);
   });
   it('Should display product title, category, price and overview information', () => {
-    expect(screen.getByText(testData.product.category)).not.toBeNull();
+    expect(screen.getByText(testData.product.category.toUpperCase())).not.toBeNull();
     expect(screen.getByText(testData.product.name)).not.toBeNull();
     expect(screen.getByText(testData.product.default_price)).not.toBeNull();
     expect(screen.getByText(testData.product.slogan)).not.toBeNull();
@@ -77,7 +91,7 @@ describe('Add to Cart test suite', () => {
     // Initially dropdownboxes should only have 7 options (6 sizes + hidden "select size")
     expect(screen.getAllByRole('option').length).toBe(7);
     // Select a size option
-    fireEvent.change(screen.getByRole('combobox', { name: 'Select Size:' }), { target: { value: 'M' } });
+    fireEvent.change(screen.getByRole('combobox', { name: 'size' }), { target: { value: 'M' } });
     // dropdown boxes should have rendered the quantity dropdown, increasing number of options to 21
     expect(screen.getAllByRole('option').length).toBe(21);
   });
@@ -92,8 +106,8 @@ describe('Add to Cart test suite', () => {
 
     render(<AddToCart currentStyle={defaultStyle} />, container);
     // Select a size option to render quantity
-    fireEvent.change(screen.getByRole('combobox', { name: 'Select Size:' }), { target: { value: 'M' } });
-    fireEvent.change(screen.getByRole('combobox', { name: 'Select Quantity:' }), { target: { value: '3' } });
+    fireEvent.change(screen.getByRole('combobox', { name: 'size' }), { target: { value: 'M' } });
+    fireEvent.change(screen.getByRole('combobox', { name: 'quantity' }), { target: { value: '3' } });
     fireEvent(screen.getByRole('button'), new MouseEvent('click'));
 
     expect(axios.post).toHaveBeenCalledWith('/cart', { count: '3', sku_id: '2390359' });
