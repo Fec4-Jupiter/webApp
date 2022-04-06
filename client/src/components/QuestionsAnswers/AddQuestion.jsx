@@ -40,7 +40,7 @@ class AddQuestion extends React.Component {
   render() {
     return (
       <div className={this.props.showAddQuestion ? 'modal display-block' : 'modal display-none'}>
-        <div>
+        <div className="modal-main">
           <h2> Ask your question</h2>
           <h3>
             {' '}
@@ -49,20 +49,30 @@ class AddQuestion extends React.Component {
             {this.props.product.name}
             {' '}
           </h3>
-          <form className="modal-main" onSubmit={this.handleSubmit}>
-            <label>
-              * Your question:
-              <textarea name="questionText" onChange={this.handleChange} />
+          <form className="addquestionform" onSubmit={this.handleSubmit}>
+
+            <label className="formlabel">
+              <span className="mandatory">* </span>
+              Your question:
+
             </label>
-            <label>
-              * What is your nickname:
-              <input type="text" name="nickname" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
+            <textarea type="text" className="textareaQA" name="questionText" onChange={this.handleChange} placeholder="Enter your question here" />
+
+            <label className="formlabel">
+              <span className="mandatory">* </span>
+              {' '}
+              What is your nickname:
+              {' '}
             </label>
-            <label>
-              * Your email:
-              <input type="text" name="email" onChange={this.handleInputChange} />
+            <input className="inputQA" type="text" name="nickname" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
+
+            <label className="formlabel">
+              <span className="mandatory">* </span>
+              Your email:
             </label>
-            <button type="button" onClick={this.props.handleClose}>
+            <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jackson11@gmail.com" />
+
+            <button className="formbutton" type="button" onClick={this.props.handleClose}>
               Submit
             </button>
           </form>
