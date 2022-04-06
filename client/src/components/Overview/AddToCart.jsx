@@ -67,33 +67,28 @@ class AddToCart extends React.Component {
     let list;
     if (availableSizes.length) {
       list = (
-        <div>
-          <label htmlFor="size">Select Size:</label>
-          <select
-            id="size"
-            name="size"
-            defaultValue=""
-            onChange={this.changeSize}
-            required
-            onInvalid={(e) => {
-              e.target.setCustomValidity('Please select size');
-            }}
-          >
-            <option value="" disabled hidden>Select a Size</option>
-            {availableSizes.map(
-              (sku) => <option key={sku.sku} value={sku.size}>{sku.size}</option>,
-            )}
-          </select>
-        </div>
+        <select
+          name="size"
+          className="size-list"
+          aria-label="size"
+          defaultValue=""
+          onChange={this.changeSize}
+          required
+          onInvalid={(e) => {
+            e.target.setCustomValidity('Please select size');
+          }}
+        >
+          <option value="" disabled hidden>Select a Size</option>
+          {availableSizes.map(
+            (sku) => <option key={sku.sku} value={sku.size}>{sku.size}</option>,
+          )}
+        </select>
       );
     } else {
       list = (
-        <div>
-          <label htmlFor="size">Select Size:</label>
-          <select disabled name="size">
-            <option name="OUT OF STOCK">OUT OF STOCK</option>
-          </select>
-        </div>
+        <select disabled className="size-list" name="size" aria-label="size">
+          <option name="OUT OF STOCK">OUT OF STOCK</option>
+        </select>
       );
     }
 
@@ -111,21 +106,15 @@ class AddToCart extends React.Component {
         quantities.push(<option key={i} value={i}>{i}</option>);
       }
       list = (
-        <div>
-          <label htmlFor="quantity">Select Quantity:</label>
-          <select id="quantity" name="quantity" defaultValue="1" onChange={this.changeQuantity}>
-            {quantities}
-          </select>
-        </div>
+        <select className="quantity-list" aria-label="quantity" name="quantity" defaultValue="1" onChange={this.changeQuantity}>
+          {quantities}
+        </select>
       );
     } else {
       list = (
-        <div>
-          <label htmlFor="quantity">Select Quantity:</label>
-          <select disabled name="quantity">
-            <option>-</option>
-          </select>
-        </div>
+        <select className="quantity-list" disabled aria-label="quantity" name="quantity">
+          <option>-</option>
+        </select>
       );
     }
 
@@ -135,8 +124,8 @@ class AddToCart extends React.Component {
   render() {
     const { availableSizes } = this.state;
     return (
-      <div className="addtocart">
-        <form onSubmit={this.handleAdd}>
+      <div className="add-to-cart right-column">
+        <form className="add-to-cart-form" onSubmit={this.handleAdd}>
           {this.sizeList()}
           {this.quantityList()}
           {availableSizes.length ? <input type="submit" value="Add to Cart" /> : ''}

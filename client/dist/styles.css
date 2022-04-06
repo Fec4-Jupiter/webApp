@@ -60,16 +60,89 @@ main {
 }
 
 #app {
-  color: blue;
+  color: rgb(99, 99, 99);
+  background-color: rgb(251, 250, 249);
 }
 
+.title-banner {
+  color: rgb(251, 251, 251);
+  background-color: rgb(68, 68, 68);
+  height: 5vh;
+}
+
+
+/* ----------- Overview section layout ----- */
+.overview {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  padding: 10px;
+  height: 80vh;
+}
+.image-gallery {
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  grid-row-start: 1;
+  grid-row-end: span 3;
+}
+.product-information {
+  grid-column-start: 4;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+.style-selector {
+  grid-column-start: 4;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+}
+.add-to-cart {
+  grid-column-start: 4;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: span 1;
+}
+.add-to-cart-form {
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 50% 50%;
+}
+.size-list {
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+.quantity-list {
+  grid-column-start: 4;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+  padding-left: 10px;
+}
+.social-buttons {
+  grid-column-start: 4;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+  grid-row-end: span 1;
+}
+.product-description {
+  grid-column-start: 1;
+  grid-column-end: span 5;
+  grid-row-start: 5;
+  grid-row-end: span 1;
+}
+.right-column {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 /* ----------- Thumbnail selection styling ----- */
 .thumbnailcontainer {
   display: inline-block;
   border-radius: 50%;
   overflow: hidden;
-  width: 100px;
-  height: 100px
+  width: 50px;
+  height: 50px
 }
 
 .thumbnailcontainer.selected {
@@ -92,6 +165,12 @@ main {
   left: 15%;
   font-weight: bold;
 }
+/* -----------Image Gallery Styling ------ */
+
+.selectedThumbnail {
+  border: 3px solid red;
+}
+
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
