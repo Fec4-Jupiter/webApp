@@ -13,9 +13,8 @@ function QuestionView(props) {
   const question = props.question.question_body;
   const answersArray = Object.entries(props.question.answers);
   const listAnswers = answersArray?.map((answer) => (
-    <div className="answercol-1" key={`answercol1 ${answer[0]}`}>
+    <div key={`oneanswer ${answer[0]}`}>
       <div className="answer" key={`answer ${answer[0]}`}>
-        <span className="answer-A">A:</span>
         <span>{answer[1].body}</span>
       </div>
       <div className="footer" key={`Footer ${answer[0]}`}>
@@ -23,9 +22,7 @@ function QuestionView(props) {
           answer={answer}
         />
       </div>
-      {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
-        <SideBox />
-      </div> */}
+
     </div>
   ));
 
@@ -36,11 +33,16 @@ function QuestionView(props) {
           <span className="question-Q">Q:</span>
           <span>{question}</span>
         </div>
-        <div className="q</div>questioncol-2"> SideBox </div>
+        <div className="questioncol-2"> SideBox Comp </div>
+        {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
+        <SideBox />
+      </div> */}
       </div>
-      <div className="answerrow">
-        <div>{listAnswers}</div>
-        <div className="answercol-3" />
+      <div className="answerslist">
+        <div className="answercol-1">
+          <div className="answer-A">A:</div>
+          <div className="answerlist">{listAnswers}</div>
+        </div>
       </div>
     </div>
   );
