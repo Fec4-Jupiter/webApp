@@ -37,7 +37,13 @@ class AddQuestion extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(JSON.stringify(this.state));
-    axios.post('/qa/questions', JSON.stringify(this.state));
+    axios.post('/qa/questions', JSON.stringify(this.state))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   render() {
