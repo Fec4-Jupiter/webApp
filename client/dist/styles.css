@@ -109,3 +109,53 @@ main {
 .addquestion {
   background-color: rgb(247, 125, 206);
 }
+
+
+/* ----------- Ratings and Reviews styling ----- */
+.modal {
+  font-size: 15px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 18px;
+  text-align: left;
+  padding: 1px;
+}
+.modal > .subheader {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 12px;
+  text-align: left;
+  padding: 1px;
+  margin-bottom: 5px;
+}
+.frame{
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+.card-header{
+  padding: 5px;
+}
+.block-section{
+  position: relative;
+  padding:5px;
+}
+.a-input-text, input[type=text]{
+  background-color: #ffffff;
+  height: 31px;
+  padding: 3px 7px;
+  line-height: normal;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}

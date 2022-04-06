@@ -15,8 +15,10 @@ class RatingsReviews extends React.Component {
       reviews: [],
       metadata: {},
       sort: 'relevance',
+      count: 2,
     };
-    this.fetchReviews = this.fetchReviews.bind(this);
+    this.clickHelpful = this.clickHelpful.bind(this);
+    this.moreReviews = this.moreReviews.bind(this);
   }
 
   componentDidMount() {
@@ -26,22 +28,41 @@ class RatingsReviews extends React.Component {
   // * Fetch all reviews and metadata.
   // * Init state
   fetchReviews() {
-    const { product: { pId }, sort } = this.state;
-    axios.get(`/reviews?product_id=${pId}&sort=${sort}`)
+    const { product: { pId }, sort, count } = this.state;
+    axios.get(`/reviews?product_id=${pId}&sort=${'helpful'}&count=${count}`)
       .then(({ data }) => {
-        // console.log(data);
+        console.log(data.results);
         this.setState({
           reviews: data.results,
+          reviewsToShow: data.results,
         });
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
       .then(({ data }) => {
-        // console.log(data);
+        console.log(data);
         this.setState({
           metadata: data,
         });
       });
   }
+
+  // *------------------------- For Review List ----------------------
+  clickHelpful(id) {
+    axios.put(`/reviews/${id}/helpful`)
+      .then(() => {
+        console.log('click update');
+        this.fetchReviews();
+      });
+  }
+
+  moreReviews(e) {
+    e.preventDefault();
+    const { count } = this.state;
+    this.setState({ count: count + 2 }, () => {
+      this.fetchReviews();
+    });
+  }
+  // !------------------------- For Review List end ----------------------
 
   render() {
     const { product, reviews, metadata } = this.state;
@@ -49,7 +70,14 @@ class RatingsReviews extends React.Component {
       <div>
         <h1>Ratings&Reviews</h1>
         {reviews.length === 0 ? <p>Loading Reviews....</p>
-          : <ReviewList product={product} reviews={reviews} update={this.fetchReviews} />}
+          : (
+            <ReviewList
+              product={product}
+              reviews={reviews}
+              helpful={this.clickHelpful}
+              moreReviews={this.moreReviews}
+            />
+          )}
       </div>
 
     );
