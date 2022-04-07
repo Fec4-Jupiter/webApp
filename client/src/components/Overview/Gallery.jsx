@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import Carousel from 'react-gallery-carousel';
-import Thumbs from 'react-multi-carousel';
+import MainImage from 'react-gallery-carousel';
+import Thumbnails from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'react-gallery-carousel/dist/index.css';
 import notAvailable from '../Common/imageNotAvailable.png';
@@ -69,18 +69,20 @@ class Gallery extends React.Component {
     const { images, currentImage } = this.state;
     return (
       <div className="image-gallery">
-        <Carousel className="mainimage" index={currentImage} images={images} onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} shouldMaximizeOnClick shouldMinimizeOnClick hasSizeButton={false} />
-        <Thumbs className="thumbnails" infinite={false} showDots={false} responsive={responsive} itemClass="thumbnail-item">
-          {images.map((image, index) => (
-            <img
-              key={image.src}
-              onClick={this.thumbClick}
-              src={image.src}
-              alt={index}
-              className={(index === currentImage) ? 'selectedThumbnail' : 'thumbnail-item'}
-            />
-          ))}
-        </Thumbs>
+        <MainImage className="main-image" index={currentImage} images={images} objectFit="cover" onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} shouldMaximizeOnClick shouldMinimizeOnClick hasSizeButton={false} />
+        <div className="thumbnails">
+          <Thumbnails infinite={false} showDots={false} responsive={responsive} itemClass="thumbnail-item">
+            {images.map((image, index) => (
+              <img
+                key={image.src}
+                onClick={this.thumbClick}
+                src={image.src}
+                alt={index}
+                className={(index === currentImage) ? 'selected-image thumbnail-image' : 'thumbnail-image'}
+              />
+            ))}
+          </Thumbnails>
+        </div>
       </div>
     );
   }
