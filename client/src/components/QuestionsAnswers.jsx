@@ -15,10 +15,10 @@ function QuestionsAnswers(props) {
   return (
     <div className="questionsandanswerscontainer">
       <div className="questionsandanswers-row1">
-        <h3> Questions and Answers Component</h3>
-        <h4>
+        <h3> Questions & Answers</h3>
+        {/* <h4>
           {props.product.id}
-        </h4>
+        </h4> */}
         <div className="questionsandanswers-row2">
           <Search
             product={props.product}

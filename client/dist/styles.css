@@ -95,32 +95,36 @@ main {
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
-  background-color: rgb(208, 208, 208);
+  background-color:white;
+  color: black;
 }
 
 /* question view grids */
 .questionrow {
-  border: solid grey;
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 5fr 3fr;
+
 }
 
 .questioncol-1 {
   grid-area: questioncol-1;
+  font-weight: 600;
 }
 
 .questioncol-2 {
   grid-area: questioncol-2;
+  font-size: 0.7em;
+
 }
 
 .answerrow {
-  border: solid rgb(48, 11, 11);
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "answercol-1 answercol-2";
   grid-template-columns: 3fr 1fr;
+  font-weight: 300;
 }
 
 .answercol-1 {
@@ -141,6 +145,11 @@ main {
 .answerlist {
   padding-left: 10px;
 }
+
+.answer-A, .question-Q {
+  font-weight: 600;
+}
+
 /* addQuestion modal */
 .modal {
   position: fixed;
@@ -214,4 +223,10 @@ main {
 
 .mandatory {
   color: red;
+}
+
+/* Search component in Questions & Answers */
+
+.searchinput {
+  width: 100%;
 }

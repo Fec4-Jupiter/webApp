@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/require-default-props */
 /* eslint-disable consistent-return */
@@ -7,7 +8,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
 import Footer from './Footer.jsx';
-// import SideBox from './SideBox.jsx';
+import SideBox from './SideBox.jsx';
 
 function QuestionView(props) {
   const question = props.question.question_body;
@@ -39,10 +40,14 @@ function QuestionView(props) {
           <span>{question}</span>
           <span>{`number of answers:${numOfAnswers}`}</span>
         </div>
-        <div className="questioncol-2"> SideBox Comp </div>
-        {/* <div className="sidebox" key={`SideBox${answer[0]}`}>
-        <SideBox />
-      </div> */}
+        <div
+          className="questioncol-2"
+          key={`sidebox${question.question_id}`}
+        >
+          <SideBox
+            question={props.question}
+          />
+        </div>
       </div>
       <div className="answerslist">
         <div className="answercol-1">
@@ -58,7 +63,7 @@ function QuestionView(props) {
 }
 
 QuestionView.propTypes = {
-  // product: PropTypes.instanceOf(Object),
+  product: PropTypes.instanceOf(Object),
   question: PropTypes.instanceOf(Object),
 };
 
