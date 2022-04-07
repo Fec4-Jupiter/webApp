@@ -1,42 +1,48 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Review from './Review.jsx';
+import ReviewForm from './ReviewForm.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
-    const count = 2;
-    this.state = {
-      count,
-      reviews: props.reviews.slice(0, count),
-    };
+    this.state = {};
   }
 
-  moreReviews() {
-    const { reviews } = this.props;
-    let { count } = this.state;
-    count += 2;
-    this.setState({
-      count,
-      reviews: reviews.slice(0, count),
-    });
+  renderReviewForm() {
+    const { product } = this.props;
+    return (
+      <ReviewForm product={product} />
+    );
   }
 
   render() {
-    const { update } = this.props;
-    const { reviews } = this.state;
+    const {
+      product, reviews, helpful, moreReviews,
+    } = this.props;
     return (
       <div>
-        <h2>This is review List</h2>
-        <Review reviews={reviews} update={update} />
-        <button type="button" onClick={() => this.moreReviews()}>More Reviews</button>
+        <div className="o">
+          {' '}
+          <h2>This is review List</h2>
+        </div>
+        <div className="rl"><Review reviews={reviews} helpful={helpful} /></div>
+        <div className="btn">
+          <button type="button" onClick={(e) => moreReviews(e)}>More Reviews</button>
+          {' '}
+          {this.renderReviewForm()}
+        </div>
+
       </div>
     );
   }
 }
 ReviewList.propTypes = {
-  reviews: PropTypes.instanceOf(Object).isRequired,
-  update: PropTypes.instanceOf(Function).isRequired,
+  product: PropTypes.instanceOf(Object).isRequired,
+  reviews: PropTypes.instanceOf(Array).isRequired,
+  helpful: PropTypes.instanceOf(Function).isRequired,
+  moreReviews: PropTypes.instanceOf(Function).isRequired,
 };
 export default ReviewList;
