@@ -40,6 +40,7 @@ class Review extends React.Component {
         </div>
 
         <br />
+        <hr />
 
       </div>
     ));
@@ -57,7 +58,6 @@ class Review extends React.Component {
   render() {
     return (
       <div>
-        <h3>This is review </h3>
         {this.renderReview()}
       </div>
     );

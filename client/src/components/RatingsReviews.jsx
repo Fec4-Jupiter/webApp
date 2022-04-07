@@ -5,6 +5,8 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import ReviewList from './RatingsReviews/ReviewList.jsx';
+import RatingSideBar from './RatingsReviews/RatingSideBar.jsx';
+import ProductSideBar from './RatingsReviews/ProductSideBar.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -67,8 +69,8 @@ class RatingsReviews extends React.Component {
   render() {
     const { product, reviews, metadata } = this.state;
     return (
-      <div>
-        <h1>Ratings&Reviews</h1>
+      <div className="review-container">
+        <div className="t"><h1>Ratings & Reviews</h1></div>
         {reviews.length === 0 ? <p>Loading Reviews....</p>
           : (
             <ReviewList
@@ -78,6 +80,8 @@ class RatingsReviews extends React.Component {
               moreReviews={this.moreReviews}
             />
           )}
+        <div className="r"><RatingSideBar /></div>
+        <div className="p"><ProductSideBar /></div>
       </div>
 
     );

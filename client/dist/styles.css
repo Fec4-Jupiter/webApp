@@ -367,4 +367,55 @@ input[type=text] {
   border: 1px solid #cfcece;
 }
 
+.review-container {
+  display: grid;
+  margin-left: 15%;
+  margin-right: 15%;
+  grid-template-areas:
+    "t t"
+    "r o"
+    "r rl"
+    "p rl"
+    ". rl"
+    ". btn";
+  grid-template-rows: 100px 100px 200px 300px 100px 100px;
+  grid-template-columns: 30% 70%;
+  grid-gap: 10px 20px;
+  align-items: start;
+  align-content: center;
+  justify-content: center;
+}
+
+.review-container>.t {
+  grid-area: t;
+  /* background-color: red; */
+}
+
+.review-container>.r {
+  grid-area: r;
+  /* background-color: green; */
+}
+
+.review-container>.p {
+  grid-area: p;
+  /* background-color: yellow; */
+}
+
+.review-container>o {
+  grid-area: o;
+  /* background-color: white; */
+}
+
+.review-container>.rl {
+  grid-area: rl;
+  /* background-color: brown; */
+}
+
+.review-container>.btn {
+  margin-top: 20px;
+  grid-area: btn;
+  /* background-color: blue; */
+}
+
+
 /* ----------- Ratings and Reviews styling END ----- */

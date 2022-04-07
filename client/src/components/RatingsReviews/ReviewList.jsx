@@ -24,10 +24,17 @@ class ReviewList extends React.Component {
     } = this.props;
     return (
       <div>
-        <h2>This is review List</h2>
-        <Review reviews={reviews} helpful={helpful} />
-        <button type="button" onClick={(e) => moreReviews(e)}>More Reviews</button>
-        {this.renderReviewForm()}
+        <div className="o">
+          {' '}
+          <h2>This is review List</h2>
+        </div>
+        <div className="rl"><Review reviews={reviews} helpful={helpful} /></div>
+        <div className="btn">
+          <button type="button" onClick={(e) => moreReviews(e)}>More Reviews</button>
+          {' '}
+          {this.renderReviewForm()}
+        </div>
+
       </div>
     );
   }
