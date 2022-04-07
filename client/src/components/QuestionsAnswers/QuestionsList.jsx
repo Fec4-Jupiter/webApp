@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
@@ -10,6 +11,8 @@ import PropTypes from 'prop-types';
 import QuestionView from './QuestionView.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
+const axios = require('axios');
+
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
@@ -17,10 +20,33 @@ class QuestionsList extends React.Component {
     this.state = {
       showAddQuestion: false,
       showMoreAnsweredQuestions: false,
+      questions: this.props.questions,
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
+    this.updateQuestions = this.updateQuestions.bind(this);
   }
+
+  componentDidMount() {
+    this.updateQuestions(this.props.product.id);
+  }
+
+  updateQuestions = (id) => {
+    let newQuestions = {};
+    axios.get(`/qa/questions?product_id=${id}&count=500`)
+      .then((values) => {
+        newQuestions = {
+          showAddQuestion: false,
+          showMoreAnsweredQuestions: false,
+          questions: values.data.results,
+        };
+        console.log(newQuestions);
+        this.setState(newQuestions);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
 
   showAddQuestionForm = () => {
     this.setState({ showAddQuestion: true });
@@ -34,7 +60,7 @@ class QuestionsList extends React.Component {
     return (
       <div className="questionslistgrid">
         <div className="questionviewcontainer">
-          {this.props.questions?.map((question) => (
+          {this.state.questions.map((question) => (
             <div key={`qlist ${question.question_id}`}>
               <QuestionView
                 product={this.props.product}
@@ -51,6 +77,8 @@ class QuestionsList extends React.Component {
               showAddQuestion={this.state.showAddQuestion}
               handleClose={this.hideAddQuestionForm}
               product={this.props.product}
+              questions={this.props.questions}
+              updateQuestions={this.updateQuestions}
             />
 
           </div>

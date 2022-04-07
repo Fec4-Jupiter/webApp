@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-class-component-methods */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable react/no-unused-state */
@@ -20,9 +21,9 @@ class AddQuestion extends React.Component {
       name: '',
       email: '',
       product_id: this.props.product.id,
+      // questions: this.props.questions,
     };
 
-    this.baseState = this.state;
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,21 +37,29 @@ class AddQuestion extends React.Component {
   }
 
   resetForm = () => {
-    this.setState(this.baseState);
     document.getElementById('addQuestionForm').reset();
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(JSON.stringify(this.state));
-    axios.post('/qa/questions', this.state)
+    const postBody = {
+      body: this.state.body,
+      name: this.state.name,
+      email: this.state.email,
+      product_id: this.props.product.id,
+
+    };
+    // console.log(JSON.stringify(this.state));
+    axios.post('/qa/questions', postBody)
       .then((res) => {
         console.log(res);
+        this.props.updateQuestions(this.state.product_id);
       })
       .catch((err) => {
         throw err;
       });
-    this.resetForm();
+
+    // this.resetForm();
     this.props.handleClose();
   };
 
@@ -109,8 +118,10 @@ class AddQuestion extends React.Component {
 
 AddQuestion.propTypes = {
   product: PropTypes.instanceOf(Object),
+  questions: PropTypes.instanceOf(Object),
   handleClose: PropTypes.instanceOf(Function),
   showAddQuestion: PropTypes.bool,
+  updateQuestions: PropTypes.instanceOf(Function),
 };
 
 export default AddQuestion;

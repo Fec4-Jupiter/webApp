@@ -99,12 +99,23 @@ main {
   color: black;
 }
 
+.questionsandanswers-row1,
+.questionsandanswers-row2,
+.questionsandanswers-row3{
+  padding:0  20px 0 20px;
+}
+
+.qatitle {
+  padding-left: 20px;
+}
+
 /* question view grids */
 .questionrow {
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "questioncol-1 questioncol-2";
   grid-template-columns: 5fr 3fr;
+  padding: 10px 0 10px 0;
 
 }
 

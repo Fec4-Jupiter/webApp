@@ -15,7 +15,7 @@ function QuestionsAnswers(props) {
   return (
     <div className="questionsandanswerscontainer">
       <div className="questionsandanswers-row1">
-        <h3> Questions & Answers</h3>
+        <h3 className="qatitle"> Questions & Answers</h3>
         {/* <h4>
           {props.product.id}
         </h4> */}
