@@ -85,6 +85,7 @@ main {
   grid-column-end: span 3;
   grid-row-start: 1;
   grid-row-end: span 3;
+  padding: 1px;
 }
 
 .product-information {
@@ -179,9 +180,45 @@ main {
 
 /* -----------Image Gallery Styling ------ */
 
-.selectedThumbnail {
+.selected-image {
+  position: relative;
   border: 3px solid red;
 }
+.image-zoom {
+  text-align: center;
+}
+
+.main-image ._FP5OY {
+  cursor: zoom-in;
+}
+
+.main-image ._t1897 {
+  object-fit: contain;
+}
+
+.main-image ._1zlZS {
+  opacity: 0;
+}
+.thumbnails {
+  height: 75px;
+  width: 100%;
+  z-index: 1;
+}
+.thumbnail-item {
+  max-width: 50px;
+  max-height: 75px;
+}
+.react-multi-carousel-list {
+  position: absolute;
+  top: -75px;
+  justify-content: center;
+}
+.react-multi-carousel-track {
+  width: 100%;
+  max-width: 325px;
+  justify-content: space-between;
+}
+
 
 
 /* ----------- Questions and Answers Styling ----- */
