@@ -43,7 +43,7 @@ class SideBox extends React.Component {
         <div>
           <AddAnswer
             showAddAnswer={this.state.showAddAnswer}
-            handleAddAnswerClose={this.hideAddAnswerForm}
+            handleClose={this.hideAddAnswerForm}
             question={this.props.question}
             product={this.props.product}
             updateQuestions={this.props.updateQuestions}

@@ -23,24 +23,20 @@ class AddAnswer extends React.Component {
       photos: [],
     };
 
-    this.handleAddAnswerChange = this.handleAddAnswerChange.bind(this);
-    this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.resetForm = this.resetForm.bind(this);
   }
 
-  handleAddAnswerChange(event) {
+  handleInputChange(event) {
     const target = event.target;
-    // console.log(target.value);
     this.setState({
       [target.name]: target.value,
     });
   }
 
-  resetForm = () => {
-    document.getElementById('addAnswerForm').reset();
-  };
-
-  handleSubmitAnswer = (event) => {
+  handleSubmit(event) {
+    console.log('add Answer submitted', this.props);
     event.preventDefault();
     const postBody = {
       body: this.state.body,
@@ -48,19 +44,22 @@ class AddAnswer extends React.Component {
       email: this.state.email,
       photos: this.state.photos,
     };
-    const question_id = props.question.question_id;
-
+    const question_id = this.props.question.question_id;
+    console.log('question_id', question_id, 'type', typeof question_id);
     axios.post(`/qa/questions/:${question_id}/answers`, postBody)
       .then((res) => {
-        console.log(res);
+        console.log('res from post', res);
         this.props.updateQuestions(this.state.product_id);
       })
       .catch((err) => {
         throw err;
       });
-
     this.resetForm();
-    this.props.handleAddAnswerClose();
+    this.props.handleClose();
+  }
+
+  resetForm = () => {
+    document.getElementById('addAnswerForm').reset();
   };
 
   render() {
@@ -81,7 +80,7 @@ class AddAnswer extends React.Component {
           <form
             id="addAnswerForm"
             className="addanswerform"
-            onSubmit={this.handleSubmitAnswer}
+            onSubmit={this.handleSubmit}
           >
 
             <label className="formlabel">
@@ -89,7 +88,7 @@ class AddAnswer extends React.Component {
               Your answer:
 
             </label>
-            <textarea type="text" className="textareaQA" name="body" onChange={this.handleAddAnswerChange} placeholder="Enter your question here" />
+            <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your question here" />
 
             <label className="formlabel">
               <span className="mandatory">* </span>
@@ -97,29 +96,28 @@ class AddAnswer extends React.Component {
               What is your nickname:
               {' '}
             </label>
-            <input className="inputQA" type="text" name="name" placeholder="Example: jack543!" onChange={this.handleAddAnswerChange} />
+            <input className="inputQA" type="text" name="name" placeholder="Example: jack543!" onChange={this.handleInputChange} />
 
             <label className="formlabel">
               <span className="mandatory">* </span>
               Your email:
             </label>
-            <input className="inputQA" type="text" name="email" onChange={this.handleAddAnswerChange} placeholder="Example: jack@email.com" />
+            <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jack@email.com" />
 
             <p className="addqaauth">For authentication reasons, you will not be emailed</p>
 
-            <button
+            {/* <button
               className="formbuttonaddanswer"
               type="button"
             >
               Upload your photos
-            </button>
+            </button> */}
 
-            <button className="formbuttonaddanswer" type="button" onClick={this.handleSubmitAnswer}>
+            <button className="formbuttonaddanswer" type="button" onClick={this.handleSubmit}>
               Submit
             </button>
-
-            {/* <div className="inputerror">add err msg</div> */}
           </form>
+          {/* <div className="inputerror">add err msg</div> */}
         </div>
       </div>
     );
@@ -128,7 +126,7 @@ class AddAnswer extends React.Component {
 
 AddAnswer.propTypes = {
   showAddAnswer: PropTypes.bool,
-  handleAddAnswerClose: PropTypes.instanceOf(Function),
+  handleClose: PropTypes.instanceOf(Function),
   question: PropTypes.instanceOf(Object),
   product: PropTypes.instanceOf(Object),
   updateQuestions: PropTypes.instanceOf(Function),

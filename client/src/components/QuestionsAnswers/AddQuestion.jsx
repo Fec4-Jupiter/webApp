@@ -30,7 +30,6 @@ class AddQuestion extends React.Component {
 
   handleInputChange(event) {
     const target = event.target;
-    // console.log(target.value);
     this.setState({
       [target.name]: target.value,
     });
@@ -49,7 +48,6 @@ class AddQuestion extends React.Component {
       product_id: this.props.product.id,
 
     };
-    // console.log(JSON.stringify(this.state));
     axios.post('/qa/questions', postBody)
       .then((res) => {
         console.log(res);
