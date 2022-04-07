@@ -107,7 +107,7 @@ class AddQuestion extends React.Component {
               Submit
             </button>
           </form>
-          <div className="inputerror">add err msg</div>
+          {/* <div className="inputerror">add err msg</div> */}
         </div>
       </div>
     );
