@@ -58,6 +58,7 @@ class App extends React.Component {
       return <div>Loading...</div>;
     }
     return (
+<<<<<<< HEAD
       <div>
         <Overview product={product} styles={styles} reviews={reviews} />
         <RelatedItems product={product} related={related} />
@@ -66,6 +67,18 @@ class App extends React.Component {
           questions={questions}
         />
         <RatingsReviews id="RatingsReviews" product={product} />
+=======
+      <div className="app">
+        <div className="title-banner">
+          <h2>Jupiter Clothing</h2>
+        </div>
+        <div className="content">
+          <Overview product={product} styles={styles} reviews={reviews} />
+          <RelatedItems product={product} related={related} />
+          <QuestionsAnswers product={product} questions={questions} />
+          <RatingsReviews id="RatingsReviews" product={product} />
+        </div>
+>>>>>>> main
       </div>
     );
   }

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import notAvailable from '../Common/imageNotAvailable.png';
 
 const PropTypes = require('prop-types');
 
@@ -9,12 +10,16 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
     const items = [];
     for (let i = 0; i < list.length; i += 1) {
       const style = list[i];
-      const thumb = style.photos[0].thumbnail_url;
+      const thumb = style.photos[0].thumbnail_url || notAvailable;
       if (style.style_id === currentStyle.style_id) {
         items.push(
           <td key={style.style_id} onClick={() => changeStyle(style)}>
             <span className="thumbnailcontainer selected">
-              <img className="stylethumbnail " src={thumb} alt="" />
+              <img
+                className="stylethumbnail"
+                src={thumb}
+                alt="Not provided"
+              />
               <span className="checkmark">&#10003;</span>
             </span>
           </td>,
@@ -23,7 +28,11 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
         items.push(
           <td key={style.style_id} onClick={() => changeStyle(style)}>
             <span className="thumbnailcontainer">
-              <img className="stylethumbnail" src={thumb} alt="" />
+              <img
+                className="stylethumbnail"
+                src={thumb}
+                alt="Not provided"
+              />
             </span>
           </td>,
         );
@@ -38,8 +47,11 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
   };
 
   return (
-    <div>
-      <span className="currentstyle">{currentStyle.name}</span>
+    <div className="style-selector right-column">
+      <span className="currentstyle">
+        <b>{'STYLE > '}</b>
+        {currentStyle.name}
+      </span>
       <table>
         <tbody>
           {generateTable(styles)}
