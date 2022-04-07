@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-children-prop */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -5,7 +7,9 @@ import MainImage from 'react-gallery-carousel';
 import Thumbnails from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'react-gallery-carousel/dist/index.css';
+import InnerImageZoom from 'react-inner-image-zoom';
 import notAvailable from '../Common/imageNotAvailable.png';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 
 const PropTypes = require('prop-types');
 
@@ -15,37 +19,91 @@ class Gallery extends React.Component {
     const { currentStyle, currentImage } = props;
     const images = currentStyle.photos.map((photoObj) => {
       const src = photoObj.url || notAvailable;
-      return { src };
+      const thumbnail = photoObj.thumbnail_url || notAvailable;
+      return { src, thumbnail };
     });
+    const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {
+      zoomed: false,
       images,
+      imageZooms,
       currentStyle,
       currentImage: (currentImage >= images.length) ? images.length : currentImage,
     };
     this.thumbClick = this.thumbClick.bind(this);
     this.mainChange = this.mainChange.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
+    this.handleEsc = this.handleEsc.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleEsc, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleEsc, false);
+  }
+
+  handleZoom() {
+    const {
+      images, currentStyle, imageZooms, currentImage, zoomed,
+    } = this.state;
+    if (!zoomed) {
+      this.setState({
+        zoomed: true,
+        images,
+        imageZooms,
+        currentStyle,
+        currentImage,
+      });
+    }
+  }
+
+  handleEsc(e) {
+    if (e.key === 'Escape') {
+      const {
+        images, currentStyle, imageZooms, currentImage, zoomed,
+      } = this.state;
+      if (zoomed) {
+        this.setState({
+          zoomed: false,
+          images,
+          imageZooms,
+          currentStyle,
+          currentImage,
+        });
+      }
+    }
   }
 
   thumbClick(e) {
     e.preventDefault();
-    const { images, currentStyle } = this.state;
+    const {
+      images, currentStyle, imageZooms, zoomed,
+    } = this.state;
     const { updateImage } = this.props;
     const currentImage = parseInt(e.target.alt, 10);
     updateImage(currentImage);
     this.setState({
+      zoomed,
       images,
+      imageZooms,
       currentStyle,
       currentImage,
     });
   }
 
   mainChange({ curIndex }) {
-    const { images, currentStyle } = this.state;
+    const {
+      images, currentStyle, imageZooms, zoomed,
+    } = this.state;
     const { updateImage } = this.props;
     const currentImage = curIndex;
     updateImage(currentImage);
     this.setState({
+      zoomed,
       images,
+      imageZooms,
       currentStyle,
       currentImage,
     });
@@ -66,10 +124,14 @@ class Gallery extends React.Component {
         items: 7,
       },
     };
-    const { images, currentImage } = this.state;
+    const {
+      images, currentImage, imageZooms, zoomed,
+    } = this.state;
     return (
-      <div className="image-gallery">
-        <MainImage className="main-image" index={currentImage} images={images} objectFit="cover" onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} shouldMaximizeOnClick shouldMinimizeOnClick hasSizeButton={false} />
+      <div className="image-gallery" key={zoomed}>
+        {zoomed
+          ? <MainImage className="main-image zoomed" isMaximized index={currentImage} objectFit="contain" children={imageZooms} onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} hasSizeButton={false} />
+          : <MainImage className="main-image unzoomed" index={currentImage} onTap={this.handleZoom} objectFit="contain" images={images} onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} hasSizeButton={false} />}
         <div className="thumbnails">
           <Thumbnails infinite={false} showDots={false} responsive={responsive} itemClass="thumbnail-item">
             {images.map((image, index) => (

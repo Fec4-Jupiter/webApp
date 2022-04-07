@@ -172,6 +172,9 @@ main {
   position: relative;
   border: 3px solid red;
 }
+.image-zoom {
+  text-align: center;
+}
 
 .main-image ._FP5OY {
   cursor: zoom-in;
@@ -184,7 +187,6 @@ main {
 .main-image ._1zlZS {
   opacity: 0;
 }
-
 .thumbnails {
   height: 75px;
   width: 100%;
