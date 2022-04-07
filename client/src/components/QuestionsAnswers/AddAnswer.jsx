@@ -46,10 +46,10 @@ class AddAnswer extends React.Component {
     };
     const question_id = this.props.question.question_id;
     console.log('question_id', question_id, 'type', typeof question_id);
-    axios.post(`/qa/questions/:${question_id}/answers`, postBody)
+    axios.post(`/qa/questions/${question_id}/answers`, postBody)
       .then((res) => {
         console.log('res from post', res);
-        this.props.updateQuestions(this.state.product_id);
+        this.props.updateQuestions(this.props.product.id);
       })
       .catch((err) => {
         throw err;

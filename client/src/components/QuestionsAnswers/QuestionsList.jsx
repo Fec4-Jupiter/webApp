@@ -28,12 +28,24 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
+    console.log('id in mount', this.props);
     this.updateQuestions(this.props.product.id);
   }
 
-  updateQuestions = (id) => {
+  showAddQuestionForm = () => {
+    this.setState({ showAddQuestion: true });
+  };
+
+  hideAddQuestionForm = () => {
+    this.setState({ showAddQuestion: false });
+  };
+
+  updateQuestions(id) {
+    console.log('get from questionslist, prod id', id);
     let newQuestions = {};
-    axios.get(`/qa/questions?product_id=${id}&count=500`)
+    const url = `/qa/questions?product_id=${id}&count=500`;
+    console.log('url', url);
+    axios.get(url)
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
@@ -46,15 +58,7 @@ class QuestionsList extends React.Component {
       .catch((err) => {
         throw err;
       });
-  };
-
-  showAddQuestionForm = () => {
-    this.setState({ showAddQuestion: true });
-  };
-
-  hideAddQuestionForm = () => {
-    this.setState({ showAddQuestion: false });
-  };
+  }
 
   render() {
     return (

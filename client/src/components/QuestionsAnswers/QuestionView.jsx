@@ -12,6 +12,7 @@ import SideBox from './SideBox.jsx';
 
 function QuestionView(props) {
   const question = props.question.question_body;
+  const questionId = props.question.question_id;
   const answersArray = Object.entries(props.question.answers);
   const numOfAnswers = answersArray.length;
 
@@ -38,7 +39,8 @@ function QuestionView(props) {
             {' '}
           </span>
           <span>{question}</span>
-          <span>{`number of answers:${numOfAnswers}`}</span>
+          <span>{` questionID : ${questionId}`}</span>
+          <span>{` number of answers: ${numOfAnswers}`}</span>
         </div>
         <div
           className="questioncol-2"
