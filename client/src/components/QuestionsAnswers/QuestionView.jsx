@@ -46,6 +46,8 @@ function QuestionView(props) {
         >
           <SideBox
             question={props.question}
+            product={props.product}
+            updateQuestions={props.updateQuestions}
           />
         </div>
       </div>
@@ -65,6 +67,7 @@ function QuestionView(props) {
 QuestionView.propTypes = {
   product: PropTypes.instanceOf(Object),
   question: PropTypes.instanceOf(Object),
+  updateQuestions: PropTypes.instanceOf(Function),
 };
 
 export default QuestionView;

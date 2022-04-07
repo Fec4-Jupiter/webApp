@@ -191,7 +191,8 @@ main {
   display: none;
 }
 
-.addquestionform {
+.addquestionform,
+.addanswerform {
   font-size: 2m;
 }
 
@@ -234,6 +235,43 @@ main {
 
 .mandatory {
   color: red;
+}
+
+.addqaauth {
+  font-size: 0.5em;
+}
+
+/* AddAnswer Modal */
+.addanswer, .questionhelp_yes {
+  text-decoration: underline;
+}
+
+.questionhelpfulness,
+.questionhelp_yes,
+.addanswer {
+  padding-left: 5px;
+}
+
+.formbuttonaddanswer {
+  width: 300px;
+  background-color: #9ea69e;
+  color: rgb(58, 55, 55);
+  padding: 14px 20px;
+  margin:10px auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.productname_addanswer,
+.productname_addquestion {
+  padding-left: 5px;
+}
+
+.questionbody_addanswer{
+  padding-left: 1em;
+  font-style: italic;
 }
 
 /* Search component in Questions & Answers */

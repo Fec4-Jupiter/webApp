@@ -21,11 +21,11 @@ class AddQuestion extends React.Component {
       name: '',
       email: '',
       product_id: this.props.product.id,
-      // questions: this.props.questions,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   handleInputChange(event) {
@@ -59,7 +59,7 @@ class AddQuestion extends React.Component {
         throw err;
       });
 
-    // this.resetForm();
+    this.resetForm();
     this.props.handleClose();
   };
 
@@ -69,15 +69,10 @@ class AddQuestion extends React.Component {
         <div className="modal-main">
           <h2> Ask your question</h2>
           <h3>
-            {' '}
             About the
-            {' '}
-            {this.props.product.name}
-            {' '}
-            id
-            {' '}
-            {this.props.product.id}
-            {' '}
+            <span className="productname_addquestion">
+              {this.props.product.name}
+            </span>
           </h3>
           <form
             id="addQuestionForm"
@@ -106,10 +101,13 @@ class AddQuestion extends React.Component {
             </label>
             <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jackson11@gmail.com" />
 
+            <p className="addqaauth">For authentication reasons, you will not be emailed</p>
+
             <button className="formbutton" type="button" onClick={this.handleSubmit}>
               Submit
             </button>
           </form>
+          <div className="inputerror">add err msg</div>
         </div>
       </div>
     );

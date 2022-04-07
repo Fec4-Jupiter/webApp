@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
@@ -29,24 +31,26 @@ class SideBox extends React.Component {
       <div className="sidebox">
         <span className="questionhelpfulness">
           Helpful?
-          {' '}
         </span>
-        <span className="questionhelp_yesbutton">
-
+        <span className="questionhelp_yes">
           Yes
         </span>
         <span className="questionhelpfulnesscount">{` (${this.state.questionHelpfulness}) `}</span>
         <span className="sideboxseparator">|</span>
-        <span className="addAnswer">
-          {' '}
-          AddAnswer
+        <span className="addanswer" onClick={this.showAddAnswerForm}>
+          Add Answer
+        </span>
+        <div>
           <AddAnswer
             showAddAnswer={this.state.showAddAnswer}
-            handleClose={this.hideAddAnswerForm}
+            handleAddAnswerClose={this.hideAddAnswerForm}
             question={this.props.question}
+            product={this.props.product}
+            updateQuestions={this.props.updateQuestions}
           />
 
-        </span>
+        </div>
+
       </div>
     );
   }
@@ -54,6 +58,8 @@ class SideBox extends React.Component {
 
 SideBox.propTypes = {
   question: PropTypes.instanceOf(Object),
+  product: PropTypes.instanceOf(Object),
+  updateQuestions: PropTypes.instanceOf(Function),
 };
 
 export default SideBox;

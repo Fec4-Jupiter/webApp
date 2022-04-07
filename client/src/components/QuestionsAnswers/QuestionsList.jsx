@@ -65,6 +65,7 @@ class QuestionsList extends React.Component {
               <QuestionView
                 product={this.props.product}
                 question={question}
+                updateQuestions={this.updateQuestions}
               />
             </div>
           ))}
