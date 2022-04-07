@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
@@ -10,6 +11,8 @@ import PropTypes from 'prop-types';
 import QuestionView from './QuestionView.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
+const axios = require('axios');
+
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
@@ -17,9 +20,16 @@ class QuestionsList extends React.Component {
     this.state = {
       showAddQuestion: false,
       showMoreAnsweredQuestions: false,
+      questions: this.props.questions,
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
+    this.updateQuestions = this.updateQuestions.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('id in mount', this.props);
+    this.updateQuestions(this.props.product.id);
   }
 
   showAddQuestionForm = () => {
@@ -30,15 +40,36 @@ class QuestionsList extends React.Component {
     this.setState({ showAddQuestion: false });
   };
 
+  updateQuestions(id) {
+    console.log('get from questionslist, prod id', id);
+    let newQuestions = {};
+    const url = `/qa/questions?product_id=${id}&count=500`;
+    console.log('url', url);
+    axios.get(url)
+      .then((values) => {
+        newQuestions = {
+          showAddQuestion: false,
+          showMoreAnsweredQuestions: false,
+          questions: values.data.results,
+        };
+        console.log(newQuestions);
+        this.setState(newQuestions);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
   render() {
     return (
       <div className="questionslistgrid">
         <div className="questionviewcontainer">
-          {this.props.questions?.map((question) => (
+          {this.state.questions.map((question) => (
             <div key={`qlist ${question.question_id}`}>
               <QuestionView
                 product={this.props.product}
                 question={question}
+                updateQuestions={this.updateQuestions}
               />
             </div>
           ))}
@@ -51,6 +82,8 @@ class QuestionsList extends React.Component {
               showAddQuestion={this.state.showAddQuestion}
               handleClose={this.hideAddQuestionForm}
               product={this.props.product}
+              questions={this.props.questions}
+              updateQuestions={this.updateQuestions}
             />
 
           </div>

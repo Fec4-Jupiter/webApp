@@ -223,32 +223,47 @@ main {
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
-  background-color: rgb(208, 208, 208);
+  background-color:white;
+  color: black;
+}
+
+.questionsandanswers-row1,
+.questionsandanswers-row2,
+.questionsandanswers-row3{
+  padding:0  20px 0 20px;
+}
+
+.qatitle {
+  padding-left: 20px;
 }
 
 /* question view grids */
 .questionrow {
-  border: solid grey;
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 5fr 3fr;
+  padding: 10px 0 10px 0;
+
 }
 
 .questioncol-1 {
   grid-area: questioncol-1;
+  font-weight: 600;
 }
 
 .questioncol-2 {
   grid-area: questioncol-2;
+  font-size: 0.7em;
+
 }
 
 .answerrow {
-  border: solid rgb(48, 11, 11);
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "answercol-1 answercol-2";
   grid-template-columns: 3fr 1fr;
+  font-weight: 300;
 }
 
 .answercol-1 {
@@ -269,6 +284,10 @@ main {
 
 .answerlist {
   padding-left: 10px;
+}
+
+.answer-A, .question-Q {
+  font-weight: 600;
 }
 
 /* addQuestion modal */
@@ -301,7 +320,8 @@ main {
   display: none;
 }
 
-.addquestionform {
+.addquestionform,
+.addanswerform {
   font-size: 2m;
 }
 
@@ -328,7 +348,7 @@ main {
 
 .formbutton {
   width: 50%;
-  background-color: #b7bab7;
+  background-color: #9ea69e;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
   margin: 8px 0;
@@ -340,119 +360,52 @@ main {
 
 .formbutton:hover {
   color: white;
+  background-color: #9ea69ebb;
 }
 
 .mandatory {
   color: red;
 }
 
-
-/* ----------- Ratings and Reviews styling ----- */
-.modal-review {
-  font-size: 15px;
+.addqaauth {
+  font-size: 0.5em;
 }
 
-.modal-review>.header {
-  width: 100%;
-  font-size: 18px;
-  text-align: left;
-  padding: 1px;
+/* AddAnswer Modal */
+.addanswer, .questionhelp_yes {
+  text-decoration: underline;
 }
 
-.modal-review>.subheader {
-  width: 100%;
-  border-bottom: 1px solid gray;
-  font-size: 12px;
-  text-align: left;
-  padding: 1px;
-  margin-bottom: 5px;
+.questionhelpfulness,
+.questionhelp_yes,
+.addanswer {
+  padding-left: 5px;
 }
 
-.frame {
-  background-color: #ffffff;
-  margin-bottom: 10px;
-}
-
-.card-header {
-  padding: 5px;
-}
-
-.block-section {
-  position: relative;
-  padding: 5px;
-}
-
-.a-input-text,
-input[type=text] {
-  background-color: #ffffff;
-  height: 31px;
-  padding: 3px 7px;
-  line-height: normal;
-}
-
-.modal-review>.close {
+.formbuttonaddanswer {
+  width: 300px;
+  background-color: #9ea69e;
+  color: rgb(58, 55, 55);
+  padding: 14px 20px;
+  margin:10px auto;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  position: absolute;
-  display: block;
-  padding: 2px 5px;
-  line-height: 20px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
+  float: right;
 }
 
-.review-container {
-  display: grid;
-  margin-left: 15%;
-  margin-right: 15%;
-  grid-template-areas:
-    "t t"
-    "r o"
-    "r rl"
-    "p rl"
-    ". rl"
-    ". btn";
-  grid-template-rows: 100px 100px 200px 300px 100px 100px;
-  grid-template-columns: 30% 70%;
-  grid-gap: 10px 20px;
-  align-items: start;
-  align-content: center;
-  justify-content: center;
+.productname_addanswer,
+.productname_addquestion {
+  padding-left: 5px;
 }
 
-.review-container>.t {
-  grid-area: t;
-  /* background-color: red; */
+.questionbody_addanswer{
+  padding-left: 1em;
+  font-style: italic;
 }
 
-.review-container>.r {
-  grid-area: r;
-  /* background-color: green; */
+/* Search component in Questions & Answers */
+
+.searchinput {
+  width: 100%;
 }
-
-.review-container>.p {
-  grid-area: p;
-  /* background-color: yellow; */
-}
-
-.review-container>o {
-  grid-area: o;
-  /* background-color: white; */
-}
-
-.review-container>.rl {
-  grid-area: rl;
-  /* background-color: brown; */
-}
-
-.review-container>.btn {
-  margin-top: 20px;
-  grid-area: btn;
-  /* background-color: blue; */
-}
-
-
-/* ----------- Ratings and Reviews styling END ----- */

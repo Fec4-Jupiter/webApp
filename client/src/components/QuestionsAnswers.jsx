@@ -9,16 +9,26 @@ import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
 import QuestionsList from './QuestionsAnswers/QuestionsList.jsx';
+import Search from './QuestionsAnswers/Search.jsx';
 
 function QuestionsAnswers(props) {
   return (
     <div className="questionsandanswerscontainer">
       <div className="questionsandanswers-row1">
-        <h3> Questions and Answers Component</h3>
+        <h3 className="qatitle">
+          {' '}
+          Questions & Answers
+        </h3>
         <h4>
           {props.product.id}
         </h4>
-        <div className="questionsandanswers-row2">SearchBar</div>
+        <div className="questionsandanswers-row2">
+          <Search
+            product={props.product}
+            questions={props.questions}
+          />
+
+        </div>
         <div className="questionsandanswers-row3">
           <QuestionsList
             product={props.product}
