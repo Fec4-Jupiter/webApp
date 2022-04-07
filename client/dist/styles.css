@@ -79,40 +79,47 @@ main {
   padding: 10px;
   height: 80vh;
 }
+
 .image-gallery {
   grid-column-start: 1;
   grid-column-end: span 3;
   grid-row-start: 1;
   grid-row-end: span 3;
 }
+
 .product-information {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 1;
   grid-row-end: span 1;
 }
+
 .style-selector {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 2;
   grid-row-end: span 1;
 }
+
 .add-to-cart {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 3;
   grid-row-end: span 1;
 }
+
 .add-to-cart-form {
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 50% 50%;
 }
+
 .size-list {
   grid-column-start: 1;
   grid-column-end: span 3;
   grid-row-start: 1;
   grid-row-end: span 1;
 }
+
 .quantity-list {
   grid-column-start: 4;
   grid-column-end: span 2;
@@ -120,22 +127,26 @@ main {
   grid-row-end: span 1;
   padding-left: 10px;
 }
+
 .social-buttons {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 4;
   grid-row-end: span 1;
 }
+
 .product-description {
   grid-column-start: 1;
   grid-column-end: span 5;
   grid-row-start: 5;
   grid-row-end: span 1;
 }
+
 .right-column {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 /* ----------- Thumbnail selection styling ----- */
 .thumbnailcontainer {
   display: inline-block;
@@ -165,6 +176,7 @@ main {
   left: 15%;
   font-weight: bold;
 }
+
 /* -----------Image Gallery Styling ------ */
 
 .selectedThumbnail {
@@ -217,27 +229,29 @@ main {
 .footer {
   background-color: rgb(235, 240, 126);
 }
+
 .answerlist {
   padding-left: 10px;
 }
+
 /* addQuestion modal */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-main {
-  position:fixed;
+  position: fixed;
   background: white;
   width: 80%;
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
   padding: 20px;
 }
@@ -274,6 +288,7 @@ main {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 .formbutton {
   width: 50%;
   background-color: #b7bab7;
@@ -293,3 +308,114 @@ main {
 .mandatory {
   color: red;
 }
+
+
+/* ----------- Ratings and Reviews styling ----- */
+.modal-review {
+  font-size: 15px;
+}
+
+.modal-review>.header {
+  width: 100%;
+  font-size: 18px;
+  text-align: left;
+  padding: 1px;
+}
+
+.modal-review>.subheader {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 12px;
+  text-align: left;
+  padding: 1px;
+  margin-bottom: 5px;
+}
+
+.frame {
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.card-header {
+  padding: 5px;
+}
+
+.block-section {
+  position: relative;
+  padding: 5px;
+}
+
+.a-input-text,
+input[type=text] {
+  background-color: #ffffff;
+  height: 31px;
+  padding: 3px 7px;
+  line-height: normal;
+}
+
+.modal-review>.close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.review-container {
+  display: grid;
+  margin-left: 15%;
+  margin-right: 15%;
+  grid-template-areas:
+    "t t"
+    "r o"
+    "r rl"
+    "p rl"
+    ". rl"
+    ". btn";
+  grid-template-rows: 100px 100px 200px 300px 100px 100px;
+  grid-template-columns: 30% 70%;
+  grid-gap: 10px 20px;
+  align-items: start;
+  align-content: center;
+  justify-content: center;
+}
+
+.review-container>.t {
+  grid-area: t;
+  /* background-color: red; */
+}
+
+.review-container>.r {
+  grid-area: r;
+  /* background-color: green; */
+}
+
+.review-container>.p {
+  grid-area: p;
+  /* background-color: yellow; */
+}
+
+.review-container>o {
+  grid-area: o;
+  /* background-color: white; */
+}
+
+.review-container>.rl {
+  grid-area: rl;
+  /* background-color: brown; */
+}
+
+.review-container>.btn {
+  margin-top: 20px;
+  grid-area: btn;
+  /* background-color: blue; */
+}
+
+
+/* ----------- Ratings and Reviews styling END ----- */
