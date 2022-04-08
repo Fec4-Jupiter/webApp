@@ -6,7 +6,6 @@ import pinterestlogo from './Common/pinterestlogo.png';
 import StyleSelector from './Overview/StyleSelector.jsx';
 import AddToCart from './Overview/AddToCart.jsx';
 import Gallery from './Overview/Gallery.jsx';
-import TestWrapper from './Overview/TestWrapper.jsx';
 
 const PropTypes = require('prop-types');
 
@@ -103,5 +102,7 @@ Overview.propTypes = {
   styles: PropTypes.instanceOf(Object).isRequired,
   product: PropTypes.instanceOf(Object).isRequired,
 };
+
+Overview.displayName = 'Overview';
 
 export default Overview;

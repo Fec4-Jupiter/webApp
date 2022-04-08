@@ -17,10 +17,13 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     const { currentStyle, currentImage } = props;
-    const images = currentStyle.photos.map((photoObj) => {
+    // If not expanded view, display these images
+    let images = currentStyle.photos.map((photoObj) => {
       const src = photoObj.url || notAvailable;
       return { src };
     });
+    images = images.concat(images);
+    // If we are expanded, display these inner image zoom elements
     const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {
       zoomed: false,
