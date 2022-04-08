@@ -15,13 +15,11 @@ function QuestionsAnswers(props) {
   return (
     <div className="questionsandanswerscontainer">
       <div className="questionsandanswers-row1">
-        <h3 className="qatitle">
-          {' '}
-          Questions & Answers
-        </h3>
-        <h4>
+        <span className="qatitle">
+          Questions & Answers, prod id=
           {props.product.id}
-        </h4>
+        </span>
+
         <div className="questionsandanswers-row2">
           <Search
             product={props.product}

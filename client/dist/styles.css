@@ -223,72 +223,65 @@ main {
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
-  background-color:white;
-  color: black;
-}
-
-.questionsandanswers-row1,
-.questionsandanswers-row2,
-.questionsandanswers-row3{
-  padding:0  20px 0 20px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .qatitle {
-  padding-left: 20px;
+  font-weight: 600;
+  font-size:1.5em;
 }
 
-/* question view grids */
+/* QuestionView */
 .questionrow {
   display: grid;
-  gap: 1.5rem;
-  grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 5fr 3fr;
-  padding: 10px 0 10px 0;
-
+  gap: 10px;
+  grid-template-areas: "questioncol-1 questioncol-2 questioncol-3";
+  grid-template-columns: 1fr 7fr 3fr;
 }
-
 .questioncol-1 {
   grid-area: questioncol-1;
-  font-weight: 600;
 }
-
 .questioncol-2 {
   grid-area: questioncol-2;
-  font-size: 0.7em;
-
+  font-weight: 600;
 }
-
+.questioncol-3 {
+  grid-area: questioncol-3;
+  font-size: 0.7em;
+  padding-top:4px;
+}
 .answerrow {
   display: grid;
-  gap: 1.5rem;
-  grid-template-areas: "answercol-1 answercol-2";
-  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+  grid-template-areas: "answer-A answerlist empty";
+  grid-template-columns: 1fr 7fr 3fr;
   font-weight: 300;
 }
-
-.answercol-1 {
-  grid-area: answercol-1;
-  display: grid;
-  grid-template-areas: "answer-A answerlist";
-  grid-template-columns: 1fr 71fr;
-
+.answer-A {
+  grid-area: answer-A;
 }
-
-.answercol-2 {
-  grid-area: answercol-2;
-}
-
-.footer {
-  background-color: rgb(235, 240, 126);
-}
-
 .answerlist {
-  padding-left: 10px;
+  grid-area: answerlist;
 }
-
 .answer-A, .question-Q {
   font-weight: 600;
 }
+.loadmorerow {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "col1 btn col3";
+  grid-template-columns: 1fr 7fr 3fr;
+  padding-bottom: 10px;
+}
+.loadmorecol-1 {
+  grid-area: col1;
+}
+.loadmorecol-2 {
+  grid-area: btn;
+}
+
 
 /* addQuestion modal */
 .modal {
@@ -308,7 +301,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
+  color: rgb(79, 77, 77);
   padding: 20px;
 }
 
@@ -402,6 +395,19 @@ main {
 .questionbody_addanswer{
   padding-left: 1em;
   font-style: italic;
+}
+
+/* Footer */
+
+.footer {
+  font-size: 0.7em;
+  padding-bottom: 20px;
+}
+.footerrow-1 > span {
+  padding-right: 10px;
+}
+.footerrow-2 > span {
+  padding-right: 5px;
 }
 
 /* Search component in Questions & Answers */

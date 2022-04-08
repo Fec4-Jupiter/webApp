@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/require-default-props */
@@ -15,7 +16,8 @@ function QuestionView(props) {
   const questionId = props.question.question_id;
   const answersArray = Object.entries(props.question.answers);
   const numOfAnswers = answersArray.length;
-
+  //  sorting “by [username], Month DD, YYYY”
+  //   If answerer ==='Seller, top of list
   const listAnswers = answersArray.map((answer) => (
     <div key={`oneanswer ${answer[0]}`}>
       <div className="answer" key={`answer ${answer[0]}`}>
@@ -33,17 +35,21 @@ function QuestionView(props) {
   return (
     <div className="questionviewgrid">
       <div className="questionrow" key={`q in view ${question.question_id}`}>
+
         <div className="questioncol-1">
-          <span className="question-Q">
+          <div className="question-Q">
             Q:
-            {' '}
-          </span>
+          </div>
+        </div>
+
+        <div className="questioncol-2">
           <span>{question}</span>
           <span>{` questionID : ${questionId}`}</span>
           <span>{` number of answers: ${numOfAnswers}`}</span>
         </div>
+
         <div
-          className="questioncol-2"
+          className="questioncol-3"
           key={`sidebox${question.question_id}`}
         >
           <SideBox
@@ -53,14 +59,20 @@ function QuestionView(props) {
           />
         </div>
       </div>
-      <div className="answerslist">
-        <div className="answercol-1">
-          <span className="answer-A">
-            A:
-            {' '}
-          </span>
-          <div className="answerlist">{listAnswers}</div>
+      <div className="answerrow">
+        <div className="answer-A">
+          A:
+          {' '}
         </div>
+        <div className="answerlist">{listAnswers}</div>
+
+      </div>
+      <div className="loadmorerow">
+        <div className="loadmorecol-1" />
+        <div className="loadmorecol-2">
+          <span className="loadmoreanswers">LOAD MORE ANSWERS</span>
+        </div>
+        <div className="loadmorecol-3" />
       </div>
     </div>
   );
