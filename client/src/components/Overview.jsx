@@ -1,5 +1,8 @@
 import React from 'react';
 import ReviewStars from './Common/ReviewStars.jsx';
+import facebooklogo from './Common/facebooklogo.png';
+import twitterlogo from './Common/twitterlogo.png';
+import pinterestlogo from './Common/pinterestlogo.png';
 import StyleSelector from './Overview/StyleSelector.jsx';
 import AddToCart from './Overview/AddToCart.jsx';
 import Gallery from './Overview/Gallery.jsx';
@@ -74,9 +77,9 @@ class Overview extends React.Component {
         <AddToCart currentStyle={currentStyle} key={currentStyle.style_id * 99} />
         <br />
         <div className="social-buttons right-column">
-          <button type="button">Facebook</button>
-          <button type="button">Twitter</button>
-          <button type="button">Pinterest</button>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:1128/"><img src={facebooklogo} className="logo-button" alt="facebook" /></a>
+          <a href="https://twitter.com/intent/tweet?url=http://127.0.0.1:1128/&text="><img src={twitterlogo} className="logo-button" alt="twitter" /></a>
+          <a href="https://pinterest.com/pin/create/button/?url=http://127.0.0.1:1128/&media=&description="><img src={pinterestlogo} className="logo-button" alt="pinterest" /></a>
           <br />
         </div>
         <div className="product-description">

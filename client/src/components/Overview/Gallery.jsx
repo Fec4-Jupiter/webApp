@@ -6,10 +6,10 @@ import React from 'react';
 import MainImage from 'react-gallery-carousel';
 import Thumbnails from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import 'react-gallery-carousel/dist/index.css';
+import './MainImage.css';
 import InnerImageZoom from 'react-inner-image-zoom';
 import notAvailable from '../Common/imageNotAvailable.png';
-import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
+import './InnerImageStyles.css';
 
 const PropTypes = require('prop-types');
 
@@ -22,7 +22,7 @@ class Gallery extends React.Component {
       const thumbnail = photoObj.thumbnail_url || notAvailable;
       return { src, thumbnail };
     });
-    const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
+    const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {
       zoomed: false,
       images,
