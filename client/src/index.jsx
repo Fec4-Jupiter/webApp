@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.updateProduct(66642);
+    this.updateProduct(66643);
   }
 
   updateProduct(id) {
@@ -63,9 +63,9 @@ class App extends React.Component {
           <h2>Jupiter Clothing</h2>
         </div>
         <div className="content">
-          <Overview product={product} styles={styles} reviews={reviews} />
-          <RelatedItems product={product} related={related} />
-          <QuestionsAnswers product={product} questions={questions} />
+          {/* <Overview product={product} styles={styles} reviews={reviews} /> */}
+          {/* <RelatedItems product={product} related={related} /> */}
+          {/* <QuestionsAnswers product={product} questions={questions} /> */}
           <RatingsReviews id="RatingsReviews" product={product} />
         </div>
       </div>
