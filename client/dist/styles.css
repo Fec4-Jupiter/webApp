@@ -79,6 +79,7 @@ main {
   padding: 10px;
   height: 80vh;
 }
+
 .image-gallery {
   grid-column-start: 1;
   grid-column-end: span 3;
@@ -86,34 +87,40 @@ main {
   grid-row-end: span 4;
   padding: 1px;
 }
+
 .product-information {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 1;
   grid-row-end: span 1;
 }
+
 .style-selector {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 2;
   grid-row-end: span 1;
 }
+
 .add-to-cart {
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 3;
   grid-row-end: span 1;
 }
+
 .add-to-cart-form {
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 50% 50%;
 }
+
 .size-list {
   grid-column-start: 1;
   grid-column-end: span 3;
   grid-row-start: 1;
   grid-row-end: span 1;
 }
+
 .quantity-list {
   grid-column-start: 4;
   grid-column-end: span 2;
@@ -121,6 +128,7 @@ main {
   grid-row-end: span 1;
   padding-left: 10px;
 }
+
 .social-buttons {
   display: flex;
   max-width: 250px;
@@ -130,12 +138,14 @@ main {
   grid-row-start: 4;
   grid-row-end: span 1;
 }
+
 .product-description {
   grid-column-start: 1;
   grid-column-end: span 5;
   grid-row-start: 5;
   grid-row-end: span 1;
 }
+
 .right-column {
   padding-left: 15px;
   padding-right: 15px;
@@ -174,6 +184,7 @@ main {
   left: 15%;
   font-weight: bold;
 }
+
 /* -----------Image Gallery Styling ------ */
 
 .selected-image {
@@ -229,32 +240,47 @@ main {
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
-  background-color: rgb(208, 208, 208);
+  background-color:white;
+  color: black;
+}
+
+.questionsandanswers-row1,
+.questionsandanswers-row2,
+.questionsandanswers-row3{
+  padding:0  20px 0 20px;
+}
+
+.qatitle {
+  padding-left: 20px;
 }
 
 /* question view grids */
 .questionrow {
-  border: solid grey;
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 5fr 3fr;
+  padding: 10px 0 10px 0;
+
 }
 
 .questioncol-1 {
   grid-area: questioncol-1;
+  font-weight: 600;
 }
 
 .questioncol-2 {
   grid-area: questioncol-2;
+  font-size: 0.7em;
+
 }
 
 .answerrow {
-  border: solid rgb(48, 11, 11);
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "answercol-1 answercol-2";
   grid-template-columns: 3fr 1fr;
+  font-weight: 300;
 }
 
 .answercol-1 {
@@ -272,27 +298,33 @@ main {
 .footer {
   background-color: rgb(235, 240, 126);
 }
+
 .answerlist {
   padding-left: 10px;
 }
+
+.answer-A, .question-Q {
+  font-weight: 600;
+}
+
 /* addQuestion modal */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-main {
-  position:fixed;
+  position: fixed;
   background: white;
   width: 80%;
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
   padding: 20px;
 }
@@ -305,7 +337,8 @@ main {
   display: none;
 }
 
-.addquestionform {
+.addquestionform,
+.addanswerform {
   font-size: 2m;
 }
 
@@ -329,9 +362,10 @@ main {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 .formbutton {
   width: 50%;
-  background-color: #b7bab7;
+  background-color: #9ea69e;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
   margin: 8px 0;
@@ -343,8 +377,52 @@ main {
 
 .formbutton:hover {
   color: white;
+  background-color: #9ea69ebb;
 }
 
 .mandatory {
   color: red;
+}
+
+.addqaauth {
+  font-size: 0.5em;
+}
+
+/* AddAnswer Modal */
+.addanswer, .questionhelp_yes {
+  text-decoration: underline;
+}
+
+.questionhelpfulness,
+.questionhelp_yes,
+.addanswer {
+  padding-left: 5px;
+}
+
+.formbuttonaddanswer {
+  width: 300px;
+  background-color: #9ea69e;
+  color: rgb(58, 55, 55);
+  padding: 14px 20px;
+  margin:10px auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.productname_addanswer,
+.productname_addquestion {
+  padding-left: 5px;
+}
+
+.questionbody_addanswer{
+  padding-left: 1em;
+  font-style: italic;
+}
+
+/* Search component in Questions & Answers */
+
+.searchinput {
+  width: 100%;
 }

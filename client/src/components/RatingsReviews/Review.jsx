@@ -1,7 +1,5 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 
 class Review extends React.Component {
@@ -10,21 +8,8 @@ class Review extends React.Component {
     this.state = {};
   }
 
-  clickHelpful(id) {
-    const { update } = this.props;
-    update();
-    axios.put(`/reviews/${id}/helpful`)
-      .then(() => {
-        console.log('click update');
-      })
-      .then(() => {
-        update();
-      });
-    update();
-  }
-
   renderReview() {
-    const { reviews } = this.props;
+    const { reviews, helpful } = this.props;
     return reviews.map((review) => (
       <div key={review.review_id}>
         <br />
@@ -49,12 +34,13 @@ class Review extends React.Component {
         <div>
           Helpful?
           {' '}
-          <button type="button" onClick={() => this.clickHelpful(review.review_id)}><u>Yes</u></button>
+          <button type="button" onClick={() => helpful(review.review_id)}><u>Yes</u></button>
           {`(${review.helpfulness}) | `}
           <u>Report</u>
         </div>
 
         <br />
+        <hr />
 
       </div>
     ));
@@ -72,7 +58,6 @@ class Review extends React.Component {
   render() {
     return (
       <div>
-        <h3>This is review </h3>
         {this.renderReview()}
       </div>
     );
@@ -80,7 +65,7 @@ class Review extends React.Component {
 }
 
 Review.propTypes = {
-  reviews: PropTypes.instanceOf(Object).isRequired,
-  update: PropTypes.instanceOf(Function).isRequired,
+  reviews: PropTypes.instanceOf(Array).isRequired,
+  helpful: PropTypes.instanceOf(Function).isRequired,
 };
 export default Review;

@@ -26,6 +26,7 @@
     "react-gallery-carousel": "^0.2.9",
     "react-inner-image-zoom": "^3.0.0",
     "react-multi-carousel": "^2.8.0",
+    "reactjs-popup": "^2.0.5",
     "regenerator-runtime": "^0.13.9",
     "style-loader": "^3.3.1",
     "underscore": "^1.13.2"
