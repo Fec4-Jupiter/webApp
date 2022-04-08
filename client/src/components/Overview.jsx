@@ -6,6 +6,7 @@ import pinterestlogo from './Common/pinterestlogo.png';
 import StyleSelector from './Overview/StyleSelector.jsx';
 import AddToCart from './Overview/AddToCart.jsx';
 import Gallery from './Overview/Gallery.jsx';
+import TestWrapper from './Overview/TestWrapper.jsx';
 
 const PropTypes = require('prop-types');
 
@@ -79,9 +80,9 @@ class Overview extends React.Component {
         <div className="social-buttons right-column">
           <b>Share on Socials</b>
           <div className="flex-break" />
-          <a href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.URL}`}><img src={facebooklogo} className="logo-button" alt="facebook" /></a>
-          <a href={`https://twitter.com/intent/tweet?url=${process.env.URL}&text=`}><img src={twitterlogo} className="logo-button" alt="twitter" /></a>
-          <a href={`https://pinterest.com/pin/create/button/?url=${process.env.URL}&media=&description=`}><img src={pinterestlogo} className="logo-button" alt="pinterest" /></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:1128</div>}"><img src={facebooklogo} className="logo-button" alt="facebook" /></a>
+          <a href="https://twitter.com/intent/tweet?url=http://127.0.0.1:1128</div>}&text="><img src={twitterlogo} className="logo-button" alt="twitter" /></a>
+          <a href="https://pinterest.com/pin/create/button/?url=http://127.0.0.1:1128</div>}&media=&description="><img src={pinterestlogo} className="logo-button" alt="pinterest" /></a>
           <br />
         </div>
         <div className="product-description">

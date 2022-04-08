@@ -19,8 +19,7 @@ class Gallery extends React.Component {
     const { currentStyle, currentImage } = props;
     const images = currentStyle.photos.map((photoObj) => {
       const src = photoObj.url || notAvailable;
-      const thumbnail = photoObj.thumbnail_url || notAvailable;
-      return { src, thumbnail };
+      return { src };
     });
     const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {

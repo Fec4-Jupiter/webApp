@@ -73,6 +73,8 @@ main {
 
 /* ----------- Overview section layout ----- */
 .overview {
+  max-width: 1080px;
+  margin: auto;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 22% 22% 22% 22% 12%;

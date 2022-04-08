@@ -129,16 +129,34 @@ describe('Add to Cart test suite', () => {
 });
 
 describe('Image Gallery test suite', () => {
-  it('Should display a main image and a list of thumbnail images', async () => {
+  it('Should display a main image', async () => {
+    const currentStyle = testData.styles.data.results[0];
+    currentStyle.photos = [
+      {
+        url: 'https://google.com/main1',
+      },
+      {
+        url: 'https://google.com/main2',
+      },
+      {
+        url: 'https://google.com/main3',
+      },
+    ];
+    const currentImage = 1;
 
+    render(<Gallery
+      currentStyle={currentStyle}
+      currentImage={currentImage}
+      key={currentStyle.style_id}
+      updateImage={() => {}}
+    />);
+    // Make sure each image URL from the passed in obj is rendered
+    const images = screen.getAllByRole('img');
+    const imageUrls = [];
+    images.forEach((image) => imageUrls.push(image.src));
+    currentStyle.photos.forEach((photo) => {
+      expect(imageUrls.includes(photo.url)).toBe(true);
+    });
   });
 
-  it('Should highlight the thumbnail corresponding to the main image', async () => {
-  });
-
-  it('Should display an Expanded View when the default view is clicked', () => {
-  });
-
-  it('Should populate the Expanded View with zoomable image componenets', () => {
-  });
 });
