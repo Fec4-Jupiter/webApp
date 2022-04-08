@@ -7,6 +7,7 @@ import axios from 'axios';
 import Overview from '../client/src/components/Overview.jsx';
 import StyleSelector from '../client/src/components/Overview/StyleSelector.jsx';
 import AddToCart from '../client/src/components/Overview/AddToCart.jsx';
+import Gallery from '../client/src/components/Overview/Gallery.jsx';
 import testData from './testdata.js';
 
 jest.mock('axios');
@@ -25,7 +26,7 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-describe('Overview test suite', () => {
+describe('Product information test suite', () => {
   beforeEach(() => {
     const { product } = testData;
     let { styles, reviews } = testData;
@@ -50,6 +51,12 @@ describe('Overview test suite', () => {
     const averageReview = (reviewSum / totalReviews).toFixed(1);
     expect(screen.getByText(`Read all ${totalReviews} reviews`, { exact: false })).not.toBeNull();
     expect(screen.getByText(`Rating: ${averageReview} stars.`, { exact: false })).not.toBeNull();
+  });
+
+  it('Should display links to share on social media', async () => {
+    expect(screen.getByAltText('facebook')).not.toBeNull();
+    expect(screen.getByAltText('twitter')).not.toBeNull();
+    expect(screen.getByAltText('pinterest')).not.toBeNull();
   });
 
   // ToDo: add negative testing for ratings (don't show ratings with an empty object)
@@ -118,5 +125,20 @@ describe('Add to Cart test suite', () => {
     render(<AddToCart currentStyle={blankStyle} />);
     expect(screen.getByRole('option', { name: 'OUT OF STOCK' })).not.toBeNull();
     expect(screen.queryByRole('button')).toBeNull();
+  });
+});
+
+describe('Image Gallery test suite', () => {
+  it('Should display a main image and a list of thumbnail images', async () => {
+
+  });
+
+  it('Should highlight the thumbnail corresponding to the main image', async () => {
+  });
+
+  it('Should display an Expanded View when the default view is clicked', () => {
+  });
+
+  it('Should populate the Expanded View with zoomable image componenets', () => {
   });
 });
