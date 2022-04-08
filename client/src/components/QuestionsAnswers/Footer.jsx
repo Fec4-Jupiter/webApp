@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/destructuring-assignment */
@@ -13,7 +14,6 @@ class Footer extends React.Component {
     this.state = {
       showSeller: false,
       showPhotos: false,
-      answerHelpfulness: 0,
     };
     // addHelpfulnessCount
   }
@@ -43,7 +43,7 @@ class Footer extends React.Component {
           <span className="answerhelp_yes">
             Yes
           </span>
-          <span className="answerhelpfulnesscount">{` (${this.state.answerHelpfulness}) `}</span>
+          <span className="answerhelpfulnesscount">{` (${this.props.answer[1].helpfulness}) `}</span>
           <span className="footerseparator">|</span>
           <span>Report</span>
 

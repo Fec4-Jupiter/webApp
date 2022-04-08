@@ -238,7 +238,7 @@ main {
   display: grid;
   gap: 10px;
   grid-template-areas: "questioncol-1 questioncol-2 questioncol-3";
-  grid-template-columns: 1fr 7fr 3fr;
+  grid-template-columns: 0.5fr 10fr 5fr;
 }
 .questioncol-1 {
   grid-area: questioncol-1;
@@ -256,7 +256,7 @@ main {
   display: grid;
   gap: 10px;
   grid-template-areas: "answer-A answerlist empty";
-  grid-template-columns: 1fr 7fr 3fr;
+  grid-template-columns: 0.5fr 10fr 5fr;
   font-weight: 300;
 }
 .answer-A {
@@ -272,7 +272,7 @@ main {
   display: grid;
   gap: 10px;
   grid-template-areas: "col1 btn col3";
-  grid-template-columns: 1fr 7fr 3fr;
+  grid-template-columns: 0.5fr 10fr 5fr;
   padding-bottom: 10px;
 }
 .loadmorecol-1 {
@@ -282,8 +282,7 @@ main {
   grid-area: btn;
 }
 
-
-/* addQuestion modal */
+/* addQuestion and addAnswer modal windows */
 .modal {
   position: fixed;
   top: 0;
@@ -292,7 +291,6 @@ main {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
-
 .modal-main {
   position: fixed;
   background: white;
@@ -304,98 +302,111 @@ main {
   color: rgb(79, 77, 77);
   padding: 20px;
 }
-
 .display-block {
   display: block;
 }
-
 .display-none {
   display: none;
 }
-
 .addquestionform,
 .addanswerform {
-  font-size: 2m;
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "title title"
+                      "label1 input1"
+                      "label2 input2"
+                      "warn2 msg2"
+                      "label3 input3"
+                      "warn3 msg3"
+                      "fileUp btnPhotos"
+                      "fileUp btnSubmit";
+  grid-template-columns: 2fr 3fr;
+  padding-bottom: 10px;
+  /* width: 300px; */
 }
-
-.formlabelQA {
-  font-size: 1.5em;
-  color: grey;
+.formtitle {
+  grid-area: title;;
 }
-
+.formlabel1 {
+  grid-area: label1;
+}
+.formlabel2 {
+  grid-area: label2;
+}
+.formlabel3 {
+  grid-area: label3;
+}
 .textareaQA {
-  width: 100%;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  grid-area:input1;
 }
-
-.inputQA {
-  width: 100%;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.inputQA2 {
+  grid-area: input2;
 }
-
+.inputQA3 {
+  grid-area: input3;
+}
+.warningQA2 {
+  grid-area: warn2;
+}
+.warningA3 {
+  grid-area: warn3;
+}
+.forminfoA2 {
+  grid-area: msg2;
+}
+.forminfoQA3 {
+  grid-area: msg3;
+  font-size: 0.5em;
+}
 .formbutton {
+  grid-area: btnSubmit;
+}
+.formbuttonaddphotos {
+  grid-area:btnPhotos;
+}
+.photouploadform {
+  grid-area: fileUp;
+}
+
+.formbutton,
+.formbuttonaddphotos {
   width: 50%;
-  background-color: #9ea69e;
+  background-color: #19eeee;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
-  margin: 8px 0;
+  /* margin: 8px 0; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  /* float: right; */
 }
-
-.formbutton:hover {
+.formbutton:hover,
+.formbuttonaddphotos:hover {
   color: white;
   background-color: #9ea69ebb;
 }
-
 .mandatory {
   color: red;
-}
-
-.addqaauth {
-  font-size: 0.5em;
 }
 
 /* AddAnswer Modal */
 .addanswer, .questionhelp_yes {
   text-decoration: underline;
 }
-
 .questionhelpfulness,
 .questionhelp_yes,
 .addanswer {
   padding-left: 5px;
 }
-
-.formbuttonaddanswer {
-  width: 300px;
-  background-color: #9ea69e;
-  color: rgb(58, 55, 55);
-  padding: 14px 20px;
-  margin:10px auto;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-}
-
 .productname_addanswer,
 .productname_addquestion {
   padding-left: 5px;
 }
-
 .questionbody_addanswer{
   padding-left: 1em;
   font-style: italic;
 }
+
 
 /* Footer */
 

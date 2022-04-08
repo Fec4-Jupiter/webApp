@@ -15,6 +15,7 @@ function QuestionView(props) {
   const question = props.question.question_body;
   const questionId = props.question.question_id;
   const answersArray = Object.entries(props.question.answers);
+  // if numasnwers === 0, don't show question
   const numOfAnswers = answersArray.length;
   //  sorting “by [username], Month DD, YYYY”
   //   If answerer ==='Seller, top of list

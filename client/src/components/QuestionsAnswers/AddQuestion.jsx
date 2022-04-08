@@ -65,41 +65,43 @@ class AddQuestion extends React.Component {
     return (
       <div className={this.props.showAddQuestion ? 'modal display-block' : 'modal display-none'}>
         <div className="modal-main">
-          <h2> Ask your question</h2>
-          <h3>
-            About the
-            <span className="productname_addquestion">
-              {this.props.product.name}
-            </span>
-          </h3>
+
           <form
             id="addQuestionForm"
             className="addquestionform"
             onSubmit={this.handleSubmit}
           >
-
-            <label className="formlabel">
+            <div className="formtitle">
+              <h2> Ask your question</h2>
+              <h3>
+                About the
+                <span className="productname_addquestion">
+                  {this.props.product.name}
+                </span>
+              </h3>
+            </div>
+            <label className="formlabel1">
               <span className="mandatory">* </span>
               Your question:
 
             </label>
             <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your question here" />
 
-            <label className="formlabel">
+            <label className="formlabel2">
               <span className="mandatory">* </span>
               {' '}
               What is your nickname:
               {' '}
             </label>
-            <input className="inputQA" type="text" name="name" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
+            <input className="inputQA2" type="text" name="name" placeholder="Example: jackson11!" onChange={this.handleInputChange} />
 
-            <label className="formlabel">
+            <label className="formlabel3">
               <span className="mandatory">* </span>
               Your email:
             </label>
-            <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jackson11@gmail.com" />
+            <input className="inputQA3" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jackson11@gmail.com" />
 
-            <p className="addqaauth">For authentication reasons, you will not be emailed</p>
+            <p className="forminfoQA3">For authentication reasons, you will not be emailed</p>
 
             <button className="formbutton" type="button" onClick={this.handleSubmit}>
               Submit

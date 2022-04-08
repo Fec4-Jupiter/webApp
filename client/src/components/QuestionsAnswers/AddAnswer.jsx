@@ -17,6 +17,7 @@ class AddAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showUploadPhotos: false,
       body: '',
       name: '',
       email: '',
@@ -26,6 +27,7 @@ class AddAnswer extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
   }
 
   handleInputChange(event) {
@@ -62,58 +64,67 @@ class AddAnswer extends React.Component {
     document.getElementById('addAnswerForm').reset();
   };
 
+  handleUploadPhotos = () => {
+    this.setState({ showUploadPhotos: true });
+  };
+
   render() {
     return (
       <div className={this.props.showAddAnswer ? 'modal display-block' : 'modal display-none'}>
         <div className="modal-main">
-          <h2> Submit Your Answer</h2>
-          <h3>
-            About the
-            <span className="productname_addanswer">
-              {this.props.product.name}
-            </span>
-            :
-            <span className="questionbody_addanswer">
-              {this.props.question.question_body}
-            </span>
-          </h3>
           <form
             id="addAnswerForm"
             className="addanswerform"
             onSubmit={this.handleSubmit}
           >
+            <div className="formtitle">
+              <h2> Submit Your Answer</h2>
+              <h3>
+                About the
+                <span className="productname_addanswer">
+                  {this.props.product.name}
+                </span>
+                :
+                <span className="questionbody_addanswer">
+                  {this.props.question.question_body}
+                </span>
+              </h3>
+            </div>
 
-            <label className="formlabel">
+            <label className="formlabel1">
               <span className="mandatory">* </span>
               Your answer:
-
             </label>
             <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your question here" />
 
-            <label className="formlabel">
+            <label className="formlabe2">
               <span className="mandatory">* </span>
-              {' '}
               What is your nickname:
-              {' '}
             </label>
-            <input className="inputQA" type="text" name="name" placeholder="Example: jack543!" onChange={this.handleInputChange} />
+            <input className="inputQA2" type="text" name="name" placeholder="Example: jack543!" onChange={this.handleInputChange} />
 
-            <label className="formlabel">
+            <label className="formlabel3">
               <span className="mandatory">* </span>
               Your email:
             </label>
-            <input className="inputQA" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jack@email.com" />
+            <input className="inputQA3" type="text" name="email" onChange={this.handleInputChange} placeholder="Example: jack@email.com" />
 
-            <p className="addqaauth">For authentication reasons, you will not be emailed</p>
+            <p className="forminfoQA3">For authentication reasons, you will not be emailed</p>
+            {/* triggers photo uploading */}
+            <button className="formbuttonaddphotos" type="button" onClick={this.handleUploadPhotos}> Upload your photos</button>
 
-            {/* <button
-              className="formbuttonaddanswer"
-              type="button"
-            >
-              Upload your photos
-            </button> */}
+            {/* photo uploading form - add conditional rendering */}
+            {this.state.showUploadPhotos
+              && (
 
-            <button className="formbuttonaddanswer" type="button" onClick={this.handleSubmit}>
+                <div className="photouploadform" onSubmit={this.handleSubmit}>
+                  <input type="file" id="file" multiple name="file" className="uploadbtn" onChange={this.handleChange} />
+                  <button type="submit"> Update File </button>
+                </div>
+
+              )}
+
+            <button className="formbutton" type="button" onClick={this.handleSubmit}>
               Submit
             </button>
           </form>
