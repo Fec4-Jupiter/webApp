@@ -27,6 +27,7 @@ class AddAnswer extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.showUploadForm = this.showUploadForm.bind(this);
     this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
   }
 
@@ -60,12 +61,29 @@ class AddAnswer extends React.Component {
     this.props.handleClose();
   }
 
-  resetForm = () => {
-    document.getElementById('addAnswerForm').reset();
+  handleUploadPhotos(e) {
+    // const tempArray = [...e.target.files].map((file) => {
+      // const url = URL.createObjectURL(file);
+    //   return url;
+    // });
+    const url = e.target.value;
+    // console.log(e.target.value);
+    const prevstate = this.state.photos;
+    if ( prevstate.length === 5 ) {
+      console.log('max limit reached', prevstate.length);
+      return;
+    }
+    prevstate.push(url);
+    this.setState( {photos: prevstate } );
+    console.log('state after up photos', this.state.photos, 'len: ', this.state.photos.length);
+  }
+
+  showUploadForm = () => {
+    this.setState({ showUploadPhotos: true });
   };
 
-  handleUploadPhotos = () => {
-    this.setState({ showUploadPhotos: true });
+  resetForm = () => {
+    document.getElementById('addAnswerForm').reset();
   };
 
   render() {
@@ -111,17 +129,22 @@ class AddAnswer extends React.Component {
 
             <p className="forminfoQA3">For authentication reasons, you will not be emailed</p>
             {/* triggers photo uploading */}
-            <button className="formbuttonaddphotos" type="button" onClick={this.handleUploadPhotos}> Upload your photos</button>
+            <button className="formbuttonaddphotos" type="button" onClick={this.showUploadForm}> Upload your photos</button>
 
             {/* photo uploading form - add conditional rendering */}
             {this.state.showUploadPhotos
               && (
+                <div className="photouploadform">
+                  <input type="file" name="photo" multiple className="uploadbtn" onChange={this.handleUploadPhotos} />
 
-                <div className="photouploadform" onSubmit={this.handleSubmit}>
-                  <input type="file" id="file" multiple name="file" className="uploadbtn" onChange={this.handleChange} />
-                  <button type="submit"> Update File </button>
+                  <div className="photothumbs">
+                    <span>photo1 </span>
+                    <span>photo2 </span>
+                    <span>photo3 </span>
+                    <span>Photo4 </span>
+                    <span>photo5 </span>
+                  </div>
                 </div>
-
               )}
 
             <button className="formbutton" type="button" onClick={this.handleSubmit}>

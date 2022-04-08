@@ -388,6 +388,9 @@ main {
 .mandatory {
   color: red;
 }
+.photothumbs > span {
+  padding-right: 10px;
+}
 
 /* AddAnswer Modal */
 .addanswer, .questionhelp_yes {
