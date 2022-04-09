@@ -62,4 +62,5 @@ SideBox.propTypes = {
   updateQuestions: PropTypes.instanceOf(Function),
 };
 
+SideBox.displayName = 'SideBox';
 export default SideBox;

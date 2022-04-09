@@ -44,4 +44,5 @@ QuestionsAnswers.propTypes = {
   questions: PropTypes.instanceOf(Object),
 };
 
+QuestionsAnswers.displayName = 'QuestionsAnswers';
 export default QuestionsAnswers;

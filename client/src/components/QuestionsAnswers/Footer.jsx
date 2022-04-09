@@ -10,27 +10,33 @@ import moment from 'moment';
 class Footer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showSeller: false,
       showPhotos: false,
     };
-    // addHelpfulnessCount
+
+    this.showPhotos = this.showPhotos.bind(this);
   }
 
-  componentDidMount() {
-    // console.log(this.props.answer); // ['idnum', {... }]
-  }
+  // componentDidMount() {
+  //   console.log()
+  // }
+
+  // eslint-disable-next-line class-methods-use-this
+  showPhotos = (photos) => {
+    photos.map((photo) => {
+      const { id, url } = photo;
+      return (
+        <img src={url} key={id} alt="cat" className="QAthumb" />
+      );
+    });
+  };
 
   render() {
     return ( // 2 rows
       <div>
         <div className="footerrow-1">
-          <span>Photo1</span>
-          <span>Photo2</span>
-          <span>Photo3</span>
-          <span>Photo4</span>
-          <span>Photo5</span>
+          {this.showPhotos(this.props.answer[1].photos)}
         </div>
         <div className="footerrow-2">
           {/* if answerer name === 'Seller', show in bold */}
@@ -57,4 +63,5 @@ Footer.propTypes = {
   answer: PropTypes.instanceOf(Object),
 };
 
+Footer.displayName = 'Footer';
 export default Footer;

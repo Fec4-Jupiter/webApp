@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
@@ -48,7 +49,7 @@ class AddAnswer extends React.Component {
       photos: this.state.photos,
     };
     const question_id = this.props.question.question_id;
-    console.log('question_id', question_id, 'type', typeof question_id);
+    console.log('to be posted:', postBody);
     axios.post(`/qa/questions/${question_id}/answers`, postBody)
       .then((res) => {
         console.log('res from post', res);
@@ -59,22 +60,24 @@ class AddAnswer extends React.Component {
       });
     this.resetForm();
     this.props.handleClose();
+    this.setState({
+      body: '',
+      name: '',
+      email: '',
+      photos: [],
+    });
   }
 
   handleUploadPhotos(e) {
-    // const tempArray = [...e.target.files].map((file) => {
-      // const url = URL.createObjectURL(file);
-    //   return url;
-    // });
-    const url = e.target.value;
-    // console.log(e.target.value);
+    // const filepath = e.target.value;
+    const filepath = 'https://www.fernvet.co.za/wp-content/uploads/2018/02/Cat-White-Background-Images.jpg';
     const prevstate = this.state.photos;
-    if ( prevstate.length === 5 ) {
+    if (prevstate.length === 5) {
       console.log('max limit reached', prevstate.length);
       return;
     }
-    prevstate.push(url);
-    this.setState( {photos: prevstate } );
+    prevstate.push(filepath);
+    this.setState({ photos: prevstate });
     console.log('state after up photos', this.state.photos, 'len: ', this.state.photos.length);
   }
 
@@ -113,7 +116,7 @@ class AddAnswer extends React.Component {
               <span className="mandatory">* </span>
               Your answer:
             </label>
-            <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your question here" />
+            <textarea type="text" className="textareaQA" name="body" onChange={this.handleInputChange} placeholder="Enter your answer here" />
 
             <label className="formlabe2">
               <span className="mandatory">* </span>
@@ -166,4 +169,5 @@ AddAnswer.propTypes = {
   updateQuestions: PropTypes.instanceOf(Function),
 };
 
+AddAnswer.displayName = 'AddAnswer';
 export default AddAnswer;

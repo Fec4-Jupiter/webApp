@@ -85,4 +85,5 @@ QuestionView.propTypes = {
   updateQuestions: PropTypes.instanceOf(Function),
 };
 
+QuestionView.displayName = 'QuestionView';
 export default QuestionView;

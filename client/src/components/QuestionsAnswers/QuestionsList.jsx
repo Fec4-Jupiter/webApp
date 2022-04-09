@@ -98,4 +98,5 @@ QuestionsList.propTypes = {
   questions: PropTypes.instanceOf(Object),
 };
 
+QuestionsList.displayName = 'QuestionsList';
 export default QuestionsList;

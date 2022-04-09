@@ -122,4 +122,5 @@ AddQuestion.propTypes = {
   updateQuestions: PropTypes.instanceOf(Function),
 };
 
+AddQuestion.displayName = 'AddQuestion';
 export default AddQuestion;

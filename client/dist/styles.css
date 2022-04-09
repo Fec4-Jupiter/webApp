@@ -423,6 +423,15 @@ main {
 .footerrow-2 > span {
   padding-right: 5px;
 }
+.QAthumb{
+  height: auto;
+  width: 75px;
+}
+
+.footerthumbs {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+}
 
 /* Search component in Questions & Answers */
 
