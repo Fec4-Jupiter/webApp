@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rating from '@mui/material/Rating';
+import moment from 'moment';
 
 class Review extends React.Component {
   constructor(props) {
@@ -13,14 +15,21 @@ class Review extends React.Component {
     return reviews.map((review) => (
       <div key={review.review_id}>
         <br />
-        <h4><strong>{review.summary}</strong></h4>
         <span>
-          {review.reviewer_name}
-          {' '}
-          -
-          {' '}
-          {review.date}
+          {
+            review.rating % 1 === 0
+              ? <Rating defaultValue={review.rating} readOnly />
+              : (
+                <Rating
+                  defaultValue={Math.floor(review.rating)}
+                  precision={review.rating - Math.floor(review.rating)}
+                  readOnly
+                />
+              )
+          }
+          {`\t\t${review.reviewer_name} ${moment(review.date).format('MMM Do YY')}`}
         </span>
+        <h4><strong>{review.summary}</strong></h4>
         <p>{review.body}</p>
         {this.renderImg(review.photos)}
         {review.recommend ? <p>&#10004; I recommend this product</p> : null}
