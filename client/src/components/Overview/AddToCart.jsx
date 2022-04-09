@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 const PropTypes = require('prop-types');
 
@@ -44,7 +45,7 @@ class AddToCart extends React.Component {
     const { availableSizes } = this.state;
     let { currentQuantity } = this.state;
     currentQuantity = currentQuantity || '1';
-    const currentSize = e.target.value;
+    const currentSize = e.value;
     this.setState({
       availableSizes,
       currentQuantity,
@@ -54,7 +55,7 @@ class AddToCart extends React.Component {
 
   changeQuantity(e) {
     const { availableSizes, currentSize } = this.state;
-    const currentQuantity = e.target.value;
+    const currentQuantity = e.value;
     this.setState({
       availableSizes,
       currentQuantity,
@@ -66,30 +67,10 @@ class AddToCart extends React.Component {
     const { availableSizes } = this.state;
     let list;
     if (availableSizes.length) {
-      list = (
-        <select
-          name="size"
-          className="size-list"
-          aria-label="size"
-          defaultValue=""
-          onChange={this.changeSize}
-          required
-          onInvalid={(e) => {
-            e.target.setCustomValidity('Please select size');
-          }}
-        >
-          <option value="" disabled hidden>Select a Size</option>
-          {availableSizes.map(
-            (sku) => <option key={sku.sku} value={sku.size}>{sku.size}</option>,
-          )}
-        </select>
-      );
+      const options = availableSizes.map((sku) => ({ value: sku.size, label: sku.size }));
+      list = <Select options={options} isSearchable={false} placeholder="Select Size:" onChange={this.changeSize} aria-label="size" />;
     } else {
-      list = (
-        <select disabled className="size-list" name="size" aria-label="size">
-          <option name="OUT OF STOCK">OUT OF STOCK</option>
-        </select>
-      );
+      list = <Select isDisabled placeholder="OUT OF STOCK" aria-label="size" />;
     }
 
     return list;
@@ -103,19 +84,11 @@ class AddToCart extends React.Component {
       const availableQ = availableSizes.filter((sku) => sku.size === currentSize)[0].quantity;
       const quantities = [];
       for (let i = 1; i <= availableQ && i <= 15; i += 1) {
-        quantities.push(<option key={i} value={i}>{i}</option>);
+        quantities.push({ value: i, label: i });
       }
-      list = (
-        <select className="quantity-list" aria-label="quantity" name="quantity" defaultValue="1" onChange={this.changeQuantity}>
-          {quantities}
-        </select>
-      );
+      list = <Select options={quantities} isSearchable={false} defaultValue={{ value: 1, label: 1 }} onChange={this.changeQuantity} aria-label="quantity" />;
     } else {
-      list = (
-        <select className="quantity-list" disabled aria-label="quantity" name="quantity">
-          <option>-</option>
-        </select>
-      );
+      list = <Select isDisabled placeholder="-" aria-label="quantity" />;
     }
 
     return list;

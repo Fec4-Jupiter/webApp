@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import axios from 'axios';
 
 function analyticsWrapper(Component) {
   return function WrappedComponent(props) {
@@ -14,7 +15,7 @@ function analyticsWrapper(Component) {
       const widget = Component.displayName;
       const element = e.target.className || e.target.innerHTML || e.target.name;
 
-      console.log({ time, widget, element });
+      axios.post('/interactions', { element, widget, time });
     };
 
     return (
