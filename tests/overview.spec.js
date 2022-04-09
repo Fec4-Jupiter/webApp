@@ -41,13 +41,7 @@ describe('Product information test suite', () => {
 
   it('Should display average rating of a product, and a link to view all ratings', () => {
     const totalReviews = testData.reviews.data.results.length;
-    let reviewSum = 0;
-    testData.reviews.data.results.forEach((review) => {
-      reviewSum += review.rating;
-    });
-    const averageReview = (reviewSum / totalReviews).toFixed(1);
     expect(screen.getByText(`Read all ${totalReviews} reviews`, { exact: false })).not.toBeNull();
-    expect(screen.getByText(`Rating: ${averageReview} stars.`, { exact: false })).not.toBeNull();
   });
 
   it('Should display links to share on social media', async () => {

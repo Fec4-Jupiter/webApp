@@ -4,8 +4,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import MainImage from 'react-gallery-carousel';
-import Thumbnails from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import Thumbnails from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 import './MainImage.css';
 import InnerImageZoom from 'react-inner-image-zoom';
 import notAvailable from '../Common/imageNotAvailable.png';
@@ -117,35 +117,26 @@ class Gallery extends React.Component {
         breakpoint: { max: 3000, min: 1024 },
         items: 7,
       },
-      tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 7,
-      },
-      mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 7,
-      },
     };
     const {
       images, currentImage, imageZooms, zoomed,
     } = this.state;
+    const thumbs = images.map((image, index) => (
+      <img
+        key={image.src}
+        onClick={this.thumbClick}
+        src={image.src}
+        alt={index}
+        className={(index === currentImage) ? 'selected-image thumbnail-image' : 'thumbnail-image'}
+      />
+    ));
     return (
       <div className="image-gallery" key={zoomed}>
         {zoomed
           ? <MainImage className="main-image zoomed" isMaximized index={currentImage} objectFit="contain" children={imageZooms} onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} hasSizeButton={false} />
           : <MainImage className="main-image unzoomed" index={currentImage} onTap={this.handleZoom} objectFit="contain" images={images} onIndexChange={this.mainChange} isLoop={false} hasMediaButton={false} hasIndexBoard={false} hasDotButtonsAtMax="bottom" hasThumbnails={false} hasSizeButton={false} />}
         <div className="thumbnails">
-          <Thumbnails infinite={false} showDots={false} responsive={responsive} itemClass="thumbnail-item">
-            {images.map((image, index) => (
-              <img
-                key={image.src}
-                onClick={this.thumbClick}
-                src={image.src}
-                alt={index}
-                className={(index === currentImage) ? 'selected-image thumbnail-image' : 'thumbnail-image'}
-              />
-            ))}
-          </Thumbnails>
+          <Thumbnails items={thumbs} controlsStrategy="responsive" activeIndex={currentImage} disableDotsControls innerWidth={0} responsive={{ 0: { items: 7 } }} />
         </div>
       </div>
     );

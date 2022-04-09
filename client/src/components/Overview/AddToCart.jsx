@@ -100,7 +100,7 @@ class AddToCart extends React.Component {
         );
       }
     } else {
-      list = <Select isDisabled placeholder="OUT OF STOCK" aria-label="size" />;
+      list = <Select className="size-select" isDisabled placeholder="OUT OF STOCK" aria-label="size" />;
     }
 
     return list;
