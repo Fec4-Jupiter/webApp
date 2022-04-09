@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 const PropTypes = require('prop-types');
 
@@ -21,6 +22,7 @@ class AddToCart extends React.Component {
       availableSizes,
       currentSize: null,
       currentQuantity: null,
+      invalidInput: false,
     };
 
     this.sizeList = this.sizeList.bind(this);
@@ -32,64 +34,73 @@ class AddToCart extends React.Component {
 
   handleAdd(e) {
     e.preventDefault();
-    const { availableSizes, currentSize, currentQuantity } = this.state;
-    const selectedSKU = availableSizes.filter((sku) => sku.size === currentSize)[0].sku;
-    axios.post('/cart', {
-      sku_id: selectedSKU,
-      count: currentQuantity,
-    });
+    const {
+      availableSizes, currentSize, currentQuantity,
+    } = this.state;
+    if (!currentSize && !currentQuantity) {
+      this.setState({
+        availableSizes,
+        currentSize,
+        currentQuantity,
+        invalidInput: true,
+      });
+    } else {
+      const selectedSKU = availableSizes.filter((sku) => sku.size === currentSize)[0].sku;
+      axios.post('/cart', {
+        sku_id: selectedSKU,
+        count: currentQuantity,
+      });
+      this.setState({
+        availableSizes,
+        currentSize,
+        currentQuantity,
+        invalidInput: false,
+      });
+    }
   }
 
   changeSize(e) {
     const { availableSizes } = this.state;
     let { currentQuantity } = this.state;
     currentQuantity = currentQuantity || '1';
-    const currentSize = e.target.value;
+    const currentSize = e.value;
     this.setState({
       availableSizes,
       currentQuantity,
       currentSize,
+      invalidInput: false,
     });
   }
 
   changeQuantity(e) {
-    const { availableSizes, currentSize } = this.state;
-    const currentQuantity = e.target.value;
+    const { availableSizes, currentSize, invalidInput } = this.state;
+    const currentQuantity = e.value;
     this.setState({
       availableSizes,
       currentQuantity,
       currentSize,
+      invalidInput,
     });
   }
 
   sizeList() {
-    const { availableSizes } = this.state;
+    const { availableSizes, invalidInput, currentSize } = this.state;
     let list;
     if (availableSizes.length) {
-      list = (
-        <select
-          name="size"
-          className="size-list"
-          aria-label="size"
-          defaultValue=""
-          onChange={this.changeSize}
-          required
-          onInvalid={(e) => {
-            e.target.setCustomValidity('Please select size');
-          }}
-        >
-          <option value="" disabled hidden>Select a Size</option>
-          {availableSizes.map(
-            (sku) => <option key={sku.sku} value={sku.size}>{sku.size}</option>,
-          )}
-        </select>
-      );
+      const options = availableSizes.map((sku) => ({ value: sku.size, label: sku.size }));
+      if (currentSize) {
+        const defaultVal = { value: currentSize, label: currentSize };
+        list = <Select key={invalidInput} className="size-select" options={options} defaultMenuIsOpen={(invalidInput)} value={defaultVal} defaultValue={defaultVal} isFocused={(invalidInput)} isSearchable={false} onChange={this.changeSize} aria-label="size" />;
+      } else {
+        list = (
+          <div className="size-select">
+            {invalidInput ? <b className="invalid-input-err">Please select size</b> : ''}
+            <Select key={invalidInput} options={options} defaultMenuIsOpen={(invalidInput)} placeholder="Select Size:" isFocused={(invalidInput)} isSearchable={false} onChange={this.changeSize} aria-label="size" />
+          </div>
+        );
+      }
     } else {
-      list = (
-        <select disabled className="size-list" name="size" aria-label="size">
-          <option name="OUT OF STOCK">OUT OF STOCK</option>
-        </select>
-      );
+      list = <Select className="size-select" isDisabled placeholder="OUT OF STOCK" aria-label="size" />;
     }
 
     return list;
@@ -103,19 +114,11 @@ class AddToCart extends React.Component {
       const availableQ = availableSizes.filter((sku) => sku.size === currentSize)[0].quantity;
       const quantities = [];
       for (let i = 1; i <= availableQ && i <= 15; i += 1) {
-        quantities.push(<option key={i} value={i}>{i}</option>);
+        quantities.push({ value: i, label: i });
       }
-      list = (
-        <select className="quantity-list" aria-label="quantity" name="quantity" defaultValue="1" onChange={this.changeQuantity}>
-          {quantities}
-        </select>
-      );
+      list = <Select key={currentSize || 'no size'} className="quantity-select" options={quantities} isSearchable={false} defaultValue={{ value: 1, label: 1 }} onChange={this.changeQuantity} aria-label="quantity" />;
     } else {
-      list = (
-        <select className="quantity-list" disabled aria-label="quantity" name="quantity">
-          <option>-</option>
-        </select>
-      );
+      list = <Select key={currentSize || 'no size'} className="quantity-select" placeholder="-" aria-label="quantity" />;
     }
 
     return list;
@@ -125,11 +128,9 @@ class AddToCart extends React.Component {
     const { availableSizes } = this.state;
     return (
       <div className="add-to-cart right-column">
-        <form className="add-to-cart-form" onSubmit={this.handleAdd}>
-          {this.sizeList()}
-          {this.quantityList()}
-          {availableSizes.length ? <input type="submit" value="Add to Cart" /> : ''}
-        </form>
+        {this.sizeList()}
+        {this.quantityList()}
+        {availableSizes.length ? <button type="button" className="cart-button" onClick={this.handleAdd}>Add to Cart</button> : ''}
       </div>
     );
   }
