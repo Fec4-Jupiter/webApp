@@ -27,7 +27,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img,
 picture,
 video,
 canvas,
@@ -105,15 +104,11 @@ main {
 }
 
 .add-to-cart {
-  grid-column-start: 4;
-  grid-column-end: span 2;
-  grid-row-start: 3;
-  grid-row-end: span 1;
-}
-
-.add-to-cart-form {
+  display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 50% 50%;
+  grid-column: 4 / span 2;
+  grid-row: 3 / span 1;
 }
 
 .size-list {
@@ -164,11 +159,13 @@ main {
 }
 /* ----------- Thumbnail selection styling ----- */
 .thumbnailcontainer {
+  border: 0px;
   display: inline-block;
   border-radius: 50%;
   overflow: hidden;
-  width: 50px;
-  height: 50px
+  width: 75px;
+  height: 75px;
+  margin: 5px;
 }
 
 .thumbnailcontainer.selected {
@@ -177,7 +174,6 @@ main {
 }
 
 .stylethumbnail {
-  border: 1px solid white;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -191,12 +187,57 @@ main {
   left: 15%;
   font-weight: bold;
 }
+/*------------ReviewStars Styling------*/
+.product-rating {
+  margin: auto;
+  display: block;
+}
+.rating-link {
+  display: inline-block;
+  padding-left: 10px;
+  height: 38px;
+  line-height: 38px;
+}
+/*-----------Add to Cart Styling ------ */
+.size-select {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+  padding-right: 10px;
+  align-self: end;
+}
+.quantity-select {
+  grid-column: 4 / span 2;
+  grid-row: 1 / span 1;
+  padding-left: 10px;
+  align-self: end;
+}
+.cart-button {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 1;
+  height: 38px;
+  align-self: center;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.invalid-input-err{
+  color: red;
+}
 
 /* -----------Image Gallery Styling ------ */
 
 .selected-image {
   position: relative;
   border: 3px solid red;
+  object-fit: contain;
+}
+.thumbnail-image {
+  object-fit: contain;
+  max-width: 50px;
+  max-height: 75px;
 }
 
 .image-zoom {
@@ -232,20 +273,35 @@ main {
 }
 
 .thumbnail-item {
-  max-width: 50px;
-  max-height: 75px;
+  max-width: 40px;
+  max-height: 60px;
 }
 
-.react-multi-carousel-list {
+.alice-carousel {
+  margin:auto;
+}
+
+.alice-carousel__wrapper {
   position: absolute;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
   top: -75px;
-  justify-content: center;
+  justify-content: space-around;
+  max-width: 475px;
 }
 
-.react-multi-carousel-track {
-  width: 100%;
-  max-width: 325px;
-  justify-content: space-between;
+.alice-carousel__prev-btn-item {
+  position: absolute;
+  background-color: antiquewhite;
+  top: -75px;
+  left: 50px;
+}
+.alice-carousel__next-btn-item {
+  position: absolute;
+  background-color: antiquewhite;
+  top: -75px;
+  right: 75px;
 }
 
 
