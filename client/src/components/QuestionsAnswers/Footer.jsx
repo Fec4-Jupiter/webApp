@@ -1,3 +1,8 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/require-default-props */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
@@ -13,30 +18,32 @@ class Footer extends React.Component {
     this.state = {
       showSeller: false,
       showPhotos: false,
+      helpfulness: this.props.answer[1].helpfulness,
     };
-
-    this.showPhotos = this.showPhotos.bind(this);
+    this.addDefaultSrc = this.addDefaultSrc.bind(this);
   }
 
-  // componentDidMount() {
-  //   console.log()
-  // }
+  componentDidMount() {
+    // console.log(this.props)
+  }
 
-  // eslint-disable-next-line class-methods-use-this
-  showPhotos = (photos) => {
-    photos.map((photo) => {
-      const { id, url } = photo;
-      return (
-        <img src={url} key={id} alt="cat" className="QAthumb" />
-      );
-    });
-  };
+  addDefaultSrc(ev) {
+    ev.target.src = './imgDefault.png';
+  }
 
   render() {
     return ( // 2 rows
       <div>
         <div className="footerrow-1">
-          {this.showPhotos(this.props.answer[1].photos)}
+          {this.props.answer[1].photos.map((photoURL) => (
+            <img
+              src={photoURL}
+              // onError={this.addDefaultSrc}
+              key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
+              alt="uploaded by user"
+              className="QAthumb"
+            />
+          ))}
         </div>
         <div className="footerrow-2">
           {/* if answerer name === 'Seller', show in bold */}
@@ -46,7 +53,7 @@ class Footer extends React.Component {
           <span className="answerhelpfulness">
             Helpful?
           </span>
-          <span className="answerhelp_yes">
+          <span className="answerhelp_yes" onClick={this.voteHelpfulness}>
             Yes
           </span>
           <span className="answerhelpfulnesscount">{` (${this.props.answer[1].helpfulness}) `}</span>

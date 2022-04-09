@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable camelcase */
@@ -69,8 +70,10 @@ class AddAnswer extends React.Component {
   }
 
   handleUploadPhotos(e) {
-    const filepath = e.target.value;
-    // const filepath = 'https://www.fernvet.co.za/wp-content/uploads/2018/02/Cat-White-Background-Images.jpg';
+    // const filepath = e.target.value; //gets actual localfile input from user
+    // const catURL = [];
+    // const filepath = 'https://cataas.com/cat'; // cat as a service - pics for devs
+    const filepath = 'https://thiscatdoesnotexist.com/'; // another of those
     const prevstate = this.state.photos;
     if (prevstate.length === 5) {
       console.log('max limit reached', prevstate.length);
@@ -141,11 +144,11 @@ class AddAnswer extends React.Component {
                   <input type="file" name="photo" multiple className="uploadbtn" onChange={this.handleUploadPhotos} />
 
                   <div className="photothumbs">
-                    <span>photo1 </span>
-                    <span>photo2 </span>
-                    <span>photo3 </span>
-                    <span>Photo4 </span>
-                    <span>photo5 </span>
+                    <img src={this.state.photos[0]} key="photo_0" alt="cat" className="QAthumb_mini" />
+                    <img src={this.state.photos[1]} key="photo_1" alt="cat" className="QAthumb_mini" />
+                    <img src={this.state.photos[2]} key="photo_2" alt="cat" className="QAthumb_mini" />
+                    <img src={this.state.photos[3]} key="photo_3" alt="cat" className="QAthumb_mini" />
+                    <img src={this.state.photos[4]} key="photo_4" alt="cat" className="QAthumb_mini" />
                   </div>
                 </div>
               )}

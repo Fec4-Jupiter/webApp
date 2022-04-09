@@ -5,6 +5,7 @@ import * as React from 'react';
 import 'regenerator-runtime/runtime.js';
 import { render, screen } from '@testing-library/react';
 import QuestionsAnswers from '../client/src/components/QuestionsAnswers.jsx';
+import QuestionsList from '../client/src/components/QuestionsAnswers/QuestionsList.jsx';
 import testData from './testdata.js';
 
 describe('QuestionsAnswers test suite', () => {

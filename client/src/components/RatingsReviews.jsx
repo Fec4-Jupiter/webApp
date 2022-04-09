@@ -33,7 +33,7 @@ class RatingsReviews extends React.Component {
     const { product: { pId }, sort, count } = this.state;
     axios.get(`/reviews?product_id=${pId}&sort=${'helpful'}&count=${count}`)
       .then(({ data }) => {
-        console.log(data.results);
+        // console.log(data.results);
         this.setState({
           reviews: data.results,
           reviewsToShow: data.results,
@@ -41,7 +41,7 @@ class RatingsReviews extends React.Component {
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           metadata: data,
         });
@@ -52,7 +52,7 @@ class RatingsReviews extends React.Component {
   clickHelpful(id) {
     axios.put(`/reviews/${id}/helpful`)
       .then(() => {
-        console.log('click update');
+        // console.log('click update');
         this.fetchReviews();
       });
   }
