@@ -5,6 +5,7 @@ import Overview from './components/Overview.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers.jsx';
 import RatingsReviews from './components/RatingsReviews.jsx';
 import RelatedItems from './components/RelatedItems.jsx';
+import analyticsWrapper from './components/Overview/AnalyticsWrapper.jsx';
 
 const axios = require('axios');
 
@@ -57,13 +58,14 @@ class App extends React.Component {
     if (!product) {
       return <div>Loading...</div>;
     }
+    const WrappedOverview = analyticsWrapper(Overview);
     return (
       <div className="app">
         <div className="title-banner">
           <h2>Jupiter Clothing</h2>
         </div>
         <div className="content">
-          <Overview product={product} styles={styles} reviews={reviews} />
+          <WrappedOverview product={product} styles={styles} reviews={reviews} />
           <RelatedItems product={product} related={related} />
           <QuestionsAnswers product={product} questions={questions} />
           <RatingsReviews id="RatingsReviews" product={product} />

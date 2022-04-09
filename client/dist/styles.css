@@ -73,9 +73,11 @@ main {
 
 /* ----------- Overview section layout ----- */
 .overview {
+  max-width: 1080px;
+  margin: auto;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-rows: 22% 22% 22% 22% 12%;
   padding: 10px;
   height: 80vh;
 }
@@ -84,7 +86,7 @@ main {
   grid-column-start: 1;
   grid-column-end: span 3;
   grid-row-start: 1;
-  grid-row-end: span 3;
+  grid-row-end: span 4;
   padding: 1px;
 }
 
@@ -130,6 +132,10 @@ main {
 }
 
 .social-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 250px;
+  justify-content: space-around;
   grid-column-start: 4;
   grid-column-end: span 2;
   grid-row-start: 4;
@@ -147,7 +153,15 @@ main {
   padding-left: 15px;
   padding-right: 15px;
 }
-
+/*-----------Social media button styling--------*/
+.logo-button{
+  height: 30px;
+  width: 30px;
+}
+.flex-break {
+  flex-basis: 100%;
+  height: 0;
+}
 /* ----------- Thumbnail selection styling ----- */
 .thumbnailcontainer {
   display: inline-block;
@@ -188,9 +202,19 @@ main {
 .image-zoom {
   text-align: center;
 }
+.image-zoom:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
 
 .main-image ._FP5OY {
   cursor: zoom-in;
+}
+
+._1_Dg2 {
+  background-color: black;
 }
 
 .main-image ._t1897 {
