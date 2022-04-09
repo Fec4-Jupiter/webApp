@@ -85,6 +85,7 @@ main {
   grid-column-end: span 3;
   grid-row-start: 1;
   grid-row-end: span 3;
+  padding: 1px;
 }
 
 .product-information {
@@ -179,39 +180,95 @@ main {
 
 /* -----------Image Gallery Styling ------ */
 
-.selectedThumbnail {
+.selected-image {
+  position: relative;
   border: 3px solid red;
 }
+
+.image-zoom {
+  text-align: center;
+}
+
+.main-image ._FP5OY {
+  cursor: zoom-in;
+}
+
+.main-image ._t1897 {
+  object-fit: contain;
+}
+
+.main-image ._1zlZS {
+  opacity: 0;
+}
+
+.thumbnails {
+  height: 75px;
+  width: 100%;
+  z-index: 1;
+}
+
+.thumbnail-item {
+  max-width: 50px;
+  max-height: 75px;
+}
+
+.react-multi-carousel-list {
+  position: absolute;
+  top: -75px;
+  justify-content: center;
+}
+
+.react-multi-carousel-track {
+  width: 100%;
+  max-width: 325px;
+  justify-content: space-between;
+}
+
 
 
 /* ----------- Questions and Answers Styling ----- */
 .questionsandanswerscontainer {
-  background-color: rgb(208, 208, 208);
+  background-color: white;
+  color: black;
+}
+
+.questionsandanswers-row1,
+.questionsandanswers-row2,
+.questionsandanswers-row3 {
+  padding: 0 20px 0 20px;
+}
+
+.qatitle {
+  padding-left: 20px;
 }
 
 /* question view grids */
 .questionrow {
-  border: solid grey;
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 5fr 3fr;
+  padding: 10px 0 10px 0;
+
 }
 
 .questioncol-1 {
   grid-area: questioncol-1;
+  font-weight: 600;
 }
 
 .questioncol-2 {
   grid-area: questioncol-2;
+  font-size: 0.7em;
+
 }
 
 .answerrow {
-  border: solid rgb(48, 11, 11);
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "answercol-1 answercol-2";
   grid-template-columns: 3fr 1fr;
+  font-weight: 300;
 }
 
 .answercol-1 {
@@ -232,6 +289,11 @@ main {
 
 .answerlist {
   padding-left: 10px;
+}
+
+.answer-A,
+.question-Q {
+  font-weight: 600;
 }
 
 /* addQuestion modal */
@@ -264,7 +326,8 @@ main {
   display: none;
 }
 
-.addquestionform {
+.addquestionform,
+.addanswerform {
   font-size: 2m;
 }
 
@@ -291,7 +354,7 @@ main {
 
 .formbutton {
   width: 50%;
-  background-color: #b7bab7;
+  background-color: #9ea69e;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
   margin: 8px 0;
@@ -303,10 +366,55 @@ main {
 
 .formbutton:hover {
   color: white;
+  background-color: #9ea69ebb;
 }
 
 .mandatory {
   color: red;
+}
+
+.addqaauth {
+  font-size: 0.5em;
+}
+
+/* AddAnswer Modal */
+.addanswer,
+.questionhelp_yes {
+  text-decoration: underline;
+}
+
+.questionhelpfulness,
+.questionhelp_yes,
+.addanswer {
+  padding-left: 5px;
+}
+
+.formbuttonaddanswer {
+  width: 300px;
+  background-color: #9ea69e;
+  color: rgb(58, 55, 55);
+  padding: 14px 20px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.productname_addanswer,
+.productname_addquestion {
+  padding-left: 5px;
+}
+
+.questionbody_addanswer {
+  padding-left: 1em;
+  font-style: italic;
+}
+
+/* Search component in Questions & Answers */
+
+.searchinput {
+  width: 100%;
 }
 
 
@@ -380,6 +488,3 @@ main {
   margin-top: 20px;
   /* background-color: blue; */
 }
-
-
-/* ----------- Ratings and Reviews styling END ----- */
