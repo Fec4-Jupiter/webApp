@@ -28,6 +28,8 @@ function QuestionView(props) {
       <div className="footer" key={`Footer ${answer[0]}`}>
         <Footer
           answer={answer}
+          product={props.product}
+          updateQuestions={props.updateQuestions}
         />
       </div>
 

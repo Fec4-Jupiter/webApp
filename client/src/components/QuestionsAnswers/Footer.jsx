@@ -10,7 +10,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-// import axios from 'axios';
+import axios from 'axios';
 
 class Footer extends React.Component {
   constructor(props) {
@@ -18,17 +18,45 @@ class Footer extends React.Component {
     this.state = {
       showSeller: false,
       showPhotos: false,
-      helpfulness: this.props.answer[1].helpfulness,
+      voted: false,
     };
-    this.addDefaultSrc = this.addDefaultSrc.bind(this);
+    this.voteHelpfulness = this.voteHelpfulness.bind(this);
+    this.reportAnswer = this.reportAnswer.bind(this);
   }
 
   componentDidMount() {
     // console.log(this.props)
   }
 
-  addDefaultSrc(ev) {
-    ev.target.src = './imgDefault.png';
+  voteHelpfulness() {
+    if (this.state.voted) {
+      return;
+    }
+    const id = parseInt(this.props.answer[0], 10);
+    // console.log('vote help answer id', typeof parseInt(this.props.answer[0], 10));
+    // PUT /qa/answers/:answer_id/helpful
+    axios.put(`/qa/answers/${id}/helpful`)
+      .then(() => {
+        this.state.voted = true;
+        // refresh
+        this.props.updateQuestions(this.props.product.id);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  reportAnswer() {
+    const id = parseInt(this.props.answer[0], 10);
+    // PUT /qa/answers/:answer_id/report
+    axios.put(`/qa/answers/${id}/report`)
+      .then(() => {
+        // refresh
+        this.props.updateQuestions(this.props.product.id);
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   render() {
@@ -38,7 +66,6 @@ class Footer extends React.Component {
           {this.props.answer[1].photos.map((photoURL) => (
             <img
               src={photoURL}
-              // onError={this.addDefaultSrc}
               key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
               alt="uploaded by user"
               className="QAthumb"
@@ -58,7 +85,7 @@ class Footer extends React.Component {
           </span>
           <span className="answerhelpfulnesscount">{` (${this.props.answer[1].helpfulness}) `}</span>
           <span className="footerseparator">|</span>
-          <span>Report</span>
+          <span onClick={this.reportAnswer}>Report</span>
 
         </div>
       </div>
@@ -68,6 +95,8 @@ class Footer extends React.Component {
 
 Footer.propTypes = {
   answer: PropTypes.instanceOf(Object),
+  product: PropTypes.instanceOf(Object),
+  updateQuestions: PropTypes.instanceOf(Function),
 };
 
 Footer.displayName = 'Footer';
