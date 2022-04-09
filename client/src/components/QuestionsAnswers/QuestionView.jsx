@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-console */
@@ -45,8 +46,8 @@ function QuestionView(props) {
 
         <div className="questioncol-2">
           <span>{question}</span>
-          <span>{` questionID : ${questionId}`}</span>
-          <span>{` number of answers: ${numOfAnswers}`}</span>
+          {/* <span>{` questionID : ${questionId}`}</span> */}
+          {/* <span>{` number of answers: ${numOfAnswers}`}</span> */}
         </div>
 
         <div

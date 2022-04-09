@@ -300,7 +300,7 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   color: rgb(79, 77, 77);
-  padding: 20px;
+  padding: 10px;
 }
 .display-block {
   display: block;
@@ -322,7 +322,6 @@ main {
                       "fileUp btnSubmit";
   grid-template-columns: 2fr 3fr;
   padding-bottom: 10px;
-  /* width: 300px; */
 }
 .formtitle {
   grid-area: title;;
@@ -374,16 +373,14 @@ main {
   background-color: #19eeee;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
-  /* margin: 8px 0; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  /* float: right; */
 }
 .formbutton:hover,
 .formbuttonaddphotos:hover {
   color: white;
-  background-color: #9ea69ebb;
+  background-color: #097078bb;
 }
 .mandatory {
   color: red;
@@ -392,7 +389,7 @@ main {
   padding-right: 10px;
 }
 
-/* AddAnswer Modal */
+/* SideBox, Footer */
 .addanswer, .questionhelp_yes {
   text-decoration: underline;
 }
@@ -409,9 +406,6 @@ main {
   padding-left: 1em;
   font-style: italic;
 }
-
-
-/* Footer */
 
 .footer {
   font-size: 0.7em;

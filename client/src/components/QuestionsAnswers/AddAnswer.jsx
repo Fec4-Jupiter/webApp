@@ -69,8 +69,8 @@ class AddAnswer extends React.Component {
   }
 
   handleUploadPhotos(e) {
-    // const filepath = e.target.value;
-    const filepath = 'https://www.fernvet.co.za/wp-content/uploads/2018/02/Cat-White-Background-Images.jpg';
+    const filepath = e.target.value;
+    // const filepath = 'https://www.fernvet.co.za/wp-content/uploads/2018/02/Cat-White-Background-Images.jpg';
     const prevstate = this.state.photos;
     if (prevstate.length === 5) {
       console.log('max limit reached', prevstate.length);

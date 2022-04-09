@@ -16,8 +16,9 @@ function QuestionsAnswers(props) {
     <div className="questionsandanswerscontainer">
       <div className="questionsandanswers-row1">
         <span className="qatitle">
-          Questions & Answers, prod id=
-          {props.product.id}
+          Questions & Answers
+          {/* , prod id=
+          {props.product.id} */}
         </span>
 
         <div className="questionsandanswers-row2">
