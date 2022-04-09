@@ -15,12 +15,14 @@ class RatingsReviews extends React.Component {
     this.state = {
       product: { pId: id, pName: name },
       reviews: [],
+      total: 0,
       metadata: {},
       sort: 'relevance',
       count: 2,
     };
     this.clickHelpful = this.clickHelpful.bind(this);
     this.moreReviews = this.moreReviews.bind(this);
+    this.changeSort = this.changeSort.bind(this);
   }
 
   componentDidMount() {
@@ -31,17 +33,17 @@ class RatingsReviews extends React.Component {
   // * Init state
   fetchReviews() {
     const { product: { pId }, sort, count } = this.state;
-    axios.get(`/reviews?product_id=${pId}&sort=${'helpful'}&count=${count}`)
+    axios.get(`/reviews?product_id=${pId}&sort=${sort}`)
       .then(({ data }) => {
-        console.log(data.results);
+        console.log(data);
         this.setState({
-          reviews: data.results,
-          reviewsToShow: data.results,
+          reviews: data.results.slice(0, count),
+          total: data.results.length,
         });
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           metadata: data,
         });
@@ -64,10 +66,19 @@ class RatingsReviews extends React.Component {
       this.fetchReviews();
     });
   }
+
+  changeSort(e) {
+    console.log(e.target.value);
+    this.setState({ sort: e.target.value }, () => {
+      this.fetchReviews();
+    });
+  }
   // !------------------------- For Review List end ----------------------
 
   render() {
-    const { product, reviews, metadata } = this.state;
+    const {
+      product, reviews, metadata, total,
+    } = this.state;
     return (
       <div className="review-container">
         <div className="t"><h1>Ratings & Reviews</h1></div>
@@ -76,14 +87,15 @@ class RatingsReviews extends React.Component {
             <ReviewList
               product={product}
               reviews={reviews}
+              total={total}
+              sort={this.changeSort}
               helpful={this.clickHelpful}
               moreReviews={this.moreReviews}
             />
           )}
-        <div className="r"><RatingSideBar /></div>
-        <div className="p"><ProductSideBar /></div>
+        <RatingSideBar />
+        <ProductSideBar />
       </div>
-
     );
   }
 }
