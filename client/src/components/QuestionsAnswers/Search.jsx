@@ -45,4 +45,5 @@ Search.propTypes = {
   questions: PropTypes.instanceOf(Object),
 };
 
+Search.displayName = 'Search';
 export default Search;

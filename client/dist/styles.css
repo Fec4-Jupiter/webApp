@@ -307,76 +307,93 @@ main {
 
 
 /* ----------- Questions and Answers Styling ----- */
-.questionsandanswerscontainer {
-  background-color: white;
-  color: black;
+.qacontainer > div {
+  max-width: 1080px;
+  margin: auto;
 }
-
 .questionsandanswers-row1,
 .questionsandanswers-row2,
-.questionsandanswers-row3 {
-  padding: 0 20px 0 20px;
+.questionsandanswers-row3
+ {
+  padding-bottom: 10px;
 }
-
 .qatitle {
-  padding-left: 20px;
+  font-weight: 300;
+  font-size:1.5em;
 }
+.forTest{
+  color: white;
+}
+.qabutton {
+  align-self: center;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 20px;
+  padding: 20px 20px;
+  min-width: 300px;;
 
-/* question view grids */
+}
+/* QuestionView */
 .questionrow {
   display: grid;
-  gap: 1.5rem;
-  grid-template-areas: "questioncol-1 questioncol-2";
-  grid-template-columns: 5fr 3fr;
-  padding: 10px 0 10px 0;
-
+  gap: 10px;
+  grid-template-areas: "questioncol-1 questioncol-2 questioncol-3";
+  grid-template-columns: 0.5fr 9.5fr 5fr;
+  margin-top:20px;
+  margin-bottom: 5px;
 }
-
 .questioncol-1 {
   grid-area: questioncol-1;
-  font-weight: 600;
 }
-
 .questioncol-2 {
   grid-area: questioncol-2;
-  font-size: 0.7em;
-
+  font-weight: 600;
+  font-size: 1.2em;
 }
-
+.questioncol-3 {
+  grid-area: questioncol-3;
+  font-size: 0.8em;
+  padding-top:4px;
+}
 .answerrow {
   display: grid;
-  gap: 1.5rem;
-  grid-template-areas: "answercol-1 answercol-2";
-  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+  grid-template-areas: "answer-A answerlist empty";
+  grid-template-columns: 0.5fr 9.5fr 5fr;
   font-weight: 300;
 }
-
-.answercol-1 {
-  grid-area: answercol-1;
-  display: grid;
-  grid-template-areas: "answer-A answerlist";
-  grid-template-columns: 1fr 71fr;
-
+.answer-A {
+  grid-area: answer-A;
 }
-
-.answercol-2 {
-  grid-area: answercol-2;
-}
-
-.footer {
-  background-color: rgb(235, 240, 126);
-}
-
 .answerlist {
-  padding-left: 10px;
+  grid-area: answerlist;
 }
-
 .answer-A,
 .question-Q {
   font-weight: 600;
+  font-size: 1.2em;
 }
-
-/* addQuestion modal */
+.loadmorerow {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "col1 btn col3";
+  grid-template-columns: 0.5fr 9.5fr 5fr;
+  padding-bottom: 10px;
+}
+.loadmorecol-1 {
+  grid-area: col1;
+}
+.loadmorecol-2 {
+  grid-area: btn;
+}
+.loadmoreanswers{
+  font-weight: 600;
+  font-size: 0.8em;
+}
+/* addQuestion and addAnswer modal windows */
 .modal {
   position: fixed;
   top: 0;
@@ -385,7 +402,6 @@ main {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
-
 .modal-main {
   position: fixed;
   background: white;
@@ -394,81 +410,117 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
-  padding: 20px;
+  color: rgb(79, 77, 77);
+  padding: 10px;
 }
-
 .display-block {
   display: block;
 }
-
 .display-none {
   display: none;
 }
-
 .addquestionform,
 .addanswerform {
-  font-size: 2m;
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "title title"
+                      "label1 input1"
+                      "label2 input2"
+                      "warn2 msg2"
+                      "label3 input3"
+                      "warn3 msg3"
+                      "fileUp btnPhotos"
+                      "fileUp btnSubmit";
+  grid-template-columns: 2fr 3fr;
+  padding-bottom: 10px;
 }
-
-.formlabelQA {
-  font-size: 1.5em;
-  color: grey;
+.formtitle {
+  grid-area: title;;
 }
-
+.formlabel1 {
+  grid-area: label1;
+}
+.formlabel2 {
+  grid-area: label2;
+}
+.formlabel3 {
+  grid-area: label3;
+}
 .textareaQA {
-  width: 100%;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  grid-area:input1;
 }
-
-.inputQA {
-  width: 100%;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.inputQA2 {
+  grid-area: input2;
 }
-
+.inputQA3 {
+  grid-area: input3;
+}
+.warningQA2 {
+  grid-area: warn2;
+}
+.warningA3 {
+  grid-area: warn3;
+}
+.forminfoA2 {
+  grid-area: msg2;
+}
+.forminfoQA3 {
+  grid-area: msg3;
+  font-size: 0.5em;
+}
 .formbutton {
+  grid-area: btnSubmit;
+}
+.formbuttonaddphotos {
+  grid-area:btnPhotos;
+}
+.photouploadform {
+  grid-area: fileUp;
+}
+
+.formbutton,
+.formbuttonaddphotos {
   width: 50%;
-  background-color: #9ea69e;
+  background-color: #19eeee;
   color: rgb(58, 55, 55);
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
 }
-
-.formbutton:hover {
+.formbutton:hover,
+.formbuttonaddphotos:hover {
   color: white;
-  background-color: #9ea69ebb;
+  background-color: #097078bb;
 }
-
 .mandatory {
   color: red;
 }
-
-.addqaauth {
-  font-size: 0.5em;
+.photothumbs > span {
+  padding-right: 10px;
 }
 
 /* AddAnswer Modal */
 .addanswer,
-.questionhelp_yes {
+.answerhelp_yes,
+.questionhelp_yes,
+.reportAnswer,
+.reportQuestion {
   text-decoration: underline;
 }
-
 .questionhelpfulness,
 .questionhelp_yes,
+.answerhelp_yes,
 .addanswer {
   padding-left: 5px;
 }
 
+.questionhelpfulness,
+.answerhelpfulness,
+.answerhelp_yes,
+.questionhelp_yes {
+  font-weight: 400;
+}
 .formbuttonaddanswer {
   width: 300px;
   background-color: #9ea69e;
@@ -491,10 +543,42 @@ main {
   font-style: italic;
 }
 
+/* Footer, SideBox */
+.footer {
+  font-size: 0.8em;
+  padding-bottom: 20px;
+}
+.footerrow-1 {
+  padding-right: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 75px;
+  width: auto;
+}
+.footerrow-2 > span,
+.sidebox > span {
+  padding-right: 5px;
+}
+.QAthumb{
+  max-height: 100%;
+  max-width: 100%;
+  padding-right: 10px;
+}
+.QAthumb_mini {
+  height:30px;
+  width: auto;
+  padding: 4px;
+}
+.footerthumbs {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+}
 /* Search component in Questions & Answers */
-
 .searchinput {
   width: 100%;
+  border: solid grey;
+  padding: 20px 20px;
 }
 
 
