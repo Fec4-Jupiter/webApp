@@ -28,7 +28,7 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('id in mount', this.props);
+    // console.log('id in mount', this.props);
     this.updateQuestions(this.props.product.id);
   }
 
@@ -41,10 +41,10 @@ class QuestionsList extends React.Component {
   };
 
   updateQuestions(id) {
-    console.log('get from questionslist, prod id', id);
+    // console.log('get from questionslist, prod id', id);
     let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
-    console.log('url', url);
+    // console.log('url', url);
     axios.get(url)
       .then((values) => {
         newQuestions = {
@@ -52,7 +52,7 @@ class QuestionsList extends React.Component {
           showMoreAnsweredQuestions: false,
           questions: values.data.results,
         };
-        console.log(newQuestions);
+        // console.log(newQuestions);
         this.setState(newQuestions);
       })
       .catch((err) => {
@@ -75,8 +75,8 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          <button>MORE ANSWERED QUESTIONS </button>
-          <button type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
+          <button className="qabutton">MORE ANSWERED QUESTIONS </button>
+          <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
               showAddQuestion={this.state.showAddQuestion}
@@ -98,4 +98,5 @@ QuestionsList.propTypes = {
   questions: PropTypes.instanceOf(Object),
 };
 
+QuestionsList.displayName = 'QuestionsList';
 export default QuestionsList;

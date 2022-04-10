@@ -1,4 +1,7 @@
 import React from 'react';
+import Rating from 'react-rating';
+import emptyStar from './star-empty.png';
+import fullStar from './star-full.png';
 
 const PropTypes = require('prop-types');
 
@@ -13,22 +16,28 @@ function ReviewStars({ reviews }) {
     list.forEach((review) => {
       reviewTotal += review.rating;
     });
-    return (reviewTotal / numberOfReviews).toFixed(1);
+    return (reviewTotal / numberOfReviews).toFixed(3);
   };
 
   return (
-    <div>
-      Rating:
-      {' '}
-      {reviewAvg(reviews)}
-      {' stars. '}
-      <a href="#RatingsReviews">
-        Read all
-        {' '}
-        {reviews.length}
-        {' '}
-        reviews
-      </a>
+    <div className="product-rating">
+      <Rating
+        readonly
+        className="rating-stars"
+        initialRating={reviewAvg(reviews)}
+        emptySymbol={<img src={emptyStar} className="icon" alt="empty star" />}
+        fullSymbol={<img src={fullStar} className="icon" alt="full star" />}
+        fractions={4}
+      />
+      <div className="rating-link">
+        <a href="#RatingsReviews">
+          Read all
+          {' '}
+          {reviews.length}
+          {' '}
+          reviews
+        </a>
+      </div>
     </div>
   );
 }

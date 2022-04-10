@@ -82,7 +82,7 @@ class RatingsReviews extends React.Component {
   clickHelpful(id) {
     axios.put(`/reviews/${id}/helpful`)
       .then(() => {
-        console.log('click update');
+        // console.log('click update');
         this.fetchReviews();
       });
   }

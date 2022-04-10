@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Rating from '@mui/material/Rating';
+import Rating from '@mui/material/Rating/';
 import moment from 'moment';
 
 class Review extends React.Component {
