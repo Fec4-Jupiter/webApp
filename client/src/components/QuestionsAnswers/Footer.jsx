@@ -62,16 +62,19 @@ class Footer extends React.Component {
   render() {
     return ( // 2 rows
       <div>
-        <div className="footerrow-1">
-          {this.props.answer[1].photos.map((photoURL) => (
-            <img
-              src={photoURL}
-              key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
-              alt="uploaded by user"
-              className="QAthumb"
-            />
-          ))}
-        </div>
+        {this.props.answer[1].photos.length !== 0
+          && (
+          <div className="footerrow-1">
+            {this.props.answer[1].photos.map((photoURL) => (
+              <img
+                src={photoURL}
+                key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
+                alt="uploaded by user"
+                className="QAthumb"
+              />
+            ))}
+          </div>
+          )}
         <div className="footerrow-2">
           {/* if answerer name === 'Seller', show in bold */}
           <span>{`by ${this.props.answer[1].answerer_name}`}</span>
@@ -85,7 +88,7 @@ class Footer extends React.Component {
           </span>
           <span className="answerhelpfulnesscount">{` (${this.props.answer[1].helpfulness}) `}</span>
           <span className="footerseparator">|</span>
-          <span onClick={this.reportAnswer}>Report</span>
+          <span className="reportAnswer" onClick={this.reportAnswer}>Report</span>
 
         </div>
       </div>

@@ -13,28 +13,28 @@ import Search from './QuestionsAnswers/Search.jsx';
 
 function QuestionsAnswers(props) {
   return (
-    <div className="questionsandanswerscontainer">
+    <div className="qacontainer">
       <div className="questionsandanswers-row1">
         <span className="qatitle">
           Questions & Answers
-          <span className="forTest">{props.product.id} </span>
-
+          <span className="forTest">
+            {props.product.id}
+            {' '}
+          </span>
         </span>
+      </div>
+      <div className="questionsandanswers-row2">
+        <Search
+          product={props.product}
+          questions={props.questions}
+        />
 
-        <div className="questionsandanswers-row2">
-          <Search
-            product={props.product}
-            questions={props.questions}
-          />
-
-        </div>
-        <div className="questionsandanswers-row3">
-          <QuestionsList
-            product={props.product}
-            questions={props.questions}
-          />
-        </div>
-
+      </div>
+      <div className="questionsandanswers-row3">
+        <QuestionsList
+          product={props.product}
+          questions={props.questions}
+        />
       </div>
     </div>
   );

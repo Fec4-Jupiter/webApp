@@ -77,6 +77,8 @@ class SideBox extends React.Component {
         <span className="addanswer" onClick={this.showAddAnswerForm}>
           Add Answer
         </span>
+        <span className="sideboxseparator">|</span>
+        <span className="reportQuestion" onClick={this.reportQuestion}>Report</span>
         <div>
           <AddAnswer
             showAddAnswer={this.state.showAddAnswer}
@@ -86,8 +88,6 @@ class SideBox extends React.Component {
             updateQuestions={this.props.updateQuestions}
           />
         </div>
-        <span className="sideboxseparator">|</span>
-        <span onClick={this.reportQuestion}>Report</span>
 
       </div>
     );

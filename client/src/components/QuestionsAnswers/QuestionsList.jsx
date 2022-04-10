@@ -75,8 +75,8 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          <button>MORE ANSWERED QUESTIONS </button>
-          <button type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
+          <button className="qabutton">MORE ANSWERED QUESTIONS </button>
+          <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
               showAddQuestion={this.state.showAddQuestion}
