@@ -342,6 +342,8 @@ main {
   gap: 10px;
   grid-template-areas: "questioncol-1 questioncol-2 questioncol-3";
   grid-template-columns: 0.5fr 9.5fr 5fr;
+  margin-top:20px;
+  margin-bottom: 5px;
 }
 .questioncol-1 {
   grid-area: questioncol-1;
@@ -349,10 +351,11 @@ main {
 .questioncol-2 {
   grid-area: questioncol-2;
   font-weight: 600;
+  font-size: 1.2em;
 }
 .questioncol-3 {
   grid-area: questioncol-3;
-  font-size: 0.7em;
+  font-size: 0.8em;
   padding-top:4px;
 }
 .answerrow {
@@ -371,6 +374,7 @@ main {
 .answer-A,
 .question-Q {
   font-weight: 600;
+  font-size: 1.2em;
 }
 .loadmorerow {
   display: grid;
@@ -385,7 +389,10 @@ main {
 .loadmorecol-2 {
   grid-area: btn;
 }
-
+.loadmoreanswers{
+  font-weight: 600;
+  font-size: 0.8em;
+}
 /* addQuestion and addAnswer modal windows */
 .modal {
   position: fixed;
@@ -495,6 +502,7 @@ main {
 
 /* AddAnswer Modal */
 .addanswer,
+.answerhelp_yes,
 .questionhelp_yes,
 .reportAnswer,
 .reportQuestion {
@@ -502,10 +510,17 @@ main {
 }
 .questionhelpfulness,
 .questionhelp_yes,
+.answerhelp_yes,
 .addanswer {
   padding-left: 5px;
 }
 
+.questionhelpfulness,
+.answerhelpfulness,
+.answerhelp_yes,
+.questionhelp_yes {
+  font-weight: 400;
+}
 .formbuttonaddanswer {
   width: 300px;
   background-color: #9ea69e;
@@ -530,7 +545,7 @@ main {
 
 /* Footer, SideBox */
 .footer {
-  font-size: 0.7em;
+  font-size: 0.8em;
   padding-bottom: 20px;
 }
 .footerrow-1 {
