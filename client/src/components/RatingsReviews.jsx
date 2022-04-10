@@ -19,10 +19,11 @@ class RatingsReviews extends React.Component {
       metadata: {},
       sort: 'relevance',
       count: 2,
+      filters: [],
     };
     this.clickHelpful = this.clickHelpful.bind(this);
-    this.moreReviews = this.moreReviews.bind(this);
     this.changeSort = this.changeSort.bind(this);
+    this.clickFilters = this.clickFilters.bind(this);
   }
 
   componentDidMount() {
@@ -32,13 +33,18 @@ class RatingsReviews extends React.Component {
   // * Fetch all reviews and metadata.
   // * Init state
   fetchReviews() {
-    const { product: { pId }, sort, count } = this.state;
+    const {
+      product: { pId }, sort,
+    } = this.state;
     axios.get(`/reviews?product_id=${pId}&sort=${sort}`)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
+        // let reviews = data.results.slice(0, count);
+        const reviews = this.filterSelected(data.results);
+        // console.log(reviews);
         this.setState({
-          reviews: data.results.slice(0, count),
-          total: data.results.length,
+          reviews,
+          total: reviews.length,
         });
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
@@ -50,6 +56,28 @@ class RatingsReviews extends React.Component {
       });
   }
 
+  filterSelected(arr) {
+    const { filters } = this.state;
+    return arr.filter((review) => filters.includes(review.rating) || filters.length === 0);
+  }
+
+  clickFilters(rating) {
+    const { filters } = this.state;
+    if (!rating) {
+      this.setState({ filters: [] }, () => this.fetchReviews());
+    } else {
+      // console.log(`rating is ${rating}`);
+      const index = filters.indexOf(rating);
+      if (index !== -1) {
+        filters.splice(index, 1);
+        this.setState({ filters }, () => this.fetchReviews());
+      } else {
+        filters.push(rating);
+        this.setState({ filters }, () => this.fetchReviews());
+      }
+    }
+  }
+
   // *------------------------- For Review List ----------------------
   clickHelpful(id) {
     axios.put(`/reviews/${id}/helpful`)
@@ -57,14 +85,6 @@ class RatingsReviews extends React.Component {
         console.log('click update');
         this.fetchReviews();
       });
-  }
-
-  moreReviews(e) {
-    e.preventDefault();
-    const { count } = this.state;
-    this.setState({ count: count + 2 }, () => {
-      this.fetchReviews();
-    });
   }
 
   changeSort(e) {
@@ -77,24 +97,29 @@ class RatingsReviews extends React.Component {
 
   render() {
     const {
-      product, reviews, metadata, total,
+      product, reviews, metadata, total, filters,
     } = this.state;
     return (
       <div className="review-container">
         <div className="t"><h1>Ratings & Reviews</h1></div>
-        {reviews.length === 0 ? <p>Loading Reviews....</p>
-          : (
-            <ReviewList
-              product={product}
-              reviews={reviews}
-              total={total}
-              sort={this.changeSort}
-              helpful={this.clickHelpful}
-              moreReviews={this.moreReviews}
+        <ReviewList
+          product={product}
+          reviews={reviews}
+          total={total}
+          sort={this.changeSort}
+          helpful={this.clickHelpful}
+        />
+        {Object.keys(metadata).length !== 0
+          ? (
+            <RatingSideBar
+              filters={filters}
+              metadata={metadata}
+              clickFilters={this.clickFilters}
             />
-          )}
-        <RatingSideBar />
-        <ProductSideBar />
+          ) : null}
+        {Object.keys(metadata).length !== 0
+          ? (<ProductSideBar metadata={metadata} />)
+          : null }
       </div>
     );
   }

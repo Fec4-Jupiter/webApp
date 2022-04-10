@@ -431,7 +431,7 @@ main {
   grid-template-columns: 300px 70%;
   grid-gap: 10px 20px;
   /* border: 1px solid grey; */
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .t {
@@ -487,4 +487,27 @@ main {
   /* border: 1px solid grey; */
   margin-top: 20px;
   /* background-color: blue; */
+}
+
+.p_breakdown {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.p_breakdown .bar {
+  background-color: grey;
+  opacity: 0.2;
+}
+
+.p_breakdown > .movebar {
+  left: 0px;
+  top: -8px;
+  position: absolute;
+  /* border: 1px solid red; */
+}
+.text-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
