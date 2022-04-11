@@ -56,9 +56,7 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList() {
-    const { questions } = this.props;
-    console.log(questions);
-    // select questions with answers and sort by helpfulness
+    const { questions } = this.state;
     const answered = [];
     questions.map((question) => {
       if (Object.keys(question.answers).length !== 0) {
@@ -69,15 +67,20 @@ class QuestionsList extends React.Component {
 
     if (this.state.showAllQuestions === false) {
       const shortAnswered = answered.slice(0, 2);
-      this.setState({ sortedQuestions: shortAnswered });
+      console.log('SHORT ARRAY', shortAnswered);
+      this.setState({ sortedQuestions: shortAnswered }, () => {
+        this.render();
+      });
       return;
     }
-    console.log('answered ar', answered);
-    this.setState({ sortedQuestions: answered });
+    console.log('LONG ARRAY', answered);
+    this.setState({ sortedQuestions: answered }, () => {
+      this.render();
+    });
   }
 
   updateQuestions(id) {
-    // console.log('get from questionslist, prod id', id);
+  // console.log('get from questionslist, prod id', id);
     let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
     // console.log('url', url);
@@ -118,7 +121,7 @@ class QuestionsList extends React.Component {
           {this.state.showAllQuestions === false
           && <button className="qabutton" type="button" onClick={this.showMoreQuestions}> SHOW MORE QUESTIONS </button>}
           {this.state.showAllQuestions === true
-            && <button className="qabutton" type="button" onClick={this.showFewerQuestions}> SHOW FEWER QUESTIONS </button>}
+          && <button className="qabutton" type="button" onClick={this.showFewerQuestions}> SHOW FEWER QUESTIONS </button>}
 
           <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
