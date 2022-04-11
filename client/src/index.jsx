@@ -65,7 +65,7 @@ class App extends React.Component {
         <div className="content">
           <WrappedOverview product={product} styles={styles} reviews={reviews} />
           <WrappedQA product={product} questions={questions} />
-          <WrappedRatings id="RatingsReviews" product={product} />
+          <WrappedRatings product={product} />
         </div>
       </div>
     );

@@ -198,6 +198,9 @@ main {
   height: 38px;
   line-height: 38px;
 }
+html {
+  scroll-behavior: smooth;
+}
 /*-----------Add to Cart Styling ------ */
 .size-select {
   grid-column: 1 / span 3;
