@@ -19,7 +19,7 @@ class QuestionsList extends React.Component {
 
     this.state = {
       showAddQuestion: false,
-      showAllQuestions: false,
+      showAll: false,
       questions: this.props.questions,
       sortedQuestions: [],
     };
@@ -27,35 +27,38 @@ class QuestionsList extends React.Component {
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
     this.createQuestionsList = this.createQuestionsList.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
-    this.showMoreQuestions = this.showMoreQuestions.bind(this);
-    this.showFewerQuestions = this.showFewerQuestions.bind(this);
+    this.toggleMoreQuestions = this.toggleMoreQuestions.bind(this);
   }
 
   componentDidMount() {
     this.updateQuestions(this.props.product.id);
-    // this.createQuestionsList();
+    console.log('calling create short');
+    this.createQuestionsList('short');
   }
 
   showAddQuestionForm = () => {
     this.setState({ showAddQuestion: true });
-    this.createQuestionsList();
   };
 
   hideAddQuestionForm = () => {
     this.setState({ showAddQuestion: false });
   };
 
-  showMoreQuestions() {
-    this.setState({ showAllQuestions: true });
-    this.createQuestionsList();
+  toggleMoreQuestions() {
+    const { showAll } = this.state;
+    this.setState({ showAll: !showAll }, () => {
+      if (this.state.showAll === true) {
+        console.log('if > show All is true.. show all:', this.state.showAll);
+        this.createQuestionsList('long');
+      } else {
+        console.log('if > show all is false');
+        this.createQuestionsList('short');
+      }
+    });
   }
 
-  showFewerQuestions() {
-    this.setState({ showAllQuestions: false });
-    this.createQuestionsList();
-  }
-
-  createQuestionsList() {
+  createQuestionsList(len) {
+    console.log('len', len);
     const { questions } = this.state;
     const answered = [];
     questions.map((question) => {
@@ -65,22 +68,21 @@ class QuestionsList extends React.Component {
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
 
-    if (this.state.showAllQuestions === false) {
+    if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
       console.log('SHORT ARRAY', shortAnswered);
-      this.setState({ sortedQuestions: shortAnswered }, () => {
+      return this.setState({ sortedQuestions: shortAnswered }, () => {
         this.render();
       });
-      return;
     }
     console.log('LONG ARRAY', answered);
-    this.setState({ sortedQuestions: answered }, () => {
+    return this.setState({ sortedQuestions: answered }, () => {
       this.render();
     });
   }
 
   updateQuestions(id) {
-  // console.log('get from questionslist, prod id', id);
+    // console.log('get from questionslist, prod id', id);
     let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
     // console.log('url', url);
@@ -88,13 +90,13 @@ class QuestionsList extends React.Component {
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
-          showAllQuestions: false,
+          showAll: false,
           questions: values.data.results,
           sortedQuestions: [],
         };
         // console.log(newQuestions);
         this.setState(newQuestions);
-        this.createQuestionsList();
+        this.createQuestionsList('short');
       })
       .catch((err) => {
         throw err;
@@ -118,11 +120,17 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          {this.state.showAllQuestions === false
-          && <button className="qabutton" type="button" onClick={this.showMoreQuestions}> SHOW MORE QUESTIONS </button>}
-          {this.state.showAllQuestions === true
-          && <button className="qabutton" type="button" onClick={this.showFewerQuestions}> SHOW FEWER QUESTIONS </button>}
 
+          <button
+            className="qabutton"
+            type="button"
+            onClick={this.toggleMoreQuestions}
+          >
+            {' '}
+            {this.state.showAll ? 'SHOW FEWER QUESTIONS' : 'SHOW MORE QUESTIONS'}
+            {' '}
+
+          </button>
           <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
