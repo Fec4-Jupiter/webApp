@@ -73,17 +73,30 @@ describe('Product information test suite', () => {
 });
 
 describe('Style Selector test suite', () => {
+  const styles = testData.styles.data.results;
+  const defaultStyle = styles.filter((style) => style['default?'])[0];
+  const clickHandler = jest.fn().mockName('test');
+
+  beforeEach(() => {
+    render(<StyleSelector
+      currentStyle={defaultStyle}
+      styles={styles}
+      changeStyle={clickHandler}
+    />);
+  });
+
   it('should display Style Selector for products with current style name and thumbnails', async () => {
-    const styles = testData.styles.data.results;
-    const defaultStyle = styles.filter((style) => style['default?'])[0];
-    render(<StyleSelector currentStyle={defaultStyle} styles={styles} changeStyle={() => {}} />);
-    expect(screen.getByText(defaultStyle.name)).not.toBeNull();
+    expect(screen.getByText(defaultStyle.name)).toBeVisible();
     expect(screen.getAllByRole('img').length).toBe(styles.length);
   });
 
   it('should overlay a checkmark on the currently selected style (default selection is the first style) ', () => {
+    expect(screen.getByRole('cell', { name: `${defaultStyle.name} ✓` })).toBeVisible();
   });
-  it('should update style name when a new style is selected ', () => {
+
+  it('should pass a clicked style into the click handler ', () => {
+    fireEvent.click(screen.getByRole('cell', { name: styles[1].name }));
+    expect(clickHandler).toHaveBeenCalledWith(styles[1]);
   });
 });
 
