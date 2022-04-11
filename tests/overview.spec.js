@@ -73,7 +73,7 @@ describe('Product information test suite', () => {
 });
 
 describe('Style Selector test suite', () => {
-  it('Should display Style Selector for products with current style name and thumbnails', async () => {
+  it('should display Style Selector for products with current style name and thumbnails', async () => {
     const styles = testData.styles.data.results;
     const defaultStyle = styles.filter((style) => style['default?'])[0];
     render(<StyleSelector currentStyle={defaultStyle} styles={styles} changeStyle={() => {}} />);
@@ -81,16 +81,9 @@ describe('Style Selector test suite', () => {
     expect(screen.getAllByRole('img').length).toBe(styles.length);
   });
 
-  it('Clicking a style should send that style to the click handler', () => {
-    const styles = testData.styles.data.results;
-    const defaultStyle = styles.filter((style) => style['default?'])[0];
-    const onClick = jest.fn();
-    const instClick = (val) => onClick(val);
-
-    render(<StyleSelector currentStyle={defaultStyle} styles={styles} changeStyle={instClick} />);
-
-    fireEvent.click(screen.getAllByRole('img')[1]);
-    expect(onClick).toHaveBeenCalledWith(styles[1]);
+  it('should overlay a checkmark on the currently selected style (default selection is the first style) ', () => {
+  });
+  it('should update style name when a new style is selected ', () => {
   });
 });
 
