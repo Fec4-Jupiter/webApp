@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import Overview from './components/Overview.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers.jsx';
 import RatingsReviews from './components/RatingsReviews.jsx';
-import RelatedItems from './components/RelatedItems.jsx';
-import analyticsWrapper from './components/Overview/AnalyticsWrapper.jsx';
+import analyticsWrapper from './components/Common/AnalyticsWrapper.jsx';
 
 const axios = require('axios');
 
@@ -16,7 +15,6 @@ class App extends React.Component {
       product: null,
       reviews: [],
       styles: [],
-      related: [],
       questions: [],
     };
 
@@ -34,14 +32,12 @@ class App extends React.Component {
         newState.product = results.data;
         const reviews = axios.get(`/reviews?product_id=${id}&count=500`);
         const styles = axios.get(`/products/${id}/styles`);
-        const related = axios.get(`/products/${id}/related`);
         const questions = axios.get(`/qa/questions?product_id=${id}&count=500`);
-        Promise.all([reviews, styles, related, questions])
+        Promise.all([reviews, styles, questions])
           .then((values) => {
             newState.reviews = values[0].data.results;
             newState.styles = values[1].data.results;
-            newState.related = values[2].data;
-            newState.questions = values[3].data.results;
+            newState.questions = values[2].data.results;
             this.setState(newState);
           })
           .catch((err) => {
@@ -53,12 +49,14 @@ class App extends React.Component {
 
   render() {
     const {
-      product, reviews, styles, related, questions,
+      product, reviews, styles, questions,
     } = this.state;
     if (!product) {
       return <div>Loading...</div>;
     }
     const WrappedOverview = analyticsWrapper(Overview);
+    const WrappedQA = analyticsWrapper(QuestionsAnswers);
+    const WrappedRatings = analyticsWrapper(RatingsReviews);
     return (
       <div className="app">
         <div className="title-banner">
@@ -66,9 +64,8 @@ class App extends React.Component {
         </div>
         <div className="content">
           <WrappedOverview product={product} styles={styles} reviews={reviews} />
-          <RelatedItems product={product} related={related} />
-          <QuestionsAnswers product={product} questions={questions} />
-          <RatingsReviews id="RatingsReviews" product={product} />
+          <WrappedQA product={product} questions={questions} />
+          <WrappedRatings product={product} />
         </div>
       </div>
     );

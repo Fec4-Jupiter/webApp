@@ -18,7 +18,7 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
               <img
                 className="stylethumbnail"
                 src={thumb}
-                alt="Not provided"
+                alt={style.name}
               />
               <span className="checkmark">&#10003;</span>
             </span>
@@ -31,7 +31,7 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
               <img
                 className="stylethumbnail"
                 src={thumb}
-                alt="Not provided"
+                alt={style.name}
               />
             </span>
           </td>,
@@ -64,7 +64,7 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
 StyleSelector.propTypes = {
   currentStyle: PropTypes.instanceOf(Object).isRequired,
   styles: PropTypes.instanceOf(Object).isRequired,
-  changeStyle: PropTypes.instanceOf(Function).isRequired,
+  changeStyle: PropTypes.func.isRequired,
 };
 
 export default StyleSelector;

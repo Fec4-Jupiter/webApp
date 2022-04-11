@@ -100,7 +100,7 @@ class RatingsReviews extends React.Component {
       product, reviews, metadata, total, filters,
     } = this.state;
     return (
-      <div className="review-container">
+      <div className="review-container" id="RatingsReviews">
         <div className="t"><h1>Ratings & Reviews</h1></div>
         <ReviewList
           product={product}
@@ -128,5 +128,7 @@ class RatingsReviews extends React.Component {
 RatingsReviews.propTypes = {
   product: PropTypes.instanceOf(Object).isRequired,
 };
+
+RatingsReviews.displayName = 'RatingsReviews';
 
 export default RatingsReviews;
