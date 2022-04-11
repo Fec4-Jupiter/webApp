@@ -19,26 +19,62 @@ class QuestionsList extends React.Component {
 
     this.state = {
       showAddQuestion: false,
-      showMoreAnsweredQuestions: false,
+      showAllQuestions: false,
       questions: this.props.questions,
+      sortedQuestions: [],
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
+    this.createQuestionsList = this.createQuestionsList.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
+    this.showMoreQuestions = this.showMoreQuestions.bind(this);
+    this.showFewerQuestions = this.showFewerQuestions.bind(this);
   }
 
   componentDidMount() {
-    // console.log('id in mount', this.props);
     this.updateQuestions(this.props.product.id);
+    // this.createQuestionsList();
   }
 
   showAddQuestionForm = () => {
     this.setState({ showAddQuestion: true });
+    this.createQuestionsList();
   };
 
   hideAddQuestionForm = () => {
     this.setState({ showAddQuestion: false });
   };
+
+  showMoreQuestions() {
+    this.setState({ showAllQuestions: true });
+    this.createQuestionsList();
+  }
+
+  showFewerQuestions() {
+    this.setState({ showAllQuestions: false });
+    this.createQuestionsList();
+  }
+
+  createQuestionsList() {
+    const { questions } = this.props;
+    console.log(questions);
+    // select questions with answers and sort by helpfulness
+    const answered = [];
+    questions.map((question) => {
+      if (Object.keys(question.answers).length !== 0) {
+        answered.push(question);
+      }
+    });
+    answered.sort((a, b) => a.helpfulness - b.helpfulness);
+
+    if (this.state.showAllQuestions === false) {
+      const shortAnswered = answered.slice(0, 2);
+      this.setState({ sortedQuestions: shortAnswered });
+      return;
+    }
+    console.log('answered ar', answered);
+    this.setState({ sortedQuestions: answered });
+  }
 
   updateQuestions(id) {
     // console.log('get from questionslist, prod id', id);
@@ -49,11 +85,13 @@ class QuestionsList extends React.Component {
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
-          showMoreAnsweredQuestions: false,
+          showAllQuestions: false,
           questions: values.data.results,
+          sortedQuestions: [],
         };
         // console.log(newQuestions);
         this.setState(newQuestions);
+        this.createQuestionsList();
       })
       .catch((err) => {
         throw err;
@@ -64,7 +102,9 @@ class QuestionsList extends React.Component {
     return (
       <div className="questionslistgrid">
         <div className="questionviewcontainer">
-          {this.state.questions.map((question) => (
+          {/* default: show 2 questions */}
+          {/* show all questions */}
+          {this.state.sortedQuestions.map((question) => (
             <div key={`qlist ${question.question_id}`}>
               <QuestionView
                 product={this.props.product}
@@ -75,7 +115,11 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          <button className="qabutton">MORE ANSWERED QUESTIONS </button>
+          {this.state.showAllQuestions === false
+          && <button className="qabutton" type="button" onClick={this.showMoreQuestions}> SHOW MORE QUESTIONS </button>}
+          {this.state.showAllQuestions === true
+            && <button className="qabutton" type="button" onClick={this.showFewerQuestions}> SHOW FEWER QUESTIONS </button>}
+
           <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
