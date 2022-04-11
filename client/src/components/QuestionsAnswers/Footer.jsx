@@ -60,14 +60,14 @@ class Footer extends React.Component {
   }
 
   render() {
-    return ( // 2 rows
+    return (
       <div>
         {this.props.answer[1].photos.length !== 0
           && (
           <div className="footerrow-1">
             {this.props.answer[1].photos.map((photoURL) => (
               <img
-                src={photoURL}
+                src={photoURL || 'https://acttochange.org/wp-content/plugins/ninja-forms/assets/img/no-image-available-icon-6.jpg'}
                 key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
                 alt="uploaded by user"
                 className="QAthumb"

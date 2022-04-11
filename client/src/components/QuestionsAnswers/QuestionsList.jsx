@@ -19,17 +19,21 @@ class QuestionsList extends React.Component {
 
     this.state = {
       showAddQuestion: false,
-      showMoreAnsweredQuestions: false,
+      showAll: this.props.showAllQuestions,
       questions: this.props.questions,
+      sortedQuestions: [],
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
+    this.createQuestionsList = this.createQuestionsList.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
+    this.toggleMoreQuestions = this.toggleMoreQuestions.bind(this);
   }
 
   componentDidMount() {
-    // console.log('id in mount', this.props);
     this.updateQuestions(this.props.product.id);
+    // console.log('calling create short');
+    this.createQuestionsList('short');
   }
 
   showAddQuestionForm = () => {
@@ -40,6 +44,43 @@ class QuestionsList extends React.Component {
     this.setState({ showAddQuestion: false });
   };
 
+  toggleMoreQuestions() {
+    const { showAll } = this.state;
+    this.setState({ showAll: !showAll }, () => {
+      if (this.state.showAll === true) {
+        // console.log('if > show All is true.. show all:', this.state.showAll);
+        this.createQuestionsList('long');
+      } else {
+        // console.log('if > show all is false');
+        this.createQuestionsList('short');
+      }
+    });
+  }
+
+  createQuestionsList(len) {
+    // console.log('len', len);
+    const { questions } = this.state;
+    const answered = [];
+    questions.map((question) => {
+      if (Object.keys(question.answers).length !== 0) {
+        answered.push(question);
+      }
+    });
+    answered.sort((a, b) => a.helpfulness - b.helpfulness);
+
+    if (len === 'short') {
+      const shortAnswered = answered.slice(0, 2);
+      // console.log('SHORT ARRAY', shortAnswered);
+      return this.setState({ sortedQuestions: shortAnswered }, () => {
+        this.render();
+      });
+    }
+    // console.log('LONG ARRAY', answered);
+    return this.setState({ sortedQuestions: answered }, () => {
+      this.render();
+    });
+  }
+
   updateQuestions(id) {
     // console.log('get from questionslist, prod id', id);
     let newQuestions = {};
@@ -49,11 +90,13 @@ class QuestionsList extends React.Component {
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
-          showMoreAnsweredQuestions: false,
+          showAll: false,
           questions: values.data.results,
+          sortedQuestions: [],
         };
         // console.log(newQuestions);
         this.setState(newQuestions);
+        this.createQuestionsList('short');
       })
       .catch((err) => {
         throw err;
@@ -64,7 +107,9 @@ class QuestionsList extends React.Component {
     return (
       <div className="questionslistgrid">
         <div className="questionviewcontainer">
-          {this.state.questions.map((question) => (
+          {/* default: show 2 questions */}
+          {/* show all questions */}
+          {this.state.sortedQuestions.map((question) => (
             <div key={`qlist ${question.question_id}`}>
               <QuestionView
                 product={this.props.product}
@@ -75,7 +120,17 @@ class QuestionsList extends React.Component {
           ))}
         </div>
         <div className="questionslistfooter">
-          <button className="qabutton">MORE ANSWERED QUESTIONS </button>
+
+          <button
+            className="qabutton"
+            type="button"
+            onClick={this.toggleMoreQuestions}
+          >
+            {' '}
+            {this.state.showAll ? 'SHOW FEWER QUESTIONS' : 'SHOW MORE QUESTIONS'}
+            {' '}
+
+          </button>
           <button className="qabutton" type="button" onClick={this.showAddQuestionForm}>ADD A QUESTION </button>
           <div>
             <AddQuestion
@@ -96,6 +151,7 @@ class QuestionsList extends React.Component {
 QuestionsList.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
+  showAllQuestions: PropTypes.bool,
 };
 
 QuestionsList.displayName = 'QuestionsList';
