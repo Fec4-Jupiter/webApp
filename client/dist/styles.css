@@ -319,8 +319,12 @@ main {
 }
 .questionsandanswers-row3 {
   overflow: scroll;
-  max-height: 600px;;
+  max-height: 600px;
 }
+/* .short {
+  background-color: yellow;;
+} */
+
 .qatitle {
   font-weight: 300;
   font-size:1.5em;

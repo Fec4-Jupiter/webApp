@@ -19,7 +19,7 @@ class QuestionsList extends React.Component {
 
     this.state = {
       showAddQuestion: false,
-      showAll: false,
+      showAll: this.props.showAllQuestions,
       questions: this.props.questions,
       sortedQuestions: [],
     };
@@ -32,7 +32,7 @@ class QuestionsList extends React.Component {
 
   componentDidMount() {
     this.updateQuestions(this.props.product.id);
-    console.log('calling create short');
+    // console.log('calling create short');
     this.createQuestionsList('short');
   }
 
@@ -48,17 +48,17 @@ class QuestionsList extends React.Component {
     const { showAll } = this.state;
     this.setState({ showAll: !showAll }, () => {
       if (this.state.showAll === true) {
-        console.log('if > show All is true.. show all:', this.state.showAll);
+        // console.log('if > show All is true.. show all:', this.state.showAll);
         this.createQuestionsList('long');
       } else {
-        console.log('if > show all is false');
+        // console.log('if > show all is false');
         this.createQuestionsList('short');
       }
     });
   }
 
   createQuestionsList(len) {
-    console.log('len', len);
+    // console.log('len', len);
     const { questions } = this.state;
     const answered = [];
     questions.map((question) => {
@@ -70,12 +70,12 @@ class QuestionsList extends React.Component {
 
     if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
-      console.log('SHORT ARRAY', shortAnswered);
+      // console.log('SHORT ARRAY', shortAnswered);
       return this.setState({ sortedQuestions: shortAnswered }, () => {
         this.render();
       });
     }
-    console.log('LONG ARRAY', answered);
+    // console.log('LONG ARRAY', answered);
     return this.setState({ sortedQuestions: answered }, () => {
       this.render();
     });
@@ -151,6 +151,7 @@ class QuestionsList extends React.Component {
 QuestionsList.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
+  showAllQuestions: PropTypes.bool,
 };
 
 QuestionsList.displayName = 'QuestionsList';

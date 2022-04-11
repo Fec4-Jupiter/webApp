@@ -11,33 +11,43 @@ import PropTypes from 'prop-types';
 import QuestionsList from './QuestionsAnswers/QuestionsList.jsx';
 import Search from './QuestionsAnswers/Search.jsx';
 
-function QuestionsAnswers(props) {
-  return (
-    <div className="qacontainer">
-      <div className="questionsandanswers-row1">
-        <span className="qatitle">
-          Questions & Answers
-          <span className="forTest">
-            {props.product.id}
-            {' '}
-          </span>
-        </span>
-      </div>
-      <div className="questionsandanswers-row2">
-        <Search
-          product={props.product}
-          questions={props.questions}
-        />
+class QuestionsAnswers extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAllQuestions: false,
+    };
+  }
 
+  render() {
+    return (
+      <div className="qacontainer">
+        <div className="questionsandanswers-row1">
+          <span className="qatitle">
+            Questions & Answers
+            <span className="forTest">
+              {this.props.product.id}
+              {' '}
+            </span>
+          </span>
+        </div>
+        <div className="questionsandanswers-row2">
+          <Search
+            product={this.props.product}
+            questions={this.props.questions}
+          />
+
+        </div>
+        <div className={`questionsandanswers-row3 ${this.state.showAllQuestions ? '' : 'short'}`}>
+          <QuestionsList
+            product={this.props.product}
+            questions={this.props.questions}
+            showAllQuestions={this.state.showAllQuestions}
+          />
+        </div>
       </div>
-      <div className="questionsandanswers-row3">
-        <QuestionsList
-          product={props.product}
-          questions={props.questions}
-        />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 QuestionsAnswers.propTypes = {
