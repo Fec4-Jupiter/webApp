@@ -26,7 +26,6 @@ class QuestionView extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.updateQuestions(this.props.product.id);
     this.createAnswersList('short');
   }
 

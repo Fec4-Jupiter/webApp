@@ -32,11 +32,10 @@ class Footer extends React.Component {
       return;
     }
     const id = parseInt(this.props.answer[0], 10);
-    // console.log('vote help answer id', typeof parseInt(this.props.answer[0], 10));
     // PUT /qa/answers/:answer_id/helpful
     axios.put(`/qa/answers/${id}/helpful`)
       .then(() => {
-        this.state.voted = true;
+        this.setState({ voted: true });
         // refresh
         this.props.updateQuestions(this.props.product.id, 'long');
       })
@@ -52,7 +51,6 @@ class Footer extends React.Component {
       .then(() => {
         // refresh
         this.props.updateQuestions(this.props.product.id, 'long');
-        this.forceUpdate();
       })
       .catch((err) => {
         throw err;

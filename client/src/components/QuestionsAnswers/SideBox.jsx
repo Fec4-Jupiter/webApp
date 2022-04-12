@@ -40,9 +40,10 @@ class SideBox extends React.Component {
     // PUT /qa/questions/:question_id/helpful
     axios.put(`/qa/questions/${id}/helpful`)
       .then(() => {
-        this.state.voted = true;
+        this.setState({ voted: true }, () => {
+          this.props.updateQuestions(this.props.product.id);
+        });
         // refresh
-        this.props.updateQuestions(this.props.product.id);
       })
       .catch((err) => {
         throw err;
@@ -56,8 +57,7 @@ class SideBox extends React.Component {
     axios.put(`/qa/questions/${id}/report`)
       .then(() => {
         // refresh
-        this.props.updateQuestions(this.props.product.id)
-          .then(() => { this.render(); });
+        this.props.updateQuestions(this.props.product.id);
       })
       .catch((err) => {
         throw err;

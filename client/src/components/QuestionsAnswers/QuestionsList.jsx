@@ -68,30 +68,25 @@ class QuestionsList extends React.Component {
 
     if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
-      return this.setState({ sortedQuestions: shortAnswered }, () => {
-        this.render();
-      });
+      this.setState({ sortedQuestions: shortAnswered });
+      return;
     }
-    return this.setState({ sortedQuestions: answered }, () => {
-      this.render();
-    });
+
+    this.setState({ sortedQuestions: answered });
   }
 
   updateQuestions(id, len) {
     console.log('update Questions called');
-    let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
-    // console.log('url', url);
     axios.get(url)
       .then((values) => {
-        newQuestions = {
+        console.log('data from updQ get', values);
+        this.setState({
           showAddQuestion: false,
           questions: values.data.results,
-        };
-        // console.log('newquestions after GET ===>', newQuestions);
-        this.setState(newQuestions);
-        this.createQuestionsList(len);
-        this.forceUpdate();
+        }, () => {
+          this.createQuestionsList(len);
+        });
       })
       .catch((err) => {
         throw err;
@@ -122,7 +117,7 @@ class QuestionsList extends React.Component {
             onClick={this.toggleMoreQuestions}
           >
             {' '}
-            {this.state.showAll ? 'SHOW FEWER QUESTIONS' : 'SHOW MORE QUESTIONS'}
+            {this.state.showAll ? 'COLLAPSE QUESTIONS' : 'SHOW MORE QUESTIONS'}
             {' '}
 
           </button>
