@@ -120,6 +120,10 @@ describe('Add to Cart test suite', () => {
     expect(screen.getByText('OUT OF STOCK')).not.toBeNull();
     expect(screen.queryByRole('button')).toBeNull();
   });
+
+  it('Should open the size dropdown if the Add to Cart button is clicked with no style selected', () => {
+
+  });
 });
 
 describe('Image Gallery test suite', () => {
