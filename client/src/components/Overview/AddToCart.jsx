@@ -118,7 +118,7 @@ class AddToCart extends React.Component {
       }
       list = <Select key={currentSize || 'no size'} className="quantity-select" options={quantities} isSearchable={false} defaultValue={{ value: 1, label: 1 }} onChange={this.changeQuantity} aria-label="quantity" />;
     } else {
-      list = <Select key={currentSize || 'no size'} className="quantity-select" placeholder="-" aria-label="quantity" />;
+      list = <Select key={currentSize || 'no size'} isDisabled className="quantity-select" placeholder="-" aria-label="quantity" />;
     }
 
     return list;

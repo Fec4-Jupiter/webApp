@@ -76,13 +76,14 @@ class Overview extends React.Component {
         <StyleSelector currentStyle={currentStyle} styles={styles} changeStyle={this.updateStyle} />
         <AddToCart currentStyle={currentStyle} key={currentStyle.style_id * 99} />
         <br />
-        <div className="social-buttons right-column">
-          <b>Share on Socials</b>
+        <div className="social-buttons-contianer right-column">
+          <b className="social-buttons-title">Share on Socials</b>
           <div className="flex-break" />
-          <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:1128</div>}"><img src={facebooklogo} className="logo-button" alt="facebook" /></a>
-          <a href="https://twitter.com/intent/tweet?url=http://127.0.0.1:1128</div>}&text="><img src={twitterlogo} className="logo-button" alt="twitter" /></a>
-          <a href="https://pinterest.com/pin/create/button/?url=http://127.0.0.1:1128</div>}&media=&description="><img src={pinterestlogo} className="logo-button" alt="pinterest" /></a>
-          <br />
+          <div className="social-buttons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:1128</div>}"><img src={facebooklogo} className="logo-button" alt="facebook" /></a>
+            <a href="https://twitter.com/intent/tweet?url=http://127.0.0.1:1128</div>}&text="><img src={twitterlogo} className="logo-button" alt="twitter" /></a>
+            <a href="https://pinterest.com/pin/create/button/?url=http://127.0.0.1:1128</div>}&media=&description="><img src={pinterestlogo} className="logo-button" alt="pinterest" /></a>
+          </div>
         </div>
         <div className="product-description">
           <span className="slogan">

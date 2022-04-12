@@ -109,9 +109,7 @@ describe('Add to Cart test suite', () => {
     document.body.appendChild(container);
 
     render(<AddToCart currentStyle={defaultStyle} />, container);
-    // Should render two dropdown boxes
-    expect(screen.getAllByRole('combobox').length).toBe(2);
-    // Select a size option
+    expect(screen.getAllByRole('combobox').length).toBe(1);
   });
 
   it('Should show OUT OF STOCK and hide Add to Cart button for a style with no stock', () => {
