@@ -109,9 +109,7 @@ describe('Add to Cart test suite', () => {
     document.body.appendChild(container);
 
     render(<AddToCart currentStyle={defaultStyle} />, container);
-    // Should render two dropdown boxes
-    expect(screen.getAllByRole('combobox').length).toBe(2);
-    // Select a size option
+    expect(screen.getAllByRole('combobox').length).toBe(1);
   });
 
   it('Should show OUT OF STOCK and hide Add to Cart button for a style with no stock', () => {
@@ -119,10 +117,6 @@ describe('Add to Cart test suite', () => {
     render(<AddToCart currentStyle={blankStyle} />);
     expect(screen.getByText('OUT OF STOCK')).not.toBeNull();
     expect(screen.queryByRole('button')).toBeNull();
-  });
-
-  it('Should open the size dropdown if the Add to Cart button is clicked with no style selected', () => {
-
   });
 });
 
