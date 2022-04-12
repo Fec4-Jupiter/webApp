@@ -36,7 +36,7 @@ class SideBox extends React.Component {
       return;
     }
     const { id } = this.props.question;
-    // console.log('question id', question_id);
+    console.log('question id', id);
     // PUT /qa/questions/:question_id/helpful
     axios.put(`/qa/questions/${id}/helpful`)
       .then(() => {

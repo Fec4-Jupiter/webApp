@@ -32,7 +32,6 @@ class QuestionsList extends React.Component {
 
   componentDidMount() {
     this.updateQuestions(this.props.product.id);
-    // console.log('calling create short');
     this.createQuestionsList('short');
   }
 
@@ -90,13 +89,14 @@ class QuestionsList extends React.Component {
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
-          showAll: false,
+          // showAll: false,
           questions: values.data.results,
-          sortedQuestions: [],
+          // sortedQuestions: [],
         };
         // console.log(newQuestions);
         this.setState(newQuestions);
-        this.createQuestionsList('short');
+        this.render();
+        // this.createQuestionsList('long');
       })
       .catch((err) => {
         throw err;
