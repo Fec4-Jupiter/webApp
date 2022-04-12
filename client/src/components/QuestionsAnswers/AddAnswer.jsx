@@ -54,7 +54,8 @@ class AddAnswer extends React.Component {
     axios.post(`/qa/questions/${question_id}/answers`, postBody)
       .then((res) => {
         // console.log('res from post', res);
-        this.props.updateQuestions(this.props.product.id);
+        this.props.updateQuestions(this.props.product.id)
+          .then(() => { this.render(); });
       })
       .catch((err) => {
         throw err;
@@ -72,16 +73,14 @@ class AddAnswer extends React.Component {
   handleUploadPhotos(e) {
     // const filepath = e.target.value; //gets localfile and causes browser err
     // const catURL = [];
-    // const filepath = 'https://cataas.com/cat'; // cat as a service - pics for devs
-    const filepath = 'https://thiscatdoesnotexist.com/'; // another version
+    // online cat pics for devs
+    const filepath = 'https://thiscatdoesnotexist.com/';
     const prevstate = this.state.photos;
     if (prevstate.length === 5) {
-      // console.log('max limit reached', prevstate.length);
       return;
     }
     prevstate.push(filepath);
     this.setState({ photos: prevstate });
-    // console.log('state after up photos', this.state.photos, 'len: ', this.state.photos.length);
   }
 
   showUploadForm = () => {

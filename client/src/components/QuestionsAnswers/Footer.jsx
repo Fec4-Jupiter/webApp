@@ -39,7 +39,8 @@ class Footer extends React.Component {
       .then(() => {
         this.state.voted = true;
         // refresh
-        this.props.updateQuestions(this.props.product.id);
+        this.props.updateQuestions(this.props.product.id)
+          .then(() => { this.render(); });
       })
       .catch((err) => {
         throw err;
@@ -64,16 +65,16 @@ class Footer extends React.Component {
       <div>
         {this.props.answer[1].photos.length !== 0
           && (
-          <div className="footerrow-1">
-            {this.props.answer[1].photos.map((photoURL) => (
-              <img
-                src={photoURL || 'https://acttochange.org/wp-content/plugins/ninja-forms/assets/img/no-image-available-icon-6.jpg'}
-                key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
-                alt="uploaded by user"
-                className="QAthumb"
-              />
-            ))}
-          </div>
+            <div className="footerrow-1">
+              {this.props.answer[1].photos.map((photoURL) => (
+                <img
+                  src={photoURL || 'https://acttochange.org/wp-content/plugins/ninja-forms/assets/img/no-image-available-icon-6.jpg'}
+                  key={`photoURL ${this.props.answer[1].id} ${this.props.answer[1].date} ${Math.random() * 1000}`}
+                  alt="uploaded by user"
+                  className="QAthumb"
+                />
+              ))}
+            </div>
           )}
         <div className="footerrow-2">
           {/* if answerer name === 'Seller', show in bold */}

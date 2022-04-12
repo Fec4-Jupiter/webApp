@@ -57,7 +57,6 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList(len) {
-    // console.log('len', len);
     const { questions } = this.state;
     const answered = [];
     questions.map((question) => {
@@ -69,19 +68,17 @@ class QuestionsList extends React.Component {
 
     if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
-      // console.log('SHORT ARRAY', shortAnswered);
       return this.setState({ sortedQuestions: shortAnswered }, () => {
         this.render();
       });
     }
-    // console.log('LONG ARRAY', answered);
     return this.setState({ sortedQuestions: answered }, () => {
       this.render();
     });
   }
 
   updateQuestions(id) {
-    // console.log('get from questionslist, prod id', id);
+    // console.log('get from questionslist, prod id ===>', id);
     let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
     // console.log('url', url);
@@ -89,14 +86,12 @@ class QuestionsList extends React.Component {
       .then((values) => {
         newQuestions = {
           showAddQuestion: false,
-          // showAll: false,
           questions: values.data.results,
-          // sortedQuestions: [],
         };
-        // console.log(newQuestions);
+        console.log('newquestions after GET ===>', newQuestions);
         this.setState(newQuestions);
+        this.createQuestionsList('short');
         this.render();
-        // this.createQuestionsList('long');
       })
       .catch((err) => {
         throw err;

@@ -51,7 +51,8 @@ class AddQuestion extends React.Component {
     axios.post('/qa/questions', postBody)
       .then((res) => {
         console.log(res);
-        this.props.updateQuestions(this.state.product_id);
+        this.props.updateQuestions(this.state.product_id)
+          .then(() => { this.render(); });
       })
       .catch((err) => {
         throw err;

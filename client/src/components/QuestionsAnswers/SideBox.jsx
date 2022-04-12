@@ -35,7 +35,7 @@ class SideBox extends React.Component {
     if (this.state.voted) {
       return;
     }
-    const { id } = this.props.question;
+    const id = this.props.question.question_id;
     console.log('question id', id);
     // PUT /qa/questions/:question_id/helpful
     axios.put(`/qa/questions/${id}/helpful`)
@@ -55,8 +55,9 @@ class SideBox extends React.Component {
     // PUT /qa/questions/:question_id/report
     axios.put(`/qa/questions/${id}/report`)
       .then(() => {
-      // refresh
-        this.props.updateQuestions(this.props.product.id);
+        // refresh
+        this.props.updateQuestions(this.props.product.id)
+          .then(() => { this.render(); });
       })
       .catch((err) => {
         throw err;

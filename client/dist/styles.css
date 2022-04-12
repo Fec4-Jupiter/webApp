@@ -319,7 +319,7 @@ main {
 }
 .questionsandanswers-row3 {
   overflow: scroll;
-  max-height: 600px;
+  max-height: 800px;
 }
 /* .short {
   background-color: yellow;;
