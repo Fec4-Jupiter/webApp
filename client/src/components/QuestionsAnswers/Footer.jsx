@@ -16,7 +16,6 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSeller: false,
       showPhotos: false,
       voted: false,
     };
@@ -25,7 +24,7 @@ class Footer extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props)
+    // this.props.updateQuestions(this.props.product.id, 'short');
   }
 
   voteHelpfulness() {
@@ -39,8 +38,7 @@ class Footer extends React.Component {
       .then(() => {
         this.state.voted = true;
         // refresh
-        this.props.updateQuestions(this.props.product.id)
-          .then(() => { this.render(); });
+        this.props.updateQuestions(this.props.product.id, 'long');
       })
       .catch((err) => {
         throw err;
@@ -53,7 +51,8 @@ class Footer extends React.Component {
     axios.put(`/qa/answers/${id}/report`)
       .then(() => {
         // refresh
-        this.props.updateQuestions(this.props.product.id);
+        this.props.updateQuestions(this.props.product.id, 'long');
+        this.forceUpdate();
       })
       .catch((err) => {
         throw err;
@@ -78,7 +77,8 @@ class Footer extends React.Component {
           )}
         <div className="footerrow-2">
           {/* if answerer name === 'Seller', show in bold */}
-          <span>{`by ${this.props.answer[1].answerer_name}`}</span>
+          by
+          <span className={this.props.answer[1].answerer_name.toLowerCase() === 'seller' ? 'seller' : ''}>{` ${this.props.answer[1].answerer_name}`}</span>
           <span>{moment(this.props.answer[1].date).format('MMMM Do, YYYY')}</span>
           <span className="footerseparator">|</span>
           <span className="answerhelpfulness">

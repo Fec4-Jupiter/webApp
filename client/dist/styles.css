@@ -400,6 +400,7 @@ main {
 .loadmoreanswers{
   font-weight: 600;
   font-size: 0.8em;
+
 }
 /* addQuestion and addAnswer modal windows */
 .modal {
@@ -522,12 +523,22 @@ main {
 .addanswer {
   padding-left: 5px;
 }
-
 .questionhelpfulness,
 .answerhelpfulness,
 .answerhelp_yes,
 .questionhelp_yes {
   font-weight: 400;
+}
+.questionhelp_yes:hover,
+.answerhelp_yes:hover,
+.reportQuestion:hover,
+.reportAnswer:hover {
+  transform: scale(2);
+  font-weight: 600;
+  background-color: rgb(193, 244, 247);;
+}
+.seller {
+  font-weight: 600;
 }
 .formbuttonaddanswer {
   width: 300px;

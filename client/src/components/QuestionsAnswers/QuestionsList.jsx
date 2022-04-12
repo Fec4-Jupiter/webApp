@@ -31,8 +31,8 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
-    this.updateQuestions(this.props.product.id);
-    this.createQuestionsList('short');
+    this.updateQuestions(this.props.product.id, 'short');
+    // this.createQuestionsList('short');
   }
 
   showAddQuestionForm = () => {
@@ -77,8 +77,8 @@ class QuestionsList extends React.Component {
     });
   }
 
-  updateQuestions(id) {
-    // console.log('get from questionslist, prod id ===>', id);
+  updateQuestions(id, len) {
+    console.log('update Questions called');
     let newQuestions = {};
     const url = `/qa/questions?product_id=${id}&count=500`;
     // console.log('url', url);
@@ -88,10 +88,10 @@ class QuestionsList extends React.Component {
           showAddQuestion: false,
           questions: values.data.results,
         };
-        console.log('newquestions after GET ===>', newQuestions);
+        // console.log('newquestions after GET ===>', newQuestions);
         this.setState(newQuestions);
-        this.createQuestionsList('short');
-        this.render();
+        this.createQuestionsList(len);
+        this.forceUpdate();
       })
       .catch((err) => {
         throw err;

@@ -33,6 +33,10 @@ class AddAnswer extends React.Component {
     this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
   }
 
+  componentDidMount() {
+    // this.props.updateQuestions(this.props.product.id, 'short');
+  }
+
   handleInputChange(event) {
     const target = event.target;
     this.setState({
@@ -54,8 +58,8 @@ class AddAnswer extends React.Component {
     axios.post(`/qa/questions/${question_id}/answers`, postBody)
       .then((res) => {
         // console.log('res from post', res);
-        this.props.updateQuestions(this.props.product.id)
-          .then(() => { this.render(); });
+        this.props.updateQuestions(this.props.product.id, 'long');
+        // this.forceUpdate();
       })
       .catch((err) => {
         throw err;
