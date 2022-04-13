@@ -16,7 +16,7 @@
 
 .iiz__img {
   max-width: 100%;
-  height: auto;
+  height: 100vh;
   display: block;
   pointer-events: none;
   visibility: visible;
