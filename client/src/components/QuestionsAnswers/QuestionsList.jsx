@@ -53,7 +53,7 @@ class QuestionsList extends React.Component {
 
   updateSearch() {
     this.setState({ searchStr: this.props.searchStr }, () => {
-      console.log('state in Qlist updated to: ', this.state.searchStr);
+      // console.log('state in Qlist updated to: ', this.state.searchStr);
     });
     this.createQuestionsList('long');
   }
@@ -81,39 +81,35 @@ class QuestionsList extends React.Component {
       // }
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
-    // console.log('answered before filter', answered);
+
     const searchFiltered = [];
-    let longAnswered = [];
-    let shortAnswered = [];
 
-    const searchStr = this.state.searchStr;
     // if search is active, filter list
+    const searchStr = this.state.searchStr;
     if (searchStr.length > 1) {
-      console.log('search item length', searchStr.length);
       const searchItem = this.state.searchStr;
-
       answered.forEach((question) => {
         const qtext = question.question_body;
         if (qtext.includes(searchItem)) {
-          // console.log('qtext', qtext);
           searchFiltered.push(question);
         }
       });
-      longAnswered = searchFiltered;
+      this.setState({ sortedQuestions: searchFiltered });
+      return;
       // console.log('filtered list', searchFiltered);
     }
 
-    if (len === 'short' || searchStr.length === 1) {
-      shortAnswered = answered.slice(0, 2);
+    if (len === 'short') {
+      const shortAnswered = answered.slice(0, 2);
       this.setState({ sortedQuestions: shortAnswered });
       return;
     }
 
-    this.setState({ sortedQuestions: longAnswered });
+    this.setState({ sortedQuestions: answered });
   }
 
   updateQuestions(id, len) {
-    console.log('update Questions called');
+    // console.log('update Questions called');
     const url = `/qa/questions?product_id=${id}&count=500`;
     axios.get(url)
       .then((values) => {

@@ -22,6 +22,13 @@ class Footer extends React.Component {
     this.reportAnswer = this.reportAnswer.bind(this);
   }
 
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.question !== prevState.question) {
+  //     this.refresh();
+  //   }
+  //   return null;
+  // }
+
   voteHelpfulness() {
     if (this.state.voted) {
       return;
