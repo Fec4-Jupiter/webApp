@@ -16,7 +16,15 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       showAllQuestions: false,
+      searchStr: '',
     };
+    this.search = this.search.bind(this);
+  }
+
+  search(item) {
+    this.setState({ searchStr: item }, () => {
+      console.log('search item in Q&A top comp:', item);
+    });
   }
 
   render() {
@@ -35,6 +43,7 @@ class QuestionsAnswers extends React.Component {
           <Search
             product={this.props.product}
             questions={this.props.questions}
+            search={this.search}
           />
 
         </div>
@@ -43,6 +52,7 @@ class QuestionsAnswers extends React.Component {
             product={this.props.product}
             questions={this.props.questions}
             showAllQuestions={this.state.showAllQuestions}
+            searchStr={this.state.searchStr}
           />
         </div>
       </div>

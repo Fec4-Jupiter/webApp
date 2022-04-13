@@ -23,17 +23,25 @@ class QuestionsList extends React.Component {
       showAll: this.props.showAllQuestions,
       questions: this.props.questions,
       sortedQuestions: [],
+      searchStr: '',
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
     this.createQuestionsList = this.createQuestionsList.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
     this.toggleMoreQuestions = this.toggleMoreQuestions.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
     this.updateQuestions(this.props.product.id, 'short');
-    // this.createQuestionsList('short');
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.searchStr !== this.props.searchStr) {
+      console.log('search in QL', this.props.searchStr);
+      this.updateSearch();
+    }
   }
 
   showAddQuestionForm = () => {
@@ -43,6 +51,12 @@ class QuestionsList extends React.Component {
   hideAddQuestionForm = () => {
     this.setState({ showAddQuestion: false });
   };
+
+  updateSearch() {
+    this.setState({ searchStr: this.props.searchStr }, () => {
+      console.log('state in Qlist updated to: ', this.state.searchStr);
+    });
+  }
 
   toggleMoreQuestions() {
     const { showAll } = this.state;
@@ -58,6 +72,9 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList(len) {
+    if (this.props.searchStr.length > 2) {
+      console.log('search', this.props.searchStr);
+    }
     const questions = this.state.questions;
     const answered = [];
     // deletes non-answered questions
@@ -82,7 +99,7 @@ class QuestionsList extends React.Component {
     const url = `/qa/questions?product_id=${id}&count=500`;
     axios.get(url)
       .then((values) => {
-        console.log('data from updQ get', values);
+        // console.log('data from updQ get', values);
         this.setState({
           questions: values.data.results,
         }, () => {
@@ -143,6 +160,7 @@ QuestionsList.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
   showAllQuestions: PropTypes.bool,
+  searchStr: PropTypes.string,
 };
 
 QuestionsList.displayName = 'QuestionsList';

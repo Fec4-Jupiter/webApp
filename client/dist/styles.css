@@ -428,6 +428,9 @@ main {
 .display-none {
   display: none;
 }
+.invisible {
+  display: none;
+}
 .addquestionform,
 .addanswerform {
   display: grid;
