@@ -9,8 +9,17 @@ import ReviewForm from './ReviewForm.jsx';
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
+    const { reviews } = this.props;
     this.state = {
+      count: 2,
     };
+  }
+
+  moreReviews(e) {
+    const { count } = this.state;
+    this.setState({
+      count: count + 2,
+    }, () => this.render());
   }
 
   renderDropDown() {
@@ -37,20 +46,30 @@ class ReviewList extends React.Component {
 
   render() {
     const {
-      product, reviews, helpful, moreReviews, total,
+      product, helpful, total,
     } = this.props;
-
+    let { reviews } = this.props;
+    const { count } = this.state;
+    reviews = reviews.slice(0, count);
     return (
       <div>
         {this.renderDropDown()}
         <div className="rl">
-          <Review reviews={reviews} helpful={helpful} />
-          <br />
+          {
+            reviews.length === 0 ? <h3>There are no reviews</h3>
+              : (
+                <div>
+                  <Review reviews={reviews} helpful={helpful} />
+                  <br />
 
-          {reviews.length >= 2 && reviews.length < total
-            ? <button type="button" onClick={(e) => moreReviews(e)}>More Reviews</button>
-            : null}
-          {' '}
+                  {reviews.length >= 2 && reviews.length < total
+                    ? <button type="button" onClick={() => this.moreReviews()}>More Reviews</button>
+                    : null}
+                  {' '}
+                </div>
+              )
+          }
+
           <ReviewForm product={product} />
         </div>
 
@@ -63,6 +82,5 @@ ReviewList.propTypes = {
   reviews: PropTypes.instanceOf(Array).isRequired,
   helpful: PropTypes.instanceOf(Function).isRequired,
   sort: PropTypes.instanceOf(Function).isRequired,
-  moreReviews: PropTypes.instanceOf(Function).isRequired,
 };
 export default ReviewList;

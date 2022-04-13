@@ -7,7 +7,9 @@ import moment from 'moment';
 class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+
+    };
   }
 
   renderReview() {
@@ -16,18 +18,8 @@ class Review extends React.Component {
       <div key={review.review_id}>
         <br />
         <span>
-          {
-            review.rating % 1 === 0
-              ? <Rating defaultValue={review.rating} readOnly />
-              : (
-                <Rating
-                  defaultValue={Math.floor(review.rating)}
-                  precision={review.rating - Math.floor(review.rating)}
-                  readOnly
-                />
-              )
-          }
-          {`\t\t${review.reviewer_name} ${moment(review.date).format('MMM Do YY')}`}
+          <Rating defaultValue={review.rating} readOnly />
+          {`${review.reviewer_name} ${moment(review.date).format('MMM Do YY')}`}
         </span>
         <h4><strong>{review.summary}</strong></h4>
         <p>{review.body}</p>
