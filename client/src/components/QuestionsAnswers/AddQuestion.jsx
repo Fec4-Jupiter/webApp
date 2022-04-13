@@ -56,7 +56,6 @@ class AddQuestion extends React.Component {
       .then((res) => {
         console.log(res);
         this.props.updateQuestions(this.state.product_id, 'long');
-        // this.forceUpdate();
       })
       .catch((err) => {
         throw err;

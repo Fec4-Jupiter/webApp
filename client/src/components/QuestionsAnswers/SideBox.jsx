@@ -12,7 +12,6 @@ import AddAnswer from './AddAnswer.jsx';
 class SideBox extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showAddAnswer: false,
       voted: false,
@@ -36,14 +35,13 @@ class SideBox extends React.Component {
       return;
     }
     const id = this.props.question.question_id;
-    console.log('question id', id);
     // PUT /qa/questions/:question_id/helpful
     axios.put(`/qa/questions/${id}/helpful`)
       .then(() => {
         this.setState({ voted: true }, () => {
-          this.props.updateQuestions(this.props.product.id);
+          this.props.updateQuestions(this.props.product.id, 'long');
         });
-        // refresh
+        this.props.refresh();
       })
       .catch((err) => {
         throw err;
@@ -56,8 +54,7 @@ class SideBox extends React.Component {
     // PUT /qa/questions/:question_id/report
     axios.put(`/qa/questions/${id}/report`)
       .then(() => {
-        // refresh
-        this.props.updateQuestions(this.props.product.id);
+        this.props.updateQuestions(this.props.product.id, 'long');
       })
       .catch((err) => {
         throw err;
@@ -99,6 +96,7 @@ SideBox.propTypes = {
   question: PropTypes.instanceOf(Object),
   product: PropTypes.instanceOf(Object),
   updateQuestions: PropTypes.instanceOf(Function),
+  refresh: PropTypes.instanceOf(Function),
 };
 
 SideBox.displayName = 'SideBox';

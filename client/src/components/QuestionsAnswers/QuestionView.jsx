@@ -20,13 +20,22 @@ class QuestionView extends React.Component {
       loadMore: false,
       question: this.props.question,
       answersList: [],
+      toggleState: false,
     };
     this.toggleLoadMoreAnswers = this.toggleLoadMoreAnswers.bind(this);
     this.createAnswersList = this.createAnswersList.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
     this.createAnswersList('short');
+  }
+
+  refresh() {
+    const prevState = this.state.toggleState;
+    this.setState({ toggleState: !prevState }, () => {
+    });
+    // this.toggleLoadMoreAnswers();
   }
 
   toggleLoadMoreAnswers() {
@@ -63,12 +72,13 @@ class QuestionView extends React.Component {
     if (len === 'short') {
       // if short,render only 2 answers; else render all
       const shortList = fullList.slice(0, 2);
-      return this.setState({ answersList: shortList }, () => {
-        this.render();
+      this.setState({ answersList: shortList }, () => {
+        // console.log('setState qView short');
       });
+      return;
     }
-    return this.setState({ answersList: fullList }, () => {
-      this.render();
+    this.setState({ answersList: fullList }, () => {
+      // console.log('setState qView long');
     });
   }
 
@@ -95,6 +105,7 @@ class QuestionView extends React.Component {
               question={this.props.question}
               product={this.props.product}
               updateQuestions={this.props.updateQuestions}
+              refresh={this.refresh}
             />
           </div>
         </div>
@@ -111,9 +122,11 @@ class QuestionView extends React.Component {
                 </div>
                 <div className="footer" key={`Footer ${answer[0]}`}>
                   <Footer
+                    question={this.props.question}
                     answer={answer}
                     product={this.props.product}
                     updateQuestions={this.props.updateQuestions}
+                    refresh={this.refresh}
                   />
                 </div>
               </div>
@@ -126,9 +139,9 @@ class QuestionView extends React.Component {
           <div className="loadmorecol-2">
             {Object.entries(this.props.question.answers).length > 2
               && (
-              <button className="loadmoreanswers" type="button" onClick={this.toggleLoadMoreAnswers}>
-                {this.state.loadMore ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}
-              </button>
+                <button className="loadmoreanswers" type="button" onClick={this.toggleLoadMoreAnswers}>
+                  {this.state.loadMore ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}
+                </button>
               )}
           </div>
           <div className="loadmorecol-3" />

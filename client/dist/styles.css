@@ -532,7 +532,8 @@ main {
 .questionhelp_yes:hover,
 .answerhelp_yes:hover,
 .reportQuestion:hover,
-.reportAnswer:hover {
+.reportAnswer:hover,
+.addanswer:hover {
   transform: scale(2);
   font-weight: 600;
   background-color: rgb(193, 244, 247);;

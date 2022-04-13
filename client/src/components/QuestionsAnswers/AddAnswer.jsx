@@ -59,19 +59,19 @@ class AddAnswer extends React.Component {
       .then((res) => {
         // console.log('res from post', res);
         this.props.updateQuestions(this.props.product.id, 'long');
-        // this.forceUpdate();
       })
       .catch((err) => {
         throw err;
       });
+
     this.resetForm();
     this.props.handleClose();
-    this.setState({
-      body: '',
-      name: '',
-      email: '',
-      photos: [],
-    });
+    // this.setState({
+    //   body: '',
+    //   name: '',
+    //   email: '',
+    //   photos: [],
+    // });
   }
 
   handleUploadPhotos(e) {

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
@@ -57,12 +58,13 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList(len) {
-    const { questions } = this.state;
+    const questions = this.state.questions;
     const answered = [];
+    // deletes non-answered questions
     questions.map((question) => {
-      if (Object.keys(question.answers).length !== 0) {
-        answered.push(question);
-      }
+      // if (Object.keys(question.answers).length !== 0) {
+      answered.push(question);
+      // }
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
 
@@ -82,7 +84,6 @@ class QuestionsList extends React.Component {
       .then((values) => {
         console.log('data from updQ get', values);
         this.setState({
-          showAddQuestion: false,
           questions: values.data.results,
         }, () => {
           this.createQuestionsList(len);
