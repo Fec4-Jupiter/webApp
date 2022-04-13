@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/require-default-props */
@@ -12,14 +14,15 @@ class Search extends React.Component {
     this.state = {
       searchStr: '',
     };
-    // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange(event) {
-    this.handleSearchInputChange(event.value);
+    const target = event.target;
     this.setState({
-      searchStr: event.target.value,
+      [target.name]: target.value,
+    }, () => {
+      this.props.search(this.state.searchStr);
     });
   }
 
@@ -28,9 +31,10 @@ class Search extends React.Component {
       <div>
         <div className="searchbar">
           <input
+            id="searchbar"
             className="searchinput"
             type="text"
-            // value={this.state.searchStr}
+            name="searchStr"
             placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
             onChange={this.handleInputChange}
           />
@@ -43,6 +47,7 @@ class Search extends React.Component {
 Search.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
+  search: PropTypes.instanceOf(Function),
 };
 
 Search.displayName = 'Search';

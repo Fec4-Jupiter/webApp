@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-prop-types */
@@ -6,80 +7,147 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useState } from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
 import Footer from './Footer.jsx';
 import SideBox from './SideBox.jsx';
 
-function QuestionView(props) {
-  const question = props.question.question_body;
-  const questionId = props.question.question_id;
-  const answersArray = Object.entries(props.question.answers);
-  // if numasnwers === 0, don't show question
-  const numOfAnswers = answersArray.length;
-  //  sorting “by [username], Month DD, YYYY”
-  //   If answerer ==='Seller, top of list
-  const listAnswers = answersArray.map((answer) => (
-    <div key={`oneanswer ${answer[0]}`}>
-      <div className="answer" key={`answer ${answer[0]}`}>
-        <span>{answer[1].body}</span>
-      </div>
-      <div className="footer" key={`Footer ${answer[0]}`}>
-        <Footer
-          answer={answer}
-          product={props.product}
-          updateQuestions={props.updateQuestions}
-        />
-      </div>
+class QuestionView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadMore: false,
+      question: this.props.question,
+      answersList: [],
+      toggleState: false,
+    };
+    this.toggleLoadMoreAnswers = this.toggleLoadMoreAnswers.bind(this);
+    this.createAnswersList = this.createAnswersList.bind(this);
+    this.refresh = this.refresh.bind(this);
+  }
 
-    </div>
-  ));
+  componentDidMount() {
+    this.createAnswersList('short');
+  }
 
-  return (
-    <div className="questionviewgrid">
-      <div className="questionrow" key={`q in view ${question.question_id}`}>
+  refresh() {
+    const prevState = this.state.toggleState;
+    this.setState({ toggleState: !prevState }, () => {
+    });
+    // this.toggleLoadMoreAnswers();
+  }
 
-        <div className="questioncol-1">
-          <div className="question-Q">
-            Q:
+  toggleLoadMoreAnswers() {
+    const { loadMore } = this.state;
+    this.setState({ loadMore: !loadMore }, () => {
+      if (this.state.loadMore === true) {
+        this.createAnswersList('long');
+      } else {
+        this.createAnswersList('short');
+      }
+    });
+  }
+
+  createAnswersList(len) {
+    const answersArray = Object.entries(this.props.question.answers);
+    const numOfAnswers = answersArray.length;
+
+    // creates sublist with only sellers
+    const sellersList = answersArray.filter((answer) => {
+      const answerer = answer[1].answerer_name.toLowerCase();
+      return answerer === 'seller';
+    });
+    // creates sorted list with remaining answers
+    const nonSellersList = answersArray.filter((answer) => {
+      const answerer = answer[1].answerer_name.toLowerCase();
+      return answerer !== 'seller';
+    });
+    // sort non sellers by helpfulness
+    const sortedAnswersList = nonSellersList.sort((a, b) => b[1].helpfulness - a[1].helpfulness);
+    // full list = sellerslist + sorted of other users
+    const fullList = sellersList.concat(sortedAnswersList);
+
+    // check flag: short or long
+    if (len === 'short') {
+      // if short,render only 2 answers; else render all
+      const shortList = fullList.slice(0, 2);
+      this.setState({ answersList: shortList }, () => {
+        // console.log('setState qView short');
+      });
+      return;
+    }
+    this.setState({ answersList: fullList }, () => {
+      // console.log('setState qView long');
+    });
+  }
+
+  render() {
+    return (
+      <div className="questionviewgrid">
+        <div className="questionrow" key={`q in view ${this.state.question.question_id}`}>
+
+          <div className="questioncol-1">
+            <div className="question-Q">
+              Q:
+            </div>
+          </div>
+
+          <div className="questioncol-2">
+            <span>{this.state.question.question_body}</span>
+          </div>
+
+          <div
+            className="questioncol-3"
+            key={`sidebox${this.state.question.question_id}`}
+          >
+            <SideBox
+              question={this.props.question}
+              product={this.props.product}
+              updateQuestions={this.props.updateQuestions}
+              refresh={this.refresh}
+            />
           </div>
         </div>
+        <div className="answerrow">
+          <div className="answer-A">
+            A:
+            {' '}
+          </div>
+          <div className="answerlist">
+            {this.state.answersList.map((answer) => (
+              <div key={`oneanswer ${answer[0]}`}>
+                <div className="answer" key={`answer ${answer[0]}`}>
+                  <span>{answer[1].body}</span>
+                </div>
+                <div className="footer" key={`Footer ${answer[0]}`}>
+                  <Footer
+                    question={this.props.question}
+                    answer={answer}
+                    product={this.props.product}
+                    updateQuestions={this.props.updateQuestions}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
 
-        <div className="questioncol-2">
-          <span>{question}</span>
-          {/* <span>{` questionID : ${questionId}`}</span> */}
-          {/* <span>{` number of answers: ${numOfAnswers}`}</span> */}
         </div>
-
-        <div
-          className="questioncol-3"
-          key={`sidebox${question.question_id}`}
-        >
-          <SideBox
-            question={props.question}
-            product={props.product}
-            updateQuestions={props.updateQuestions}
-          />
+        <div className="loadmorerow">
+          <div className="loadmorecol-1" />
+          <div className="loadmorecol-2">
+            {Object.entries(this.props.question.answers).length > 2
+              && (
+                <button className="loadmoreanswers" type="button" onClick={this.toggleLoadMoreAnswers}>
+                  {this.state.loadMore ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}
+                </button>
+              )}
+          </div>
+          <div className="loadmorecol-3" />
         </div>
       </div>
-      <div className="answerrow">
-        <div className="answer-A">
-          A:
-          {' '}
-        </div>
-        <div className="answerlist">{listAnswers}</div>
-
-      </div>
-      <div className="loadmorerow">
-        <div className="loadmorecol-1" />
-        <div className="loadmorecol-2">
-          <span className="loadmoreanswers">LOAD MORE ANSWERS</span>
-        </div>
-        <div className="loadmorecol-3" />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 QuestionView.propTypes = {

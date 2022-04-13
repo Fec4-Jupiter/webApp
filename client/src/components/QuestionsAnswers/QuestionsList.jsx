@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
@@ -22,18 +23,24 @@ class QuestionsList extends React.Component {
       showAll: this.props.showAllQuestions,
       questions: this.props.questions,
       sortedQuestions: [],
+      searchStr: '',
     };
     this.showAddQuestionForm = this.showAddQuestionForm.bind(this);
     this.hideAddQuestionForm = this.hideAddQuestionForm.bind(this);
     this.createQuestionsList = this.createQuestionsList.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
     this.toggleMoreQuestions = this.toggleMoreQuestions.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
-    this.updateQuestions(this.props.product.id);
-    // console.log('calling create short');
-    this.createQuestionsList('short');
+    this.updateQuestions(this.props.product.id, 'short');
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.searchStr !== this.props.searchStr) {
+      this.updateSearch();
+    }
   }
 
   showAddQuestionForm = () => {
@@ -43,6 +50,13 @@ class QuestionsList extends React.Component {
   hideAddQuestionForm = () => {
     this.setState({ showAddQuestion: false });
   };
+
+  updateSearch() {
+    this.setState({ searchStr: this.props.searchStr }, () => {
+      // console.log('state in Qlist updated to: ', this.state.searchStr);
+    });
+    this.createQuestionsList('long');
+  }
 
   toggleMoreQuestions() {
     const { showAll } = this.state;
@@ -58,45 +72,53 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList(len) {
-    // console.log('len', len);
-    const { questions } = this.state;
+    const questions = this.state.questions;
     const answered = [];
+    // deletes non-answered questions
     questions.map((question) => {
-      if (Object.keys(question.answers).length !== 0) {
-        answered.push(question);
-      }
+      // if (Object.keys(question.answers).length !== 0) {
+      answered.push(question);
+      // }
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
 
+    const searchFiltered = [];
+
+    // if search is active, filter list
+    const searchStr = this.state.searchStr;
+    if (searchStr.length > 1) {
+      const searchItem = this.state.searchStr;
+      answered.forEach((question) => {
+        const qtext = question.question_body;
+        if (qtext.includes(searchItem)) {
+          searchFiltered.push(question);
+        }
+      });
+      this.setState({ sortedQuestions: searchFiltered });
+      return;
+      // console.log('filtered list', searchFiltered);
+    }
+
     if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
-      // console.log('SHORT ARRAY', shortAnswered);
-      return this.setState({ sortedQuestions: shortAnswered }, () => {
-        this.render();
-      });
+      this.setState({ sortedQuestions: shortAnswered });
+      return;
     }
-    // console.log('LONG ARRAY', answered);
-    return this.setState({ sortedQuestions: answered }, () => {
-      this.render();
-    });
+
+    this.setState({ sortedQuestions: answered });
   }
 
-  updateQuestions(id) {
-    // console.log('get from questionslist, prod id', id);
-    let newQuestions = {};
+  updateQuestions(id, len) {
+    // console.log('update Questions called');
     const url = `/qa/questions?product_id=${id}&count=500`;
-    // console.log('url', url);
     axios.get(url)
       .then((values) => {
-        newQuestions = {
-          showAddQuestion: false,
-          showAll: false,
+        // console.log('data from updQ get', values);
+        this.setState({
           questions: values.data.results,
-          sortedQuestions: [],
-        };
-        // console.log(newQuestions);
-        this.setState(newQuestions);
-        this.createQuestionsList('short');
+        }, () => {
+          this.createQuestionsList(len);
+        });
       })
       .catch((err) => {
         throw err;
@@ -127,7 +149,7 @@ class QuestionsList extends React.Component {
             onClick={this.toggleMoreQuestions}
           >
             {' '}
-            {this.state.showAll ? 'SHOW FEWER QUESTIONS' : 'SHOW MORE QUESTIONS'}
+            {this.state.showAll ? 'COLLAPSE QUESTIONS' : 'SHOW MORE QUESTIONS'}
             {' '}
 
           </button>
@@ -152,6 +174,7 @@ QuestionsList.propTypes = {
   product: PropTypes.instanceOf(Object),
   questions: PropTypes.instanceOf(Object),
   showAllQuestions: PropTypes.bool,
+  searchStr: PropTypes.string,
 };
 
 QuestionsList.displayName = 'QuestionsList';

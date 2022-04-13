@@ -338,7 +338,7 @@ html {
 }
 .questionsandanswers-row3 {
   overflow: scroll;
-  max-height: 600px;
+  max-height: 800px;
 }
 /* .short {
   background-color: yellow;;
@@ -360,7 +360,7 @@ html {
   border-width: 1px;
   margin-right: 20px;
   padding: 20px 20px;
-  min-width: 300px;;
+  min-width: 300px;
 
 }
 /* QuestionView */
@@ -419,6 +419,7 @@ html {
 .loadmoreanswers{
   font-weight: 600;
   font-size: 0.8em;
+
 }
 /* addQuestion and addAnswer modal windows */
 .modal {
@@ -444,6 +445,9 @@ html {
   display: block;
 }
 .display-none {
+  display: none;
+}
+.invisible {
   display: none;
 }
 .addquestionform,
@@ -541,12 +545,23 @@ html {
 .addanswer {
   padding-left: 5px;
 }
-
 .questionhelpfulness,
 .answerhelpfulness,
 .answerhelp_yes,
 .questionhelp_yes {
   font-weight: 400;
+}
+.questionhelp_yes:hover,
+.answerhelp_yes:hover,
+.reportQuestion:hover,
+.reportAnswer:hover,
+.addanswer:hover {
+  transform: scale(2);
+  font-weight: 600;
+  background-color: rgb(193, 244, 247);;
+}
+.seller {
+  font-weight: 600;
 }
 .formbuttonaddanswer {
   width: 300px;
