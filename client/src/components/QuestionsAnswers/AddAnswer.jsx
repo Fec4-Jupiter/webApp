@@ -66,17 +66,10 @@ class AddAnswer extends React.Component {
 
     this.resetForm();
     this.props.handleClose();
-    // this.setState({
-    //   body: '',
-    //   name: '',
-    //   email: '',
-    //   photos: [],
-    // });
   }
 
   handleUploadPhotos(e) {
     // const filepath = e.target.value; //gets localfile and causes browser err
-    // const catURL = [];
     // online cat pics for devs
     const filepath = 'https://thiscatdoesnotexist.com/';
     const prevstate = this.state.photos;

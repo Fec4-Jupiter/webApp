@@ -39,7 +39,6 @@ class QuestionsList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.searchStr !== this.props.searchStr) {
-      console.log('search in QL', this.props.searchStr);
       this.updateSearch();
     }
   }
@@ -56,6 +55,7 @@ class QuestionsList extends React.Component {
     this.setState({ searchStr: this.props.searchStr }, () => {
       console.log('state in Qlist updated to: ', this.state.searchStr);
     });
+    this.createQuestionsList('long');
   }
 
   toggleMoreQuestions() {
@@ -72,9 +72,6 @@ class QuestionsList extends React.Component {
   }
 
   createQuestionsList(len) {
-    if (this.props.searchStr.length > 2) {
-      console.log('search', this.props.searchStr);
-    }
     const questions = this.state.questions;
     const answered = [];
     // deletes non-answered questions
@@ -84,6 +81,22 @@ class QuestionsList extends React.Component {
       // }
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
+    console.log('answered before filter', answered);
+    const searchFiltered = [];
+    // if search is active, filter list
+    if (this.state.searchStr.length > 1) {
+      // console.log('search active');
+      const searchItem = this.state.searchStr;
+
+      answered.forEach((question) => {
+        const qtext = question.question_body;
+        if (qtext.includes(searchItem)) {
+          console.log('qtext', qtext);
+          searchFiltered.push(question);
+        }
+      });
+      console.log('filtered list', searchFiltered);
+    }
 
     if (len === 'short') {
       const shortAnswered = answered.slice(0, 2);
@@ -91,7 +104,7 @@ class QuestionsList extends React.Component {
       return;
     }
 
-    this.setState({ sortedQuestions: answered });
+    this.setState({ sortedQuestions: searchFiltered });
   }
 
   updateQuestions(id, len) {
