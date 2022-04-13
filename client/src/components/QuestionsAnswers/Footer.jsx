@@ -22,13 +22,6 @@ class Footer extends React.Component {
     this.reportAnswer = this.reportAnswer.bind(this);
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.question !== prevState.question) {
-  //     this.refresh();
-  //   }
-  //   return null;
-  // }
-
   voteHelpfulness() {
     if (this.state.voted) {
       return;
@@ -40,7 +33,6 @@ class Footer extends React.Component {
         this.setState({ voted: true }, () => {
           this.props.updateQuestions(this.props.product.id, 'long');
         });
-        this.props.refresh();
       })
       .catch((err) => {
         throw err;
@@ -101,7 +93,6 @@ Footer.propTypes = {
   answer: PropTypes.instanceOf(Object),
   product: PropTypes.instanceOf(Object),
   updateQuestions: PropTypes.instanceOf(Function),
-  refresh: PropTypes.instanceOf(Function),
   question: PropTypes.instanceOf(Object),
 };
 

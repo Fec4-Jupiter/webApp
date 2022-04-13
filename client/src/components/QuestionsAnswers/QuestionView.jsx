@@ -126,7 +126,6 @@ class QuestionView extends React.Component {
                     answer={answer}
                     product={this.props.product}
                     updateQuestions={this.props.updateQuestions}
-                    refresh={this.refresh}
                   />
                 </div>
               </div>
