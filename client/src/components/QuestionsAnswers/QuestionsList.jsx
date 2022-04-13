@@ -81,30 +81,35 @@ class QuestionsList extends React.Component {
       // }
     });
     answered.sort((a, b) => a.helpfulness - b.helpfulness);
-    console.log('answered before filter', answered);
+    // console.log('answered before filter', answered);
     const searchFiltered = [];
+    let longAnswered = [];
+    let shortAnswered = [];
+
+    const searchStr = this.state.searchStr;
     // if search is active, filter list
-    if (this.state.searchStr.length > 1) {
-      // console.log('search active');
+    if (searchStr.length > 1) {
+      console.log('search item length', searchStr.length);
       const searchItem = this.state.searchStr;
 
       answered.forEach((question) => {
         const qtext = question.question_body;
         if (qtext.includes(searchItem)) {
-          console.log('qtext', qtext);
+          // console.log('qtext', qtext);
           searchFiltered.push(question);
         }
       });
-      console.log('filtered list', searchFiltered);
+      longAnswered = searchFiltered;
+      // console.log('filtered list', searchFiltered);
     }
 
-    if (len === 'short') {
-      const shortAnswered = answered.slice(0, 2);
+    if (len === 'short' || searchStr.length === 1) {
+      shortAnswered = answered.slice(0, 2);
       this.setState({ sortedQuestions: shortAnswered });
       return;
     }
 
-    this.setState({ sortedQuestions: searchFiltered });
+    this.setState({ sortedQuestions: longAnswered });
   }
 
   updateQuestions(id, len) {
