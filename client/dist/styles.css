@@ -59,13 +59,13 @@ main {
 }
 
 #app {
-  color: rgb(99, 99, 99);
-  background-color: rgb(251, 250, 249);
+  color: #373833;
+  background-color: #F7F7F7;
 }
 
 .title-banner {
-  color: rgb(251, 251, 251);
-  background-color: rgb(68, 68, 68);
+  color: #F7F7F7;
+  background-color: #373833;
   height: 5vh;
 }
 
