@@ -19,8 +19,9 @@ class Gallery extends React.Component {
     const { currentStyle, currentImage } = props;
     // If not expanded view, display these images
     const images = currentStyle.photos.map((photoObj) => {
-      const src = photoObj.url || notAvailable;
-      return { src };
+      const src = photoObj.thumbnail_url || notAvailable;
+      const thumb = photoObj.thumbnail_url || notAvailable;
+      return { src, thumb };
     });
     // If we are expanded, display these inner image zoom elements
     const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
@@ -116,9 +117,9 @@ class Gallery extends React.Component {
     } = this.state;
     const thumbs = images.map((image, index) => (
       <img
-        key={image.src}
+        key={image.thumb}
         onClick={this.thumbClick}
-        src={image.src}
+        src={image.thumb}
         alt={index}
         className={(index === currentImage) ? 'selected-image thumbnail-image' : 'thumbnail-image'}
       />

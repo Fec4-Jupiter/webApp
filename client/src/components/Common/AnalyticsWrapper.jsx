@@ -14,7 +14,6 @@ function analyticsWrapper(Component) {
       const time = `${h}:${m}:${s}`;
       const widget = Component.displayName;
       const element = e.target.className || e.target.innerHTML || e.target.name;
-
       axios.post('/interactions', { element, widget, time });
     };
 
@@ -22,7 +21,6 @@ function analyticsWrapper(Component) {
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div onClick={handleClick}>
         <Component {...props} />
-        ;
       </div>
     );
   };
