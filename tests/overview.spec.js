@@ -126,12 +126,15 @@ describe('Image Gallery test suite', () => {
     currentStyle.photos = [
       {
         url: 'https://google.com/main1',
+        thumbnail_url: 'https://google.com/main1',
       },
       {
         url: 'https://google.com/main2',
+        thumbnail_url: 'https://google.com/main2',
       },
       {
         url: 'https://google.com/main3',
+        thumbnail_url: 'https://google.com/main3',
       },
     ];
     const currentImage = 1;
@@ -147,7 +150,7 @@ describe('Image Gallery test suite', () => {
     const imageUrls = [];
     images.forEach((image) => imageUrls.push(image.src));
     currentStyle.photos.forEach((photo) => {
-      expect(imageUrls.includes(photo.url)).toBe(true);
+      expect(imageUrls.includes(photo.thumbnail_url)).toBe(true);
     });
   });
 });
