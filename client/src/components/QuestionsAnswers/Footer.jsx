@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
@@ -7,7 +8,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import axios from 'axios';
 
 class Footer extends React.Component {
@@ -20,6 +20,11 @@ class Footer extends React.Component {
     };
     this.voteHelpfulness = this.voteHelpfulness.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
+    this.formatDate = this.formatDate.bind(this);
+  }
+
+  componentDidMount() {
+    this.formatDate();
   }
 
   voteHelpfulness() {
@@ -51,6 +56,24 @@ class Footer extends React.Component {
       });
   }
 
+  formatDate() {
+    // "date": "2018-08-18T00:00:00.000Z",
+    const timeStr = this.props.answer[1].date;
+    const timeArr = timeStr.split('T');
+    const dateStr = timeArr[0];
+    const dateArr = dateStr.split('-');
+    const months = ['January', 'February', 'March', 'Apr',
+      'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'];
+    if (dateArr[1].startsWith('0')) {
+      dateArr[1] = dateArr[1][1];
+    }
+    const monthIndex = parseInt(dateArr[1], 10);
+    dateArr[1] = months[monthIndex - 1];
+    const formattedDate = `${dateArr[1]} ${dateArr[2]}, ${dateArr[0]}`;
+    return formattedDate;
+  }
+
   render() {
     return (
       <div>
@@ -71,7 +94,7 @@ class Footer extends React.Component {
           {/* if answerer name === 'Seller', show in bold */}
           by
           <span className={this.props.answer[1].answerer_name.toLowerCase() === 'seller' ? 'seller' : ''}>{` ${this.props.answer[1].answerer_name}`}</span>
-          <span>{moment(this.props.answer[1].date).format('MMMM Do, YYYY')}</span>
+          <span>{this.formatDate()}</span>
           <span className="footerseparator">|</span>
           <span className="answerhelpfulness">
             Helpful?
