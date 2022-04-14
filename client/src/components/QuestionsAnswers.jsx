@@ -5,11 +5,12 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { lazy } from 'react';
 // import ReactDOM from 'react-dom/client';
 import PropTypes from 'prop-types';
-import QuestionsList from './QuestionsAnswers/QuestionsList.jsx';
-import Search from './QuestionsAnswers/Search.jsx';
+
+const QuestionsList = lazy(() => import('./QuestionsAnswers/QuestionsList.jsx'));
+const Search = lazy(() => import('./QuestionsAnswers/Search.jsx'));
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {

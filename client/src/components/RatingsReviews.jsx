@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { lazy } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import ReviewList from './RatingsReviews/ReviewList.jsx';
-import RatingSideBar from './RatingsReviews/RatingSideBar.jsx';
-import ProductSideBar from './RatingsReviews/ProductSideBar.jsx';
+
+const ReviewList = lazy(() => import('./RatingsReviews/ReviewList.jsx'));
+const RatingSideBar = lazy(() => import('./RatingsReviews/RatingSideBar.jsx'));
+const ProductSideBar = lazy(() => import('./RatingsReviews/ProductSideBar.jsx'));
 
 class RatingsReviews extends React.Component {
   constructor(props) {
