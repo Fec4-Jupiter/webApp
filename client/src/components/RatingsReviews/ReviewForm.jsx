@@ -63,7 +63,6 @@ export default class ReviewForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log(this.state);
     const { product: { pId }, submitReview, metadata } = this.props;
     const { characteristics } = metadata;
     const {
@@ -268,7 +267,7 @@ export default class ReviewForm extends React.Component {
     return (
       <div>
         <div className="btn">
-          <Button variant="outlined" onClick={() => this.setState({ open: true })}>Write a new Review</Button>
+          <Button id="writenewreview" className="text_button" variant="outlined" onClick={() => this.setState({ open: true })}>Write a new Review</Button>
           {' '}
         </div>
 

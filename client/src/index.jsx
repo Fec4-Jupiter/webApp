@@ -5,6 +5,7 @@ import Overview from './components/Overview.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers.jsx';
 import RatingsReviews from './components/RatingsReviews.jsx';
 import analyticsWrapper from './components/Common/AnalyticsWrapper.jsx';
+import jupiterLogo from './components/Common/jupiterLogo.png';
 
 const axios = require('axios');
 
@@ -60,7 +61,8 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="title-banner">
-          <h2>Jupiter Clothing</h2>
+          <img className="title-logo" src={jupiterLogo} alt="jupiter-logo" />
+          <h2 className="page-title">Street Aesthetic</h2>
         </div>
         <div className="content">
           <WrappedOverview product={product} styles={styles} reviews={reviews} />

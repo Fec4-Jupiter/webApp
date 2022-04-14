@@ -43,7 +43,7 @@ class RatingsReviews extends React.Component {
         // console.log(data);
         // let reviews = data.results.slice(0, count);
         const reviews = this.filterSelected(data.results);
-        console.log(reviews);
+        // console.log(reviews);
         this.setState({
           reviews,
           total: reviews.length,
@@ -51,7 +51,7 @@ class RatingsReviews extends React.Component {
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           metadata: data,
         });
@@ -97,7 +97,7 @@ class RatingsReviews extends React.Component {
   }
 
   changeSort(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState({ sort: e.target.value }, () => {
       this.fetchReviews();
     });

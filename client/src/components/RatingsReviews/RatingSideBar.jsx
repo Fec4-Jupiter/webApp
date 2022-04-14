@@ -15,7 +15,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 0,
-    backgroundColor: theme.palette.mode === 'light' ? '#32CD32' : '#308fe8',
+    backgroundColor: theme.palette.mode === 'light' ? '#3FD2C7' : '#308fe8',
   },
 }));
 
@@ -85,8 +85,6 @@ export default class RatingSideBar extends React.Component {
 
   render() {
     const { avg, recRate } = this.state;
-    // console.log(Number(avg.toFixed(1)));
-    console.log(avg);
     return (
       <div className="r">
         <span style={{ display: 'flex', flexDirection: 'row' }}>

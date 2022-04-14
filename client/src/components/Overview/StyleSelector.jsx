@@ -52,11 +52,13 @@ function StyleSelector({ currentStyle, styles, changeStyle }) {
         <b>{'STYLE > '}</b>
         {currentStyle.name}
       </span>
-      <table>
-        <tbody>
-          {generateTable(styles)}
-        </tbody>
-      </table>
+      <div className="style-table">
+        <table>
+          <tbody>
+            {generateTable(styles)}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
