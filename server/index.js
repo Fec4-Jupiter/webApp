@@ -1,18 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
-const session = require('express-session');
+const compression = require('compression');
+const expressStaticGzip = require('express-static-gzip');
 
 const app = express();
-app.use(express.static(`${__dirname}/../client/dist`));
+app.use(compression());
+app.use(expressStaticGzip(`${__dirname}/../client/dist`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
-  secret: 'asdfasfasdfasdfasdfasdf',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false },
-}));
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
 
