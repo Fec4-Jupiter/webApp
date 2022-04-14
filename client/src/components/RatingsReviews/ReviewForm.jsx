@@ -186,25 +186,6 @@ export default class ReviewForm extends React.Component {
     );
   }
 
-  // fileHandler({ target }) {
-  //   const fileReader = new FileReader();
-  //   fileReader.readAsDataURL(target.files[0]);
-  //   fileReader.onload = (e) => {
-  //     // console.log(e.target.result);
-  //     const options = {
-  //       data: {
-  //         key: 'f5c9d0df5d2a2dc3df46d0b112e76443',
-  //         image: e.target.result,
-  //       },
-  //     };
-  //     axios.post('https://api.imgbb.com/1/upload', {
-  //       key: 'f5c9d0df5d2a2dc3df46d0b112e76443',
-  //       image: e.target.result,
-  //     })
-  //       .then((res) => console.log(res));
-  //   };
-  // }
-
   renderPhoto() {
     const Input = styled('input')({
       display: 'none',
