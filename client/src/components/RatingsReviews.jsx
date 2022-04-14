@@ -24,6 +24,8 @@ class RatingsReviews extends React.Component {
     this.clickHelpful = this.clickHelpful.bind(this);
     this.changeSort = this.changeSort.bind(this);
     this.clickFilters = this.clickFilters.bind(this);
+    this.submitReview = this.submitReview.bind(this);
+    this.clickReport = this.clickReport.bind(this);
   }
 
   componentDidMount() {
@@ -36,12 +38,12 @@ class RatingsReviews extends React.Component {
     const {
       product: { pId }, sort,
     } = this.state;
-    axios.get(`/reviews?product_id=${pId}&sort=${sort}`)
+    axios.get(`/reviews?product_id=${pId}&sort=${sort}&count=${1000}`)
       .then(({ data }) => {
         // console.log(data);
         // let reviews = data.results.slice(0, count);
         const reviews = this.filterSelected(data.results);
-        // console.log(reviews);
+        console.log(reviews);
         this.setState({
           reviews,
           total: reviews.length,
@@ -49,7 +51,7 @@ class RatingsReviews extends React.Component {
         return axios.get(`/reviews/meta?product_id=${pId}`);
       })
       .then(({ data }) => {
-        // console.log(data);
+        console.log(data);
         this.setState({
           metadata: data,
         });
@@ -87,11 +89,26 @@ class RatingsReviews extends React.Component {
       });
   }
 
+  clickReport(id) {
+    axios.put(`/reviews/${id}/report`)
+      .then(() => {
+        this.fetchReviews();
+      });
+  }
+
   changeSort(e) {
     console.log(e.target.value);
     this.setState({ sort: e.target.value }, () => {
       this.fetchReviews();
     });
+  }
+
+  submitReview(review) {
+    axios.post('/reviews', review)
+      .then((res) => {
+        // console.log(res);
+        this.fetchReviews();
+      });
   }
   // !------------------------- For Review List end ----------------------
 
@@ -101,13 +118,16 @@ class RatingsReviews extends React.Component {
     } = this.state;
     return (
       <div className="review-container">
-        <div className="t"><h1>Ratings & Reviews</h1></div>
+        <div className="t"><h3>Ratings & Reviews</h3></div>
         <ReviewList
           product={product}
+          metadata={metadata}
           reviews={reviews}
           total={total}
           sort={this.changeSort}
+          report={this.clickReport}
           helpful={this.clickHelpful}
+          submitReview={this.submitReview}
         />
         {Object.keys(metadata).length !== 0
           ? (
@@ -119,7 +139,7 @@ class RatingsReviews extends React.Component {
           ) : null}
         {Object.keys(metadata).length !== 0
           ? (<ProductSideBar metadata={metadata} />)
-          : null }
+          : null}
       </div>
     );
   }
