@@ -62,7 +62,7 @@ class App extends React.Component {
       <div className="app">
         <div className="title-banner">
           <img className="title-logo" src={jupiterLogo} alt="jupiter-logo" />
-          <h2 className="page-title">Jupiter Clothing</h2>
+          <h2 className="page-title">Street Aesthetic</h2>
         </div>
         <div className="content">
           <WrappedOverview product={product} styles={styles} reviews={reviews} />

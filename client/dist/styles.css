@@ -66,16 +66,26 @@ main {
 .title-banner {
   color: #F7F7F7;
   background-color: #F7F7F7;
-  /* height: 50px; */
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "logo title";
+  grid-template-columns: 1fr 3fr;
 }
 
+
 .title-logo {
-  height: 300px;
+  height: 200px;
   width: auto;
+  grid-area: logo;
+  font-weight: 600;
+  font-size: 2em;
 }
+
 .page-title {
   padding-top: 8px;
   padding-left: 50px;
+  grid-area:title;
+  color: #373833;
 }
 
 
