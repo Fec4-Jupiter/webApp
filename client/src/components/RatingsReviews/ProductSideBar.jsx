@@ -13,12 +13,12 @@ function ProductSideBar({ metadata }) {
     Fit: ['tight', 'perfect', 'long'],
   };
   return (
-    <div className="p">
+    <div className="p" style={{ marginTop: 10 }}>
       {
         arr.map((name) => {
           const value = Number(characteristics[name].value) * 60 - 5;
           return (
-            <div key={name}>
+            <div key={name} style={{ marginBottom: 10 }}>
               <h5>{name}</h5>
               <div className="p_breakdown">
                 <canvas width="100" height="7" className="bar" />

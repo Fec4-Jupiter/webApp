@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -65,11 +66,11 @@ export default class RatingSideBar extends React.Component {
       <div>
         {
           arr.map((rating) => (
-            <div key={rating[0]}>
+            <div key={rating[0]} style={{ marginBottom: 5 }}>
               <u>{`${rating[0]} Stars`}</u>
               <BorderLinearProgress
                 variant="determinate"
-                style={filters.includes(rating[0]) ? { border: '3px solid orange' } : null}
+                style={filters.includes(rating[0]) ? { border: '2px solid orange' } : null}
                 value={normalise(rating[1])}
                 onClick={() => clickFilters(rating[0])}
               />
@@ -77,22 +78,33 @@ export default class RatingSideBar extends React.Component {
           ))
         }
         {filters.length === 0 ? null
-          : (<button style={{ marginTop: 15 }} onClick={() => clickFilters()} type="button">Remove all filters</button>)}
+          : (<Button style={{ marginTop: 5, marginBottom: 125 }} size="small" onClick={() => clickFilters()} type="button">Remove all filters</Button>)}
       </div>
     );
   }
 
   render() {
     const { avg, recRate } = this.state;
+    // console.log(Number(avg.toFixed(1)));
+    console.log(avg);
     return (
       <div className="r">
         <span style={{ display: 'flex', flexDirection: 'row' }}>
-          <h2>{avg.toFixed(1)}</h2>
-          {avg % 1 === 0 ? <Rating defaultValue={avg} readOnly />
-            : <Rating name="half-rating" defaultValue={avg} precision={0.25} readOnly />}
+          <h1 style={{ fontSize: 60 }}>{avg.toFixed(1)}</h1>
+          {avg % 1 === 0 ? <Rating name="half-rating1" defaultValue={avg} readOnly />
+            : (
+              <Rating
+                name="half-rating"
+                defaultValue={Number(avg.toFixed(1))}
+                precision={0.25}
+                style={{ alignItems: 'flex-start', marginTop: 22, marginLeft: 10 }}
+                readOnly
+              />
+            )}
         </span>
+
         <br />
-        <p>{`${recRate.toFixed(1)}% of reviews recommend this product`}</p>
+        <p style={{ width: 350, marginBottom: 10, marginTop: -20 }}>{`${recRate.toFixed(0)}% of reviews recommend this product`}</p>
         {this.renderLinearBar()}
       </div>
     );
