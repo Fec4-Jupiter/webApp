@@ -190,7 +190,7 @@ main {
 
 .thumbnailcontainer.selected {
   position: relative;
-  border: 3px solid red;
+  border: 3px solid #3FD2C7;
 }
 
 .stylethumbnail {
@@ -201,7 +201,7 @@ main {
 
 .checkmark {
   position: absolute;
-  color: red;
+  color: #3FD2C7;
   z-index: 5;
   top: 10%;
   left: 15%;
@@ -253,7 +253,7 @@ html {
 /* -----------Image Gallery Styling ------ */
 
 .selected-image.thumbnail-image {
-  border: 3px solid red;
+  border: 3px solid #3FD2C7;
 }
 .thumbnail-image {
   position: relative;
