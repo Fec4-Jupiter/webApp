@@ -35,7 +35,6 @@ class Review extends React.Component {
     reviews.forEach((review) => {
       review.photos.forEach(({ id }) => { openImg[id] = false; });
     });
-    console.log(openImg);
     this.state = {
       flags: {},
       openImg,
@@ -59,7 +58,7 @@ class Review extends React.Component {
           <Rating defaultValue={review.rating} readOnly />
           {`${review.reviewer_name}, ${moment(review.date).format('MMM DD, YYYY')}`}
         </span>
-        <h4><strong>{review.summary}</strong></h4>
+        <h4 className="review-title"><strong>{review.summary}</strong></h4>
         {this.renderBody(review.body, index)}
         {this.renderImg(review.photos)}
         {review.recommend ? <p>&#10004; I recommend this product</p> : null}
@@ -73,9 +72,9 @@ class Review extends React.Component {
         <div>
           Helpful?
           {' '}
-          <Button size="small" variant="text" onClick={() => helpful(review.review_id)}><u>{`Yes (${review.helpfulness})`}</u></Button>
+          <Button size="small" variant="text" onClick={() => helpful(review.review_id)}><u className="highlighted_text">{`Yes (${review.helpfulness})`}</u></Button>
           {' | '}
-          <Button size="small" variant="text" onClick={() => report(review.review_id)}><u>Report</u></Button>
+          <Button size="small" variant="text" onClick={() => report(review.review_id)}><u className="highlighted_text">Report</u></Button>
 
         </div>
 
@@ -93,7 +92,7 @@ class Review extends React.Component {
       const len = flag ? body.length : 250;
       return (
         <div>
-          <p>{body.slice(0, len)}</p>
+          <p className="review-body">{body.slice(0, len)}</p>
           <Button
             size="small"
             variant="outlined"

@@ -70,7 +70,8 @@ class Overview extends React.Component {
           <br />
           <h1 className="name">{product.name}</h1>
           <br />
-          <span className="price">{`$${currentStyle.original_price}`}</span>
+          <span className="display-price">{`$${currentStyle.sale_price || currentStyle.original_price}`}</span>
+          <span className="original-price">{currentStyle.sale_price ? `  $${currentStyle.original_price}` : ''}</span>
           <br />
         </div>
         <StyleSelector currentStyle={currentStyle} styles={styles} changeStyle={this.updateStyle} />

@@ -65,8 +65,17 @@ main {
 
 .title-banner {
   color: #F7F7F7;
-  background-color: #373833;
-  height: 5vh;
+  background-color: #F7F7F7;
+  /* height: 50px; */
+}
+
+.title-logo {
+  height: 300px;
+  width: auto;
+}
+.page-title {
+  padding-top: 8px;
+  padding-left: 50px;
 }
 
 
@@ -150,36 +159,47 @@ main {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 /*-----------Social media button styling--------*/
 .logo-button {
   height: 30px;
   width: 30px;
   transition: transform .4s;
 }
+
 .logo-button:hover {
   transform: scale(1.4);
 }
+
 .flex-break {
   flex-basis: 100%;
   height: 0;
 }
+
 .social-buttons-title {
   align-self: flex-end;
 }
+
 .social-buttons {
   display: flex;
   justify-content: space-around;
   align-self: flex-start;
   width: 100%;
 }
+
+.original-price {
+  text-decoration-line: line-through;
+  color: #FA2742;
+}
+
 /* ----------- Thumbnail selection styling ----- */
 .thumbnailcontainer {
-  border: 3px solid rgb(99, 99, 99);
+  opacity: 0.7;
   display: inline-block;
   border-radius: 50%;
   overflow: hidden;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   margin: 5px;
   transition: transform .2s;
 }
@@ -189,6 +209,7 @@ main {
 }
 
 .thumbnailcontainer.selected {
+  opacity: 1;
   position: relative;
   border: 3px solid #3FD2C7;
 }
@@ -199,6 +220,11 @@ main {
   object-fit: cover;
 }
 
+.style-table {
+  max-height: 180px;
+  overflow: scroll;
+}
+
 .checkmark {
   position: absolute;
   color: #3FD2C7;
@@ -207,20 +233,32 @@ main {
   left: 15%;
   font-weight: bold;
 }
+
 /*------------ReviewStars Styling------*/
 .product-rating {
   margin: auto;
   display: flex;
 }
+
 .rating-link {
+  text-decoration: none;
   display: inline-block;
   padding-left: 10px;
   height: 38px;
   line-height: 38px;
+  text-decoration: underline;
+  color: #3FD2C7;
 }
+
+.rating-link:hover {
+  transform: scale(1.05);
+  font-weight: 600;
+}
+
 html {
   scroll-behavior: smooth;
 }
+
 /*-----------Add to Cart Styling ------ */
 .size-select {
   grid-column: 1 / span 3;
@@ -228,12 +266,14 @@ html {
   padding-right: 10px;
   align-self: end;
 }
+
 .quantity-select {
   grid-column: 4 / span 2;
   grid-row: 1 / span 1;
   padding-left: 10px;
   align-self: end;
 }
+
 .cart-button {
   grid-column: 1 / span 3;
   grid-row: 2 / span 1;
@@ -246,8 +286,8 @@ html {
   border-width: 1px;
 }
 
-.invalid-input-err{
-  color: red;
+.invalid-input-err {
+  color: #FA2742
 }
 
 /* -----------Image Gallery Styling ------ */
@@ -255,6 +295,7 @@ html {
 .selected-image.thumbnail-image {
   border: 3px solid #3FD2C7;
 }
+
 .thumbnail-image {
   position: relative;
   object-fit: cover;
@@ -263,6 +304,7 @@ html {
   height: 75px;
   transition: transform .4s;
 }
+
 .thumbnail-image:hover {
   transform: translate(0, -5px);
 }
@@ -270,6 +312,7 @@ html {
 .image-zoom {
   text-align: center;
 }
+
 .image-zoom:before {
   content: '';
   display: inline-block;
@@ -282,7 +325,7 @@ html {
 }
 
 ._1_Dg2 {
-  background-color: black;
+  background-color: #F7F7F7;
 }
 
 .main-image ._t1897 {
@@ -299,7 +342,7 @@ html {
 }
 
 .alice-carousel {
-  margin:auto;
+  margin: auto;
 }
 
 .alice-carousel__wrapper {
@@ -316,6 +359,7 @@ html {
   top: -75px;
   left: 50px;
 }
+
 .alice-carousel__next-btn-item {
   position: absolute;
   background-color: antiquewhite;
@@ -326,65 +370,77 @@ html {
 
 
 /* ----------- Questions and Answers Styling ----- */
-.qacontainer > div {
+.qacontainer>div {
   max-width: 1080px;
   margin: auto;
 }
+
 .questionsandanswers-row1,
 .questionsandanswers-row2,
-.questionsandanswers-row3
- {
+.questionsandanswers-row3 {
   padding-bottom: 10px;
 }
+
 .questionsandanswers-row3 {
   overflow: scroll;
   max-height: 800px;
 }
+
 /* .short {
   background-color: yellow;;
 } */
 
 .qatitle {
   font-weight: 300;
-  font-size:1.5em;
+  font-size: 1.5em;
 }
-.forTest{
+
+.forTest {
   color: white;
 }
+#morereviews,
+#writenewreview,
+.text_button,
 .qabutton {
   align-self: center;
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(0, 0%, 80%);
+  background-color: white;
+  border-color: #7DA2A9;
   border-radius: 4px;
   border-style: solid;
   border-width: 1px;
   margin-right: 20px;
   padding: 20px 20px;
   min-width: 300px;
+  color: #373833;
 
 }
+
 /* QuestionView */
 .questionrow {
   display: grid;
   gap: 10px;
   grid-template-areas: "questioncol-1 questioncol-2 questioncol-3";
   grid-template-columns: 0.5fr 9.5fr 5fr;
-  margin-top:20px;
+  margin-top: 20px;
   margin-bottom: 5px;
 }
+
 .questioncol-1 {
   grid-area: questioncol-1;
 }
+
 .questioncol-2 {
   grid-area: questioncol-2;
   font-weight: 600;
   font-size: 1.2em;
 }
+
 .questioncol-3 {
   grid-area: questioncol-3;
   font-size: 0.8em;
-  padding-top:4px;
+  padding-top: 4px;
 }
+
 .answerrow {
   display: grid;
   gap: 10px;
@@ -392,17 +448,21 @@ html {
   grid-template-columns: 0.5fr 9.5fr 5fr;
   font-weight: 300;
 }
+
 .answer-A {
   grid-area: answer-A;
 }
+
 .answerlist {
   grid-area: answerlist;
 }
+
 .answer-A,
 .question-Q {
   font-weight: 600;
   font-size: 1.2em;
 }
+
 .loadmorerow {
   display: grid;
   gap: 10px;
@@ -410,17 +470,21 @@ html {
   grid-template-columns: 0.5fr 9.5fr 5fr;
   padding-bottom: 10px;
 }
+
 .loadmorecol-1 {
   grid-area: col1;
 }
+
 .loadmorecol-2 {
   grid-area: btn;
 }
-.loadmoreanswers{
+
+.loadmoreanswers {
   font-weight: 600;
   font-size: 0.8em;
 
 }
+
 /* addQuestion and addAnswer modal windows */
 .modal {
   position: fixed;
@@ -429,7 +493,9 @@ html {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
 }
+
 .modal-main {
   position: fixed;
   background: white;
@@ -440,71 +506,91 @@ html {
   transform: translate(-50%, -50%);
   color: rgb(79, 77, 77);
   padding: 10px;
+  z-index: 10;
 }
+
 .display-block {
   display: block;
 }
+
 .display-none {
   display: none;
 }
+
 .invisible {
   display: none;
 }
+
 .addquestionform,
 .addanswerform {
   display: grid;
   gap: 10px;
   grid-template-areas: "title title"
-                      "label1 input1"
-                      "label2 input2"
-                      "warn2 msg2"
-                      "label3 input3"
-                      "warn3 msg3"
-                      "fileUp btnPhotos"
-                      "fileUp btnSubmit";
+    "label1 input1"
+    "label2 input2"
+    "warn2 msg2"
+    "label3 input3"
+    "warn3 msg3"
+    "fileUp btnPhotos"
+    "fileUp btnSubmit";
   grid-template-columns: 2fr 3fr;
   padding-bottom: 10px;
 }
+
 .formtitle {
-  grid-area: title;;
+  grid-area: title;
+  ;
 }
+
 .formlabel1 {
   grid-area: label1;
 }
+
 .formlabel2 {
   grid-area: label2;
 }
+
 .formlabel3 {
   grid-area: label3;
 }
+
 .textareaQA {
-  grid-area:input1;
+  grid-area: input1;
 }
+
 .inputQA2 {
   grid-area: input2;
 }
+
 .inputQA3 {
   grid-area: input3;
 }
+
 .warningQA2 {
   grid-area: warn2;
 }
+
 .warningA3 {
   grid-area: warn3;
 }
+
 .forminfoA2 {
   grid-area: msg2;
 }
+
 .forminfoQA3 {
   grid-area: msg3;
   font-size: 0.5em;
 }
+
 .formbutton {
   grid-area: btnSubmit;
 }
+
 .formbuttonaddphotos {
-  grid-area:btnPhotos;
+  grid-area: btnPhotos;
 }
+
 .photouploadform {
   grid-area: fileUp;
 }
@@ -519,15 +605,18 @@ html {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .formbutton:hover,
 .formbuttonaddphotos:hover {
   color: white;
   background-color: #097078bb;
 }
+
 .mandatory {
-  color: red;
+  color: #FA2742;
 }
-.photothumbs > span {
+
+.photothumbs>span {
   padding-right: 10px;
 }
 
@@ -538,19 +627,23 @@ html {
 .reportAnswer,
 .reportQuestion {
   text-decoration: underline;
+  color: #3FD2C7;
 }
+
 .questionhelpfulness,
 .questionhelp_yes,
 .answerhelp_yes,
 .addanswer {
   padding-left: 5px;
 }
+
 .questionhelpfulness,
 .answerhelpfulness,
 .answerhelp_yes,
 .questionhelp_yes {
   font-weight: 400;
 }
+
 .questionhelp_yes:hover,
 .answerhelp_yes:hover,
 .reportQuestion:hover,
@@ -558,11 +651,13 @@ html {
 .addanswer:hover {
   transform: scale(2);
   font-weight: 600;
-  background-color: rgb(193, 244, 247);;
+  /* background-color: rgb(193, 244, 247); */
 }
+
 .seller {
   font-weight: 600;
 }
+
 .formbuttonaddanswer {
   width: 300px;
   background-color: #9ea69e;
@@ -590,6 +685,7 @@ html {
   font-size: 0.8em;
   padding-bottom: 20px;
 }
+
 .footerrow-1 {
   padding-right: 10px;
   display: flex;
@@ -598,28 +694,33 @@ html {
   height: 75px;
   width: auto;
 }
-.footerrow-2 > span,
-.sidebox > span {
+
+.footerrow-2>span,
+.sidebox>span {
   padding-right: 5px;
 }
-.QAthumb{
+
+.QAthumb {
   max-height: 100%;
   max-width: 100%;
   padding-right: 10px;
 }
+
 .QAthumb_mini {
-  height:30px;
+  height: 30px;
   width: auto;
   padding: 4px;
 }
+
 .footerthumbs {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
+
 /* Search component in Questions & Answers */
 .searchinput {
   width: 100%;
-  border: solid grey;
+  /* border: solid grey; */
   padding: 20px 20px;
 }
 
@@ -688,22 +789,38 @@ html {
   grid-row-start: 3;
   grid-row-end: 6;
   height: 80vh;
-  width: 70vh;
+  /* width: 70vh; */
   overflow: scroll;
   margin-left: 40px;
   margin-top: 10px;
-  padding-right: 50px;
+  /* padding-right: 50px; */
   border-radius: 10px;
   /* background-color: brown; */
 }
+
+.bottomofreviewsbtns{
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "col1 col2";
+  grid-template-columns: 1fr 1fr;
+  max-width: 1080px;
+  margin: auto;
+}
+.morereviews {
+ grid-area: col1;
+}
+
+.writeanew {
+  grid-area: col2;
+}
+
 
 .btn {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 6;
   grid-row-end: 7;
-  margin-left: 40%;
-  height:auto;
+  height: auto;
   /* border: 1px solid grey; */
   /* margin-top: auto;
   margin-left: 40px; */
@@ -721,14 +838,40 @@ html {
   opacity: 0.2;
 }
 
-.p_breakdown > .movebar {
+.p_breakdown>.movebar {
   left: 0px;
   top: -8px;
   position: absolute;
   /* border: 1px solid red; */
 }
+
 .text-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.review-title {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.review-body {
+  font-weight: 600;
+  font-size: 0.8em;
+}
+
+.highlighted_text {
+  font-weight: 400;
+  text-decoration: underline;
+  color: #3FD2C7;
+}
+
+.MuiOutlinedInput-input.MuiInputBase-input.MuiInputBase-inputSizeSmall.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
+  background-color: white;
+}
+
+.highlighted_text:hover {
+  transform: scale(1.2);
+  font-weight: 600;
 }

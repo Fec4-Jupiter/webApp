@@ -29,8 +29,8 @@ function ReviewStars({ reviews }) {
         fullSymbol={<img src={fullStar} className="icon" alt="full star" />}
         fractions={4}
       />
-      <div className="rating-link">
-        <a href="#RatingsReviews">
+      <div>
+        <a className="rating-link" href="#RatingsReviews">
           Read all
           {' '}
           {reviews.length}

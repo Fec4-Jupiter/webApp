@@ -73,35 +73,47 @@ class ReviewList extends React.Component {
     return (
       <div>
         {this.renderDropDown()}
-        <TextField
-          label="Search a review"
-          value={searchText}
-          size="small"
-          style={{
-            width: 560,
-            height: 15,
-            marginTop: 15,
-            marginBottom: 15,
-            marginLeft: 41,
-          }}
-          onChange={(e) => this.setState({ searchText: e.target.value })}
-        />
+        <div className="reviewsearch">
+          <TextField
+            label="Search a review"
+            value={searchText}
+            size="small"
+            style={{
+              width: 560,
+              height: 15,
+              marginTop: 15,
+              marginBottom: 15,
+              marginLeft: 41,
+            }}
+            onChange={(e) => this.setState({ searchText: e.target.value })}
+          />
+        </div>
+
         <div className="rl">
           {
             reviews.length === 0 ? <h3>There are no reviews</h3>
               : (
-                <div>
+                <div className="morereviews">
                   <Review reviews={reviews} helpful={helpful} report={report} />
                   <br />
-
-                  {reviews.length >= 2 && reviews.length < total
-                    ? <Button type="button" onClick={() => this.moreReviews()}>More Reviews</Button>
-                    : null}
-                  {' '}
                 </div>
               )
           }
-          <ReviewForm metadata={metadata} product={product} submitReview={submitReview} />
+          <div className="bottomofreviewsbtns">
+
+            <div>
+              {reviews.length >= 2 && reviews.length < total
+                ? <Button id="morereviews" className="text_button" type="button" onClick={() => this.moreReviews()}>More Reviews</Button>
+                : null}
+              {' '}
+            </div>
+
+            {/* } */}
+            <div className="writeanew">
+              <ReviewForm metadata={metadata} product={product} submitReview={submitReview} />
+            </div>
+
+          </div>
         </div>
       </div>
     );
