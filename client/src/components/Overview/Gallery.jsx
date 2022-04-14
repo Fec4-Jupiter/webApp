@@ -4,12 +4,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import MainImage from 'react-gallery-carousel';
-import Thumbnails from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
 import './MainImage.css';
+import Thumbnails from 'react-alice-carousel';
+import './alice-carousel.css';
 import InnerImageZoom from 'react-inner-image-zoom';
-import notAvailable from '../Common/imageNotAvailable.png';
 import './InnerImageStyles.css';
+import notAvailable from '../Common/imageNotAvailable.png';
 
 const PropTypes = require('prop-types');
 
@@ -18,11 +18,10 @@ class Gallery extends React.Component {
     super(props);
     const { currentStyle, currentImage } = props;
     // If not expanded view, display these images
-    let images = currentStyle.photos.map((photoObj) => {
+    const images = currentStyle.photos.map((photoObj) => {
       const src = photoObj.url || notAvailable;
       return { src };
     });
-    images = images.concat(images);
     // If we are expanded, display these inner image zoom elements
     const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {
@@ -112,12 +111,6 @@ class Gallery extends React.Component {
   }
 
   render() {
-    const responsive = {
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 7,
-      },
-    };
     const {
       images, currentImage, imageZooms, zoomed,
     } = this.state;

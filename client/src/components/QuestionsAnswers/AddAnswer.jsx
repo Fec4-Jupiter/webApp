@@ -33,6 +33,10 @@ class AddAnswer extends React.Component {
     this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
   }
 
+  componentDidMount() {
+    // this.props.updateQuestions(this.props.product.id, 'short');
+  }
+
   handleInputChange(event) {
     const target = event.target;
     this.setState({
@@ -41,7 +45,7 @@ class AddAnswer extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('add Answer submitted', this.props);
+    // console.log('add Answer submitted', this.props);
     event.preventDefault();
     const postBody = {
       body: this.state.body,
@@ -50,38 +54,30 @@ class AddAnswer extends React.Component {
       photos: this.state.photos,
     };
     const question_id = this.props.question.question_id;
-    console.log('to be posted:', postBody);
+    // console.log('to be posted:', postBody);
     axios.post(`/qa/questions/${question_id}/answers`, postBody)
       .then((res) => {
-        console.log('res from post', res);
-        this.props.updateQuestions(this.props.product.id);
+        // console.log('res from post', res);
+        this.props.updateQuestions(this.props.product.id, 'long');
       })
       .catch((err) => {
         throw err;
       });
+
     this.resetForm();
     this.props.handleClose();
-    this.setState({
-      body: '',
-      name: '',
-      email: '',
-      photos: [],
-    });
   }
 
   handleUploadPhotos(e) {
-    // const filepath = e.target.value; //gets actual localfile input from user
-    // const catURL = [];
-    // const filepath = 'https://cataas.com/cat'; // cat as a service - pics for devs
-    const filepath = 'https://thiscatdoesnotexist.com/'; // another of those
+    // const filepath = e.target.value; //gets localfile and causes browser err
+    // online cat pics for devs
+    const filepath = 'https://thiscatdoesnotexist.com/';
     const prevstate = this.state.photos;
     if (prevstate.length === 5) {
-      console.log('max limit reached', prevstate.length);
       return;
     }
     prevstate.push(filepath);
     this.setState({ photos: prevstate });
-    console.log('state after up photos', this.state.photos, 'len: ', this.state.photos.length);
   }
 
   showUploadForm = () => {

@@ -28,6 +28,10 @@ class AddQuestion extends React.Component {
     this.resetForm = this.resetForm.bind(this);
   }
 
+  componentDidMount() {
+    // this.props.updateQuestions(this.props.product.id, 'short');
+  }
+
   handleInputChange(event) {
     const target = event.target;
     this.setState({
@@ -51,7 +55,7 @@ class AddQuestion extends React.Component {
     axios.post('/qa/questions', postBody)
       .then((res) => {
         console.log(res);
-        this.props.updateQuestions(this.state.product_id);
+        this.props.updateQuestions(this.state.product_id, 'long');
       })
       .catch((err) => {
         throw err;

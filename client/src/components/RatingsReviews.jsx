@@ -149,4 +149,6 @@ RatingsReviews.propTypes = {
   product: PropTypes.instanceOf(Object).isRequired,
 };
 
+RatingsReviews.displayName = 'RatingsReviews';
+
 export default RatingsReviews;

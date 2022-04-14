@@ -40,7 +40,6 @@ describe('Index test suite', () => {
     expect(urls[0]).toEqual('/products/66642');
     expect(urls[1]).toEqual('/reviews?product_id=66642&count=500');
     expect(urls[2]).toEqual('/products/66642/styles');
-    expect(urls[3]).toEqual('/products/66642/related');
-    expect(urls[4]).toEqual('/qa/questions?product_id=66642&count=500');
+    expect(urls[3]).toEqual('/qa/questions?product_id=66642&count=500');
   });
 });
