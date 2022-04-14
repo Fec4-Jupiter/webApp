@@ -30,7 +30,6 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "express-static-gzip": "^2.1.5",
-    "moment": "^2.29.2",
     "path": "^0.12.7",
     "pm2": "^5.2.0",
     "prop-types": "^15.8.1",

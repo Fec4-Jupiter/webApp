@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/extensions */
@@ -10,7 +12,6 @@ import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
-import moment from 'moment';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
@@ -27,6 +28,24 @@ const style = {
   // p: 4,
 };
 
+const formatDate = (date) => {
+  // "date": "2018-08-18T00:00:00.000Z",
+  const timeStr = date;
+  const timeArr = timeStr.split('T');
+  const dateStr = timeArr[0];
+  const dateArr = dateStr.split('-');
+  const months = ['January', 'February', 'March', 'Apr',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'];
+  if (dateArr[1].startsWith('0')) {
+    dateArr[1] = dateArr[1][1];
+  }
+  const monthIndex = parseInt(dateArr[1], 10);
+  dateArr[1] = months[monthIndex - 1];
+  const formattedDate = `${dateArr[1]} ${dateArr[2]}, ${dateArr[0]}`;
+  return formattedDate;
+};
+
 class Review extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +54,7 @@ class Review extends React.Component {
     reviews.forEach((review) => {
       review.photos.forEach(({ id }) => { openImg[id] = false; });
     });
+    // console.log(reviews);
     this.state = {
       flags: {},
       openImg,
@@ -56,11 +76,11 @@ class Review extends React.Component {
         <br />
         <span style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Rating defaultValue={review.rating} readOnly />
-          {`${review.reviewer_name}, ${moment(review.date).format('MMM DD, YYYY')}`}
+          {`${review.reviewer_name}, ${formatDate(review.date)}`}
         </span>
         <h4 className="review-title"><strong>{review.summary}</strong></h4>
         {this.renderBody(review.body, index)}
-        {this.renderImg(review.photos)}
+        {review.photos.length === 0 ? null : this.renderImg(review.photos)}
         {review.recommend ? <p>&#10004; I recommend this product</p> : null}
         {review.response !== '' && review.response !== null
           ? (
@@ -113,6 +133,9 @@ class Review extends React.Component {
         {
           photos.map((photo) => {
             const { id, url } = photo;
+            if (!openImg[id]) {
+              openImg[id] = false;
+            }
             return (
               <div key={id}>
                 <ImageListItem key={url}>
