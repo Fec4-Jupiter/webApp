@@ -1,11 +1,12 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
-import Overview from './components/Overview.jsx';
-import QuestionsAnswers from './components/QuestionsAnswers.jsx';
-import RatingsReviews from './components/RatingsReviews.jsx';
 import analyticsWrapper from './components/Common/AnalyticsWrapper.jsx';
 import jupiterLogo from './components/Common/jupiterLogo.png';
+
+const Overview = lazy(() => import('./components/Overview.jsx'));
+const QuestionsAnswers = lazy(() => import('./components/QuestionsAnswers.jsx'));
+const RatingsReviews = lazy(() => import('./components/RatingsReviews.jsx'));
 
 const axios = require('axios');
 
