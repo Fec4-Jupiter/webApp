@@ -2,7 +2,9 @@
 /* eslint-disable react/jsx-filename-extension */
 import * as React from 'react';
 import 'regenerator-runtime/runtime.js';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+  render, screen, fireEvent, waitFor,
+} from '@testing-library/react';
 import Overview from '../client/src/components/Overview.jsx';
 import StyleSelector from '../client/src/components/Overview/StyleSelector.jsx';
 import AddToCart from '../client/src/components/Overview/AddToCart.jsx';
@@ -38,22 +40,22 @@ describe('Overview product rating negative test suite', () => {
 });
 
 describe('Product information test suite', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     const { product } = testData;
     let { styles, reviews } = testData;
     styles = styles.data.results;
     reviews = reviews.data.results;
-    render(<Overview product={product} styles={styles} reviews={reviews} />);
+    await render(<Overview product={product} styles={styles} reviews={reviews} />);
   });
 
-  it('Should display star ratings for each product, and a link to view all ratings', () => {
+  it('Should display star ratings for each product, and a link to view all ratings', async () => {
     const totalReviews = testData.reviews.data.results.length;
-    expect(screen.getByText(`Read all ${totalReviews} reviews`, { exact: false })).toBeVisible();
-    expect(screen.getAllByAltText('full star').length).toBe(5);
-    expect(screen.getAllByAltText('empty star').length).toBe(5);
+    await waitFor(() => expect(screen.getByText(`Read all ${totalReviews} reviews`, { exact: false })).not.toBeNull());
+    await waitFor(() => expect(screen.getAllByAltText('full star').length).toBe(5));
+    await waitFor(() => expect(screen.getAllByAltText('empty star').length).toBe(5));
   });
 
-  it('Should display product title, category, price and overview information', () => {
+  it('Should display product title, category, price and overview information', async () => {
     expect(screen.getByText(testData.product.category.toUpperCase())).toBeVisible();
     expect(screen.getByText(testData.product.name)).toBeVisible();
     expect(screen.getByText(`$${testData.product.default_price}`)).toBeVisible();

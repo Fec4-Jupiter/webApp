@@ -1,11 +1,12 @@
-import React from 'react';
-import ReviewStars from './Common/ReviewStars.jsx';
+import React, { lazy } from 'react';
 import facebooklogo from './Common/facebooklogo.png';
 import twitterlogo from './Common/twitterlogo.png';
 import pinterestlogo from './Common/pinterestlogo.png';
-import StyleSelector from './Overview/StyleSelector.jsx';
-import AddToCart from './Overview/AddToCart.jsx';
-import Gallery from './Overview/Gallery.jsx';
+
+const ReviewStars = lazy(() => import('./Common/ReviewStars.jsx'));
+const StyleSelector = lazy(() => import('./Overview/StyleSelector.jsx'));
+const AddToCart = lazy(() => import('./Overview/AddToCart.jsx'));
+const Gallery = lazy(() => import('./Overview/Gallery.jsx'));
 
 const PropTypes = require('prop-types');
 
