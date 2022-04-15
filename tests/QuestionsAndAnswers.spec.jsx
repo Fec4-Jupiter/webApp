@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import * as React from 'react';
 import 'regenerator-runtime/runtime.js';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import QuestionsAnswers from '../client/src/components/QuestionsAnswers.jsx';
 import QuestionsList from '../client/src/components/QuestionsAnswers/QuestionsList.jsx';
 import testData from './testdata.js';
@@ -15,7 +15,7 @@ describe('QuestionsAnswers test suite', () => {
     render(<QuestionsAnswers product={product} questions={questions} />);
   });
 
-  it('Should display product id', () => {
-    expect(screen.getByText(testData.product.id)).not.toBeNull();
+  it('Should display product id', async () => {
+    await waitFor(() => expect(screen.getByText(testData.product.id)).not.toBeNull());
   });
 });

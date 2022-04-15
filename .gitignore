@@ -1,5 +1,7 @@
 node_modules
 client/dist/
+!client/dist/index.html
+!client/dist/styles.css
 config.js
 .env
 .DS_Store
