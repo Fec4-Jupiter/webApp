@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 function ProductSideBar({ metadata }) {
   const { characteristics } = metadata;
@@ -24,9 +26,9 @@ function ProductSideBar({ metadata }) {
                 <canvas width="100" height="7" className="bar" />
                 <canvas width="90" height="7" style={{ marginLeft: 5 }} className="bar" />
                 <canvas width="100" height="7" style={{ marginLeft: 5 }} className="bar" />
-                <i
-                  className="fa-solid fa-caret-down movebar"
-                  style={{ left: value }}
+                <FontAwesomeIcon
+                  icon={faCaretDown}
+                  transform={`up-10 left-${value}`}
                 />
               </div>
               <div className="text-container">
