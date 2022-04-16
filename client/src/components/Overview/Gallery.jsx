@@ -13,16 +13,19 @@ import notAvailable from '../Common/imageNotAvailable.png';
 
 const PropTypes = require('prop-types');
 
+const resizeImage = (imageObj) => {
+  const baseUrl = imageObj.url.split('&')[0];
+  const thumb = `${baseUrl}&auto=format&fit=crop&w=60&q=75`;
+  const src = `${baseUrl}&auto=format&fit=crop&w=300&q=70`;
+  return { thumb, src };
+};
+
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
     const { currentStyle, currentImage } = props;
     // If not expanded view, display these images
-    const images = currentStyle.photos.map((photoObj) => {
-      const src = photoObj.thumbnail_url || notAvailable;
-      const thumb = photoObj.thumbnail_url || notAvailable;
-      return { src, thumb };
-    });
+    const images = currentStyle.photos.map(resizeImage);
     // If we are expanded, display these inner image zoom elements
     const imageZooms = currentStyle.photos.map((photo) => <InnerImageZoom hideHint className="image-zoom" zoomScale={2.5} src={photo.url || notAvailable} />);
     this.state = {

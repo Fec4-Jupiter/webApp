@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -5,12 +6,19 @@ import notAvailable from '../Common/imageNotAvailable.png';
 
 const PropTypes = require('prop-types');
 
+const resizeThumb = (imageURL) => {
+  const baseUrl = imageURL.split('&')[0];
+  const thumb = `${baseUrl}&auto=format&fit=crop&w=60&q=60`;
+  return thumb;
+};
+
 function StyleSelector({ currentStyle, styles, changeStyle }) {
   const generateTable = (list) => {
     const items = [];
     for (let i = 0; i < list.length; i += 1) {
       const style = list[i];
-      const thumb = style.photos[0].thumbnail_url || notAvailable;
+      const { thumbnail_url } = style.photos[0];
+      const thumb = thumbnail_url ? resizeThumb(thumbnail_url) : notAvailable;
       if (style.style_id === currentStyle.style_id) {
         items.push(
           <td key={style.style_id} onClick={() => changeStyle(style)}>
