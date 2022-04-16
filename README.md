@@ -1,7 +1,8 @@
 <div align="center">
 
 
-# Project Atelier <img src="/Users/jacky/Downloads/jupiterLogo.png" alt="jupiterLogo" style="zoom:25%;" />
+# Project Atelier 
+ <img src="img/jupiterLogo.png" alt="jupiterLogo" width="150" height="150" style="zoom:1%;" />
 
 This our first group project (Front-End Capstone) in Hack Reactor.
 
@@ -17,7 +18,7 @@ An e-commerce site
 
 ## Description:
 
-![Banner](/Users/jacky/Desktop/Banner.png)
+![Banner](img/Banner.png)
 
 The app emulates an e-commerce site with 4 sub-components:
 
@@ -31,7 +32,7 @@ The app emulates an e-commerce site with 4 sub-components:
 - Share on socials: icon links to share the product on different social media websites
 - Employs React, JavaScript, CSS, and React libraries: react-alice-carousel, react-inner-image-zoom, react-gallery-carousel, react-select
 
-![Overview](/Users/jacky/Desktop/Overview.png)
+![Overview](img/Overview.png)
 
 #### ~~Related Items~~
 
@@ -44,7 +45,7 @@ The app emulates an e-commerce site with 4 sub-components:
 - contains a search bar
 - employs React, vanilla JS, and CSS; axios for requests sent to the API
 
-![Q&A](/Users/jacky/Desktop/Q&A.png)
+![Q&A](img/Q&A.png)
 
 #### Ratings and Reviews:
 
@@ -53,7 +54,7 @@ The app emulates an e-commerce site with 4 sub-components:
 - Allow user to search and filter reviews.
 - techs used: React, vanilla JavaScript, CSS, and MUI.
 
-![RRs](/Users/jacky/Desktop/RRs.png)
+![RRs](img/RRs.png)
 
 
 
