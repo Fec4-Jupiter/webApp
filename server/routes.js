@@ -1,8 +1,8 @@
 const axios = require('axios');
 const router = require('express').Router();
 
-const joshURL = 'http://localhost:3504';
-const kunURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
+const joshURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
+const kunURL = 'http://localhost:3000';
 const qiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
 
 // Connect methods to their corresponding routes
@@ -27,6 +27,36 @@ router.get('/products*', (req, res) => {
 router.get('/qa*', (req, res) => {
   // console.log(kunURL + req.originalUrl);
   axios.get(kunURL + req.originalUrl, {
+    headers: {
+      Authorization: process.env.API_TOKEN,
+    },
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+router.post('/qa*', (req, res) => {
+  // console.log(kunURL + req.originalUrl);
+  axios.post(kunURL + req.originalUrl, {
+    headers: {
+      Authorization: process.env.API_TOKEN,
+    },
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+router.put('/qa*', (req, res) => {
+  // console.log(kunURL + req.originalUrl);
+  axios.put(kunURL + req.originalUrl, {
     headers: {
       Authorization: process.env.API_TOKEN,
     },
