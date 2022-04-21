@@ -25,7 +25,6 @@ router.get('/products*', (req, res) => {
 });
 
 router.get('/qa*', (req, res) => {
-  // console.log(kunURL + req.originalUrl);
   axios.get(kunURL + req.originalUrl, {
     headers: {
       Authorization: process.env.API_TOKEN,
@@ -40,8 +39,7 @@ router.get('/qa*', (req, res) => {
 });
 
 router.post('/qa*', (req, res) => {
-  // console.log(kunURL + req.originalUrl);
-  axios.post(kunURL + req.originalUrl, {
+  axios.post(kunURL + req.originalUrl, req.body, {
     headers: {
       Authorization: process.env.API_TOKEN,
     },
@@ -55,7 +53,6 @@ router.post('/qa*', (req, res) => {
 });
 
 router.put('/qa*', (req, res) => {
-  // console.log(kunURL + req.originalUrl);
   axios.put(kunURL + req.originalUrl, {
     headers: {
       Authorization: process.env.API_TOKEN,
