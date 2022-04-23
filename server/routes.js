@@ -2,8 +2,9 @@ const axios = require('axios');
 const router = require('express').Router();
 
 const joshURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
-const kunURL = 'http://localhost:3000';
-const qiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
+const kunURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc';
+const qiURL = 'http://localhost:3504';
+
 
 // Connect methods to their corresponding routes
 
@@ -38,6 +39,7 @@ router.get('/qa*', (req, res) => {
     });
 });
 
+
 router.post('/qa*', (req, res) => {
   axios.post(kunURL + req.originalUrl, req.body, {
     headers: {
@@ -66,9 +68,12 @@ router.put('/qa*', (req, res) => {
     });
 });
 
-router.get('/reviews*', (req, res) => {
-  axios.get(qiURL + req.originalUrl, {
-    headers: {
+router.use('/reviews*', (req, res) => {
+  axios({
+    method: req.method,
+    url: qiURL + req.originalUrl,
+    data: req.body,
+        headers: {
       Authorization: process.env.API_TOKEN,
     },
   })
@@ -79,5 +84,7 @@ router.get('/reviews*', (req, res) => {
       res.send(err);
     });
 });
+
+
 
 module.exports = router;
