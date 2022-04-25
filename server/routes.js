@@ -24,9 +24,11 @@ router.get('/products*', (req, res) => {
     });
 });
 
-router.get('/qa*', (req, res) => {
-  // console.log(kunURL + req.originalUrl);
-  axios.get(kunURL + req.originalUrl, {
+router.use('/qa*', (req, res) => {
+  axios({
+    method: req.method,
+    url: kunURL + req.originalUrl,
+    data: req.body,
     headers: {
       Authorization: process.env.API_TOKEN,
     },
@@ -38,6 +40,7 @@ router.get('/qa*', (req, res) => {
       res.send(err);
     });
 });
+
 
 router.use('/reviews*', (req, res) => {
   axios({
