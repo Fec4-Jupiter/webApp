@@ -82,7 +82,7 @@ class Review extends React.Component {
         {this.renderBody(review.body, index)}
         {review.photos.length === 0 ? null : this.renderImg(review.photos)}
         {review.recommend ? <p>&#10004; I recommend this product</p> : null}
-        {review.response !== '' && review.response !== null
+        {review.response !== '' && review.response !== null && review.response !== 'null'
           ? (
             <div className="Response">
               <h5>Response</h5>
